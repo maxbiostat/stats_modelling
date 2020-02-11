@@ -15,11 +15,16 @@ Mais informações sobre a binomial negativa e a representação Poisson-Gamma, 
 
 ### Tópicos de discussão
 
-- Teste de hipóteses, ou p-valores: yay or nay?
- --- O que significa testar uma hipótese? Ver capítulos iniciais do McElreath;
- --- As bases do frequentismo;
- --- [statement](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108) da JASA (2016);
- --- Críticas  (contemporâneas) ao statement da JASA (ver recursos úteis abaixo) e também [este](https://hdsr.mitpress.mit.edu/pub/bd5k4gzf) artigo;
+#### 1) Teste de hipóteses, ou p-valores: yay or nay?
+
+ - O que significa testar uma hipótese? Ver capítulos iniciais do McElreath;
+ 
+ - As bases do frequentismo;
+ 
+ - [Statement](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108) da JASA (2016);
+ 
+ - Críticas  (contemporâneas) ao statement da JASA (ver recursos úteis abaixo) e também [este](https://hdsr.mitpress.mit.edu/pub/bd5k4gzf) artigo;
+ 
 
 ### Recursos úteis (comentados)
 
