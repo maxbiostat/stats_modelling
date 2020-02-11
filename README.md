@@ -5,7 +5,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 **AVISO**: todos os documentos listados aqui serão atualizados à medida que o curso avança.
  
-- Na aula de quarta-feira (10/02/2020), vamos trabalhar um problema bem simples de modelagem estatística: com base num conjunto de observações de números (que parecem) naturais, prever a distribuição de observações futuras.
+- Na aula de quarta-feira (12/02/2020), vamos trabalhar um problema bem simples de modelagem estatística: com base num conjunto de observações de números (que parecem) naturais, prever a distribuição de observações futuras.
 Durante a aula, entre outras coisas, vamos estudar e criticar os modelos de Poisson,  Poisson-Binomial hierárquico (Casella & Berger, pg. 164, example 4.4.1) e Poisson-Gamma para dados de contagem.
 Discutiremos vários aspectos da modelagem estatística de dados a partir desse exemplo simples.
 O plano é apresentar um panorama da disciplina, tocando nos tópicos de identificabilidade, adequação do modelo, predições a priori e a posteriori, construção do modelo.
