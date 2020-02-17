@@ -12,6 +12,8 @@ O plano é apresentar um panorama da disciplina, tocando nos tópicos de identif
 O script para reproduzir as análises mostradas em sala está [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/code/problema_1.r).
 Mais informações sobre a binomial negativa e a representação Poisson-Gamma, ver [estas](https://www.johndcook.com/negative_binomial.pdf) notas, em especial a seção 4.
 
+- A aula de segunda-feira (17/02/2020) será sobre inferência bayesiana e cadeias de Markov Monte Carlo (MCMC). Vejam [este](https://chi-feng.github.io/mcmc-demo/app.html) applet para uma ilustração (visualização) de vários métodos modernos -- e alguns nem tanto -- de MCMC, aplicados a várias distribuições-alvo. 
+Como material de apoio, um pouco mais técnico, recomendamos este [artigo](https://projecteuclid.org/euclid.ss/1177011137) de Charlie Geyer e também outros materiais disponibilizados por ele em sua [página pessoal](http://users.stat.umn.edu/~geyer/). 
 
 ### Tópicos de discussão
 
