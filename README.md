@@ -3,7 +3,9 @@
 Como diz a [ementa](https://emap.fgv.br/disciplina/graduacao/modelagem-estatistica), o propósito desta disciplina é expor a estudante aos princípios básicos da modelagem estatística de dados, em particular aos modelos de regressão.
 Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/biblio/bibliografia_anotada.pdf). 
 
-**AVISO**: todos os documentos listados aqui serão atualizados à medida que o curso avança.
+**AVISO 0**: todos os documentos listados aqui serão atualizados à medida que o curso avança.
+
+**AVISO 1**: caso haja dificuldade em obter quaisquer dos materiais listados (PDFs de artigos, por exemplo), entrar em contato com os professores para que possamos compartilhar o material _para fins acadêmicos e de uso pessoal_.
  
 - Na aula de quarta-feira (12/02/2020), vamos trabalhar um problema bem simples de modelagem estatística: com base num conjunto de observações de números (que parecem) naturais, prever a distribuição de observações futuras.
 Durante a aula, entre outras coisas, vamos estudar e criticar os modelos de Poisson,  Poisson-Binomial hierárquico (Casella & Berger, pg. 164, example 4.4.1) e Poisson-Gamma para dados de contagem.
@@ -27,7 +29,33 @@ Como material de apoio, um pouco mais técnico, recomendamos este [artigo](https
  
  - Críticas  (contemporâneas) ao statement da JASA (ver recursos úteis abaixo) e também [este](https://hdsr.mitpress.mit.edu/pub/bd5k4gzf) artigo;
  
+#### 2) Modelos estatísticos: construção, interpretação e avaliação crítica.
+Neste ciclo de seminários teremos três tópicos, a serem cobertos em três apresentações:
+- Tópico I:  Modelos (no sentido mais amplo)
+   - Ler e discutir os seguintes artigos: [Levins, 1966](https://www.jstor.org/stable/pdf/27836590.pdf?casa_token=7tSi2uV0FvMAAAAA:pOA0tm3YnGbEgyv6GWFHQp0skImzirrSRkOznEPGnrhh8ATBAXMC9GTOuIkUWLw55pGTz4dX6SEdCJmW546H7aNyEvgSAo58uphzbEXPLUf029BaaQQzhA), [Orzack & Sober, 1993](https://www.jstor.org/stable/pdf/3037250.pdf) e [Levins, 1993](https://www.jstor.org/stable/pdf/3037251.pdf). Cobrir as noções de generalidade (generality), realismo (realism) e precisão (precision). Cobrir a "taxonomia de modelos" de Orzack e Sober, tanto da perspectiva atribuída a Levins quanto as recomendações feitas pelos autores. Discutir a possibilidade de maximização das três características (generalidade, realismo e precisão) simultaneamente.
 
+- Tópico II: Construção e interpretação de modelos e seus parâmetros.
+   - Cobrir pelo menos um dos seguintes tópicos:
+     - (i) [Table II fallacy (Westreich & Greenland, 2013)](https://academic.oup.com/aje/article/177/4/292/147738).
+     Cobrir o conceito de confounding e de seu ajuste em modelos de regressão;
+     - (ii) [Paradoxo de Simpson (Armistead, 2014 e comentário por Judea Pearl)](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2013.807750).
+     Explicar o paradoxo de Simpson e sua relevância para a inferência estatística e científica;
+     - (iii) [Interação e modificação de efeito (Wanderweele, 2009)](https://journals.lww.com/epidem/Fulltext/2009/11000/Four_Types_of_Effect_Modification__A.16.aspx).
+     Definir e exemplificar interações em modelos e discutir a conexão com o conceito de identificabilidade. Conceituar modificação de efeito e seus tipos;
+     - (iv) [All models are wrong, but some are useful (Box, 1976)](https://en.wikipedia.org/wiki/All_models_are_wrong);
+   Cobrir os famosos aforismos de Box, o "Creed" de Nester e as principais discussões do assunto, inclusive críticas (e.g. Steele). **OBS: NÃO SE ATER SOMENTE AO CONTEÚDO DA PÁGINA DA WIKIPÉDIA**.
+ 
+- Tópico III: Modelagem Estatística:
+  - Cobrir pelo menos um dos seguintes tópicos:
+    - (i) [Formalismo estatístico para quantificação da incerteza (Berger & Smith, 2018)](https://www.annualreviews.org/doi/full/10.1146/annurev-statistics-030718-105232).
+    Descrever o formalismo e pelo menos dois dos exemplos;
+     - (ii) [Estatística x Aprendizado de Máquina (Breiman, 2001 e comentários)](https://projecteuclid.org/download/pdf_1/euclid.ss/1009213726);
+     Conceituar as "duas culturas" apresentadas por Breiman. Discutir: existem mesmo duas culturas? O que mudou (e não) desde a publicação do paper?;
+      - (iii) [Reconciliando modelos determinísticos e estruturas probabilísticas (Poole & Raftery, 2000)](https://www.tandfonline.com/doi/pdf/10.1080/01621459.2000.10474324);
+     Explicar o paradoxo de Borel. Como conciliar um modelo determinístico com um mundo (aparentemente) estocástico?
+      - (iv) [DAGs e modelos causais (Aalen et al., 2016)](https://journals.sagepub.com/doi/pdf/10.1177/0962280213520436);
+      Como DAGs auxiliam na formulação de explicações causais? O que pode dar errado? Quais as alternativas/soluções? Discutir pelo menos dois exemplos. 
+      
 ### Recursos úteis (comentados)
 
 - Neste [FAQ](http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#model-specification), Ben Bolker explica os principais tipos de modelos que podem ser ajustados com o pacote [lme4](https://cran.r-project.org/web/packages/lme4/index.html) do R, e, mais importante, discute as diferenças terminológicas que tão frequentemente causam confusão -- vide distinção entre "fixed" e "random" factors.
@@ -39,8 +67,4 @@ Como material de apoio, um pouco mais técnico, recomendamos este [artigo](https
 - Neste [artigo](https://www.phil.vt.edu/dmayo/personal_website/Error_Statistics_2011.pdf), Aris Spanos e Deborah Mayo dão uma visão moderna do frequentismo.
 
 - Nesta [edição especial](https://www.tandfonline.com/toc/utas20/73/sup1) da _American_  _Statistician_,  temos uma vasta coleção de artigos sobre p-valores e seu uso. 
-Recomendamos em particular o artigo de Sander Greenland, "Valid P-Values Behave Exactly as They Should: Some Misleading Criticisms of P-Values and Their Resolution With S-Values" .
-
-
-
-
+Recomendamos em particular o artigo de Sander Greenland, "Valid P-Values Behave Exactly as They Should: Some Misleading Criticisms of P-Values and Their Resolution With S-Values".
