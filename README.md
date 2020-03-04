@@ -17,6 +17,9 @@ Mais informações sobre a binomial negativa e a representação Poisson-Gamma, 
 - A aula de segunda-feira (17/02/2020) será sobre inferência bayesiana e cadeias de Markov Monte Carlo (MCMC). Vejam [este](https://chi-feng.github.io/mcmc-demo/app.html) applet para uma ilustração (visualização) de vários métodos modernos -- e alguns nem tanto -- de MCMC, aplicados a várias distribuições-alvo. 
 Como material de apoio, um pouco mais técnico, recomendamos este [artigo](https://projecteuclid.org/euclid.ss/1177011137) de Charlie Geyer e também outros materiais disponibilizados por ele em sua [página pessoal](http://users.stat.umn.edu/~geyer/). 
 
+- A aula de quarta-feira (04/03) cobriu uma introdução aos modelos lineares generalizados (GLMs) e uma discussão das conexões entre estes modelos e estruturas causais. 
+OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [esta pergunta](https://stats.stackexchange.com/questions/369987/is-a-single-neuron-in-a-neural-network-a-glm) no CrossValidated e [este](http://blog.shakirm.com/2015/01/a-statistical-view-of-deep-learning-i-recursive-glms/) blog post.  
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
