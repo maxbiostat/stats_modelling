@@ -20,7 +20,7 @@ Como material de apoio, um pouco mais técnico, recomendamos este [artigo](https
 - A aula de quarta-feira (04/03) cobriu uma introdução aos modelos lineares generalizados (GLMs) e uma discussão das conexões entre estes modelos e estruturas causais. 
 OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [esta pergunta](https://stats.stackexchange.com/questions/369987/is-a-single-neuron-in-a-neural-network-a-glm) no CrossValidated e [este](http://blog.shakirm.com/2015/01/a-statistical-view-of-deep-learning-i-recursive-glms/) blog post.  
 
-- [Estatística Bayesiana: um crash course](https://cran.r-project.org/web/packages/LaplacesDemon/vignettes/BayesianInference.pdf)
+- [Estatística Bayesiana: um crash course](https://cran.r-project.org/web/packages/LaplacesDemon/vignettes/BayesianInference.pdf).
 
 ### Tópicos de discussão
 
