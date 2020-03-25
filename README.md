@@ -20,6 +20,8 @@ Como material de apoio, um pouco mais técnico, recomendamos este [artigo](https
 - A aula de quarta-feira (04/03) cobriu uma introdução aos modelos lineares generalizados (GLMs) e uma discussão das conexões entre estes modelos e estruturas causais. 
 OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [esta pergunta](https://stats.stackexchange.com/questions/369987/is-a-single-neuron-in-a-neural-network-a-glm) no CrossValidated e [este](http://blog.shakirm.com/2015/01/a-statistical-view-of-deep-learning-i-recursive-glms/) blog post.  
 
+- [Estatística Bayesiana: um crash course](https://cran.r-project.org/web/packages/LaplacesDemon/vignettes/BayesianInference.pdf)
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
@@ -84,6 +86,8 @@ Neste ciclo de seminários, vamos estudar as ferramentas computacionais disponí
     - Effective sample size.
 
 Fontes de consulta para II e III: [Cowles & Carlin, (1996)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1996.10476956), [Roy (2020)](https://www.annualreviews.org/doi/pdf/10.1146/annurev-statistics-031219-041300), [Bayesplot](https://cran.r-project.org/web/packages/bayesplot/vignettes/visual-mcmc-diagnostics.html).
+
+
 
 
 ### Recursos úteis (comentados)
