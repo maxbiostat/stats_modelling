@@ -57,8 +57,35 @@ Neste ciclo de seminários teremos três tópicos, a serem cobertos em três apr
       - (iii) [Reconciliando modelos determinísticos e estruturas probabilísticas (Poole & Raftery, 2000)](https://www.tandfonline.com/doi/pdf/10.1080/01621459.2000.10474324);
      Explicar o paradoxo de Borel. Como conciliar um modelo determinístico com um mundo (aparentemente) estocástico?
       - (iv) [DAGs e modelos causais (Aalen et al., 2016)](https://journals.sagepub.com/doi/pdf/10.1177/0962280213520436);
-      Como DAGs auxiliam na formulação de explicações causais? O que pode dar errado? Quais as alternativas/soluções? Discutir pelo menos dois exemplos. 
-      
+      Como DAGs auxiliam na formulação de explicações causais? O que pode dar errado? Quais as alternativas/soluções? Discutir pelo menos dois exemplos.       
+
+#### 3) Métodos computacionais para o ajuste (Bayesiano) de modelos
+
+Neste ciclo de seminários, vamos estudar as ferramentas computacionais disponíveis para ajustar modelos estatísticos a dados das mais diversas fontes. Por escolha, vamos nos concentrar nas técnicas Bayesianas de análise. O aparato metodológico envolvido aqui vai girar em torno do método de cadeias de Markov Monte Carlo (MCMC).
+
+- Tópico I: MCMC: o básico
+  - Cobrir os seguintes tópicos:
+    - Método de Monte Carlo e o teorema central do limite;
+    - Algoritmo de Metropolis;
+    - Conceitos: burn-in/warmup, autocorrelação, convergência.    
+ Referências: além daquelas listadas acima para a aula de 17/02/2020, ver também as seções 1 e 2 de [Betancourt (2017)](https://arxiv.org/pdf/1701.02434.pdf).
+ 
+- Tópico II: Diagnósticos gráficos
+  - Cobrir os seguintes tópicos, *sempre com exemplos*:
+    - Trace plots;
+    - Autocorrelograma;
+    - Histograma (porquê?);
+    - Divergências (plot), seção 4 de [Gabry et al. (2019)](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378). 
+
+- Tópico III: Diagnósticos quantitativos
+  - Cobrir os seguintes tópicos, *sempre com exemplos*:
+    - Gelman-Rubin (Rhat);
+    - Geweke;
+    - Effective sample size.
+
+Fontes de consulta para II e III: [Cowles & Carlin, (1996)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1996.10476956), [Roy (2020)](https://www.annualreviews.org/doi/pdf/10.1146/annurev-statistics-031219-041300), [Bayesplot](https://cran.r-project.org/web/packages/bayesplot/vignettes/visual-mcmc-diagnostics.html).
+
+
 ### Recursos úteis (comentados)
 
 - Neste [FAQ](http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#model-specification), Ben Bolker explica os principais tipos de modelos que podem ser ajustados com o pacote [lme4](https://cran.r-project.org/web/packages/lme4/index.html) do R, e, mais importante, discute as diferenças terminológicas que tão frequentemente causam confusão -- vide distinção entre "fixed" e "random" factors.
