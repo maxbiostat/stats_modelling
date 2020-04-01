@@ -22,7 +22,7 @@ OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [es
 
 - [Estatística Bayesiana: um crash course](https://cran.r-project.org/web/packages/LaplacesDemon/vignettes/BayesianInference.pdf).
 
-- Regressão Bayesiana aplicada com o pacote **rstanarm**: (i) [introdução](https://cran.r-project.org/web/packages/rstanarm/vignettes/rstanarm.html) e (ii) (lista de exemplos](https://cran.r-project.org/web/packages/rstanarm/vignettes/). 
+- Regressão Bayesiana aplicada com o pacote **rstanarm**: (i) [introdução](https://cran.r-project.org/web/packages/rstanarm/vignettes/rstanarm.html) e (ii) [lista de exemplos](https://cran.r-project.org/web/packages/rstanarm/vignettes/). 
 
 ### Tópicos de discussão
 
