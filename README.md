@@ -22,7 +22,9 @@ OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [es
 
 - [Estatística Bayesiana: um crash course](https://cran.r-project.org/web/packages/LaplacesDemon/vignettes/BayesianInference.pdf).
 
-- Regressão Bayesiana aplicada com o pacote **rstanarm**: (i) [introdução](https://cran.r-project.org/web/packages/rstanarm/vignettes/rstanarm.html) e (ii) [lista de exemplos](https://cran.r-project.org/web/packages/rstanarm/vignettes/). 
+- Regressão Bayesiana aplicada com o pacote **rstanarm**: (i) [introdução](https://cran.r-project.org/web/packages/rstanarm/vignettes/rstanarm.html) e (ii) [lista de exemplos](https://cran.r-project.org/web/packages/rstanarm/vignettes/).
+
+- Em regressão linear, o estimador de máxima verossimilhança (EMV) e o estimador de mínimos quadrados (EMQ) coincidem. [Dedução](https://stats.stackexchange.com/a/254003/97431) e [mais detalhes](http://www.robots.ox.ac.uk/~fwood/teaching/W4315_Fall2011/Lectures/lecture_3/lecture_3.pdf). Notar em particular os slides 29 e 30 do segundo link; há sempre um compromisso entre viés e eficiência (variância).  
 
 ### Tópicos de discussão
 
