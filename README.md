@@ -26,6 +26,10 @@ OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [es
 
 - Em regressão linear, o estimador de máxima verossimilhança (EMV) e o estimador de mínimos quadrados (EMQ) coincidem. [Dedução](https://stats.stackexchange.com/a/254003/97431) e [mais detalhes](http://www.robots.ox.ac.uk/~fwood/teaching/W4315_Fall2011/Lectures/lecture_3/lecture_3.pdf). Notar em particular os slides 29 e 30 do segundo link; há sempre um compromisso entre viés e eficiência (variância).  
 
+- O exercício sobre estimação da prevalência pode ser encontrado [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/notes/problema_prevalencia.pdf).
+Podem usar o source em `.tex`como base para preparem as respostas.
+Dúvidas são bem-vindas (via email).
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
