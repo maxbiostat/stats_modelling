@@ -47,26 +47,25 @@ Escola de Matemática Aplicada (EMAp), Get\'ulio Vargas Foundation.
 
 \section*{Introdução}
 
-Suponha que desejamos estimar a proporção $\theta$ de indivíduos infectados com um determinado patógeno em uma população.
+Suponha que desejamos estimar a proporção $\theta \in (0, 1)$ de indivíduos infectados com um determinado patógeno em uma população.
 Suponha ainda que dispomos de um teste laboratorial, que produz o resultados $r = \{-, +\}$ indicando se o indivíduo ($y_i$) é livre ($0$) ou infectado ($1$).
 Se o teste fosse perfeito, poderíamos escrever a probabilidade de observar $y = \sum_{i =1}^n y_i$ testes positivos em $n$ testes realizados como\footnote{Porquê?}
 \begin{equation}
 \label{eq:prev_simple}
- \operatorname{Pr}\left( y \mid \theta, n \right)= \binom{n}{y} \theta^y (1-\theta)^{n-y}. 
+ \operatorname{Pr}\left( y \mid \theta, n \right) = \binom{n}{y} \theta^y (1-\theta)^{n-y}. 
 \end{equation}
 
-
-Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilidades fixas da seguinte forma
+Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilidades fixas da seguinte forma\footnote{Naturalmente, $u, v \in (0, 1) \times (0, 1)$, levando em conta a restrição $u + v > 1$.}
 \begin{align}
 %  \operatorname{Pr}\left(\right)
  \operatorname{Pr}\left(\ r = + \mid y_i = 0 \right) &:= 1-u,\\
  \operatorname{Pr}\left( r = - \mid y_i = 1 \right) &:= 1-v,
 \end{align}
-de modo que agora escrevemos\footnote{Exercício bônus: mostre porquê.}
+de modo que agora, assumindo $u + v > 1$, escrevemos\footnote{Exercício bônus: mostre porquê.}
 \begin{equation}
   \operatorname{Pr}\left(r = + \mid \theta, u, v \right) := \theta ( 1- v) + (1-\theta)u,
 \end{equation}
-de modo que podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
+e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
 \begin{equation}
  \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ u + \theta ( 1- (u  + v)) \right]^{y} \left[ 1 -u - \theta (1 -(u + v))\right]^{n-y}.
 \end{equation}
