@@ -30,6 +30,8 @@ OBS: sobre a discussão paralela da conexão entre redes neurais e GLMs, ver [es
 Podem usar o source em `.tex`como base para preparem as respostas.
 Dúvidas são bem-vindas (via email).
 
+- Paper sobre integrated nested Laplace approximation: [Approximate Bayesian inference for latent Gaussian models by using integrated nested Laplace approximations](https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1467-9868.2008.00700.x) .
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
