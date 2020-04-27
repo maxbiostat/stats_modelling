@@ -32,6 +32,8 @@ Dúvidas são bem-vindas (via email).
 
 - Paper sobre integrated nested Laplace approximation (INLA): [Approximate Bayesian inference for latent Gaussian models by using integrated nested Laplace approximations](https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1467-9868.2008.00700.x).
 
+- [Paper](https://arxiv.org/pdf/1911.10500.pdf) sobre causalidade em aprendizado de máquina, por Bernhard Schölkopf.
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
