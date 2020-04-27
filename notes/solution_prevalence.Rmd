@@ -1,0 +1,54 @@
+---
+title: "Estimando a prevalência de uma doença a partir de um teste diagnóstico"
+author: "Lucas Emanuel Resck Domingues, Lucas Machado Moschen, Vitor Bitarães"
+affiliation: "Escola de Matemática Aplicada (EMAp), Fundação Getulio Vargas"
+date: "4/29/2020"
+output: pdf_document
+---
+
+\section*{Introdução}
+
+Suponha que desejamos estimar a proporção $\theta \in (0, 1)$ de indivíduos infectados com um determinado patógeno em uma população.
+Suponha ainda que dispomos de um teste laboratorial, que produz o resultados $r = \{-, +\}$ indicando se o indivíduo ($y_i$) é livre ($0$) ou infectado ($1$).
+Se o teste fosse perfeito, poderíamos escrever a probabilidade de observar $y = \sum_{i =1}^n y_i$ testes positivos em $n$ testes realizados como\footnote{Porquê?}
+\begin{equation}
+\label{eq:prev_simple}
+ \operatorname{Pr}\left( y \mid \theta, n \right) = \binom{n}{y} \theta^y (1-\theta)^{n-y}. 
+\end{equation}
+
+Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilidades fixas da seguinte forma\footnote{Naturalmente, $u, v \in (0, 1) \times (0, 1)$, levando em conta a restrição $u + v > 1$.}
+\begin{align}
+%  \operatorname{Pr}\left(\right)
+ \operatorname{Pr}\left(\ r = + \mid y_i = 0 \right) &:= 1-u,\\
+ \operatorname{Pr}\left( r = - \mid y_i = 1 \right) &:= 1-v,
+\end{align}
+de modo que agora, assumindo $u + v > 1$, escrevemos\footnote{Exercício bônus: mostre porquê.}
+\begin{equation}
+  \operatorname{Pr}\left(r = + \mid \theta, u, v \right) := \theta ( 1- v) + (1-\theta)u,
+\end{equation}
+e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
+\begin{equation}
+ \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ u + \theta ( 1- (u  + v)) \right]^{y} \left[ 1 -u - \theta (1 -(u + v))\right]^{n-y}.
+\end{equation}
+
+\section*{Problema(s)}
+
+\begin{itemize}
+
+ \item[a)] Escolha e justifique uma distribuição~\textit{a priori} para $\theta$ -- lembre-se que neste exercício $u$ e $v$ são fixos;
+ 
+ \textbf{Resposta:}
+ 
+ \item[b)] Derive $\operatorname{Pr}(\theta \mid y, n, u, v)$;
+ 
+ \textbf{Resposta:}
+ 
+ \item[c)] Suponha que $y = 4$ e $n = 5000$.
+ Qual a média~\textit{a posteriori} de $\theta$?
+ Produza intervalos de credibilidade de $80$, $90$ e $95$\% para $\theta$. 
+ \textbf{Resposta:}
+ 
+ \item[d)] \textbf{Bônus}. Que melhorias você faria neste modelo? Que outras fontes de incerteza estão sendo ignoradas?
+ 
+ \textbf{Resposta:}
+\end{itemize}
