@@ -65,11 +65,16 @@ Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilida
 \end{align}
 de modo que agora, assumindo $u + v > 1$, escrevemos\footnote{Exercício bônus: mostre porquê.}
 \begin{equation}
-  \operatorname{Pr}\left(r = + \mid \theta, u, v \right) := \theta ( 1- v) + (1-\theta)u,
+  \begin{split}
+    \operatorname{Pr}\left(r = + \mid \theta, u, v \right) &= Pr\left(r = + \mid y_i = 0\right)Pr\left(y_i = 0\right) + Pr\left(r = + \mid y_i = 1\right)Pr\left(y_i = 1\right) \\
+    &= Pr\left(r = + \mid y_i = 0\right)Pr\left(y_i = 0\right) + (1 - Pr\left(r = - \mid y_i = 1\right))Pr\left(y_i = 1\right) \\
+    &= (1 - u)(1 - \theta) + (1 - (1 - v))\theta \\
+    &= 1 - u + \theta(u + v - 1)
+     \end{split}
 \end{equation}
 e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
 \begin{equation}
- \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ u + \theta ( 1- (u  + v)) \right]^{y} \left[ 1 -u - \theta (1 -(u + v))\right]^{n-y}.
+ \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ 1 - u + \theta(u + v - 1) \right]^{y} \left[ u - \theta(u + v - 1)\right]^{n-y}.
 \end{equation}
 
 
