@@ -2,7 +2,7 @@
 title: "Estimando a prevalência de uma doença a partir de um teste diagnóstico"
 author: "Lucas Emanuel Resck Domingues, Lucas Machado Moschen, Vitor Bitarães"
 affiliation: "Escola de Matemática Aplicada (EMAp), Fundação Getulio Vargas"
-date: "4/29/2020"
+date: "29/04/2020"
 header-includes:
    - \usepackage{xcolor}
 output: pdf_document
@@ -36,6 +36,10 @@ e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
 \begin{equation}
  \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ u + \theta ( 1- (u  + v)) \right]^{y} \left[ 1 -u - \theta (1 -(u + v))\right]^{n-y}.
 \end{equation}
+
+
+
+
 
 ## Problemas
 
