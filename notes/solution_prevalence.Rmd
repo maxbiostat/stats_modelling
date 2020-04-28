@@ -55,6 +55,10 @@ a) Escolha e justifique uma distribuição~\textit{a priori} para $\theta$ -- le
 \textcolor{red}{Uma primeira idea é a distribuição BETA que já conversamos em aula.}
 
 \textcolor{red}{Procurar usadas na biografia. }
+
+\textcolor{red}{O que acham de usar a distribuição normal truncada?}
+
+[Distribuição Normal Truncada](https://en.wikipedia.org/wiki/Truncated_normal_distribution#Definitions)
  
 b) Derive $\operatorname{Pr}(\theta \mid y, n, u, v)$;
  
