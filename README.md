@@ -34,6 +34,8 @@ Dúvidas são bem-vindas (via email).
 
 - [Paper](https://arxiv.org/pdf/1911.10500.pdf) sobre causalidade em aprendizado de máquina, por Bernhard Schölkopf.
 
+- Sobre elicitação de prioris: [SHeffield ELicitation Framework (SHELF) package](http://www.tonyohagan.co.uk/shelf/).
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
