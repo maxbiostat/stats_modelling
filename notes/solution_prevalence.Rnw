@@ -20,6 +20,12 @@
 \usepackage[pdftex]{lscape}
 \usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    allcolors=,  % Nothing change colors
+    urlcolor=blue  % URL change color
+}
 
 % Title Page
 \title{\vspace{-9ex}\centering \bf Estimando a prevalência de uma doença a partir de um teste diagnóstico}
@@ -123,4 +129,15 @@ e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
 % }
 % \label{fig:}
 % \end{figure}
+
+\section*{Soluções}
+  \begin{itemize}
+    \item[a)]
+      \begin{itemize}
+        \item Uma primeira ideia é a distribuição beta que já conversamos em aula.
+        \item Procurar usadas na biografia.
+        \item O que acham de usar a \href{https://en.wikipedia.org/wiki/Truncated_normal_distribution#Definitions}{distribuição normal truncada}?
+      \end{itemize}
+  \end{itemize}
+  
 \end{document}          
