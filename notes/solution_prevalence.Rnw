@@ -132,17 +132,17 @@ e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
 
 \section*{Soluções}
     
-Uma distribuição de probabilidade plausível para o parâmetro $\theta$ é dada pela distribuição beta, uma distribuição flexível, que pode assumir várias formas, dependendo da escolha de valores de $a$ e $b$. Nesse caso, a priori é $\xi(\theta) = \frac{1}{B(a,b)}\theta^{n-1}(1 - \theta)^{b - 1}$. Claro que temos que conhecer os valores $a$ e $b$. Segundo , os hiperparâmetros podem ser escolhidos em um painel de experts, usando resultados de estudos anteriores. 
+Uma distribuição de probabilidade plausível para o parâmetro $\theta$ é dada pela distribuição beta, uma distribuição flexível, que pode assumir várias formas, dependendo da escolha de valores de $a$ e $b$. Nesse caso, a priori é $\xi(\theta) = \frac{1}{B(a,b)}\theta^{n-1}(1 - \theta)^{b - 1}$. Claro que temos que conhecer os valores $a$ e $b$. Segundo, os hiperparâmetros podem ser escolhidos em um painel de experts, usando resultados de estudos anteriores. 
  
- Nesse caso, a ideia seria aproximar a moda da distribuição $Beta$ para a prevalência acreditada por alguns epidemiologistas e, também, aproximar o desvio padrão como uma parte, um quarto, por exemplo, dos limites inferior e superior, acreditados pelo epidemeologista. 
+ Nesse caso, a ideia seria aproximar a moda da distribuição beta para a prevalência acreditada por alguns epidemiologistas e, também, aproximar o desvio padrão como uma parte, um quarto, por exemplo, dos limites inferior e superior, acreditados pelo epidemeologista. 
  
  Veja, entretando, que a escolha dos hiperarâmetros vai influenciar bastante o resultado, já que podemos estar, por exemplo, quase impossibilitando a probabilidade de algumas prevalências. 
  
- Podemos contruir uma priori não informativa, nesse caso que não temos informação. No caso da distribuição Beta, poderíamos atribuir $a = b = 1$, para termos uma distribuição uniforme no intervalo $[0,1]$. Entretanto, existem técnicas para construir essas distribuições. Intuitivamente, a ideia é minimizar o impacto da priori na nossa posteriori, e, nesse caso, a distribuição dela vai se aproximar à estimativa da verossimelança máxima. Neste artigo de Jefrey, ele comenta um método para essa construção, baseado na informação de Fisher. 
+ Podemos contruir uma priori não informativa, nesse caso que não temos informação. No caso da distribuição beta, poderíamos atribuir $a = b = 1$, para termos uma distribuição uniforme no intervalo $[0,1]$. Entretanto, existem técnicas para construir essas distribuições. Intuitivamente, a ideia é minimizar o impacto da priori na nossa posteriori, e, nesse caso, a distribuição dela vai se aproximar à estimativa da verossimelança máxima. Neste artigo de \href{http://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2014000400703}{Jefrey}, ele comenta um método para essa construção, baseado na informação de Fisher. 
  
- Usando os cálculos obtidos pelo artigo, obteríamos que essa priori seria de fato uma distribuição beta, mas $a = b = 0.5$. Isso, claro, se nossa verossemilhança for uma Binomial. 
+ Usando os cálculos obtidos pelo artigo, obteríamos que essa priori seria de fato uma distribuição beta, mas $a = b = 0.5$. Isso, claro, se nossa verossemilhança for uma binomial. 
  
- Vejamos o formato de uma $Beta(0.5,0.5)$
+ Vejamos o formato de uma $\mathrm{Beta}(0.5,0.5)$
 
 <<>>=
 p = seq(0,1, length=100)
