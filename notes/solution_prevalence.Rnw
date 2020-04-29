@@ -57,6 +57,8 @@ Se o teste fosse perfeito, poderíamos escrever a probabilidade de observar $y =
  \operatorname{Pr}\left( y \mid \theta, n \right) = \binom{n}{y} \theta^y (1-\theta)^{n-y}. 
 \end{equation}
 
+Isso vale, pois, dado $\theta$, sabemos que a variável aleatória que indica que um indivíduo está infectado tem distribuição Bernoulli com parâmetro $\theta$. Então o número de infectados é dado por uma binomial com parâmetro $\theta$.
+
 Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilidades fixas da seguinte forma\footnote{Naturalmente, $u, v \in (0, 1) \times (0, 1)$, levando em conta a restrição $u + v > 1$.}
 \begin{align}
 %  \operatorname{Pr}\left(\right)
