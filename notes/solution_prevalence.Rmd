@@ -48,10 +48,6 @@ e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
  \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ 1 - u + \theta(u + v - 1) \right]^{y} \left[ u - \theta(u + v - 1)\right]^{n-y}.
 \end{equation}
 
-
-
-
-
 ## Problemas
 
 a) Escolha e justifique uma distribuição \textit{a priori} para $\theta$ -- lembre-se que neste exercício $u$ e $v$ são fixos;
@@ -64,9 +60,27 @@ a) Escolha e justifique uma distribuição \textit{a priori} para $\theta$ -- le
  
  Veja, entretando, que a escolha dos hiperarâmetros vai influenciar bastante o resultado, já que podemos estar, por exemplo, quase impossibilitando a probabilidade de algumas prevalências. 
  
- Podemos contruir uma priori não informativa, nesse caso que não temos informação. No caso da distribuição Beta, poderíamos atribuir $a = b = 1$, para termos uma distribuição uniforme no intervalo $[0,1]$. Entretanto, existem técnicas para construir essas distribuições. Intuitivamente, a ideia é minimizar o impacto da priori na nossa posteriori, e, nesse caso, a distribuição dela vai se aproximar à estimativa da verossimelança máxima. Neste artigo de [Jefrey](http://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2014000400703), ele comenta um método para essa construção, baseado na informação de Fisher. 
+ Podemos contruir uma priori não informativa, nesse caso que não temos informação. No caso da distribuição Beta, poderíamos atribuir $a = b = 1$, para termos uma distribuição uniforme no intervalo $[0,1]$, que na verdade é informativa, e tem influencia a posteriori mais do que gostaríamos. Entretanto, existem técnicas para construir essas distribuições. Intuitivamente, a ideia é minimizar o impacto da priori na nossa posteriori, e, nesse caso, a distribuição dela vai se aproximar à estimativa da verossimelança máxima. Neste artigo de [Jefrey](http://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2014000400703), ele constrói um método baseado na informação de Fisher.
  
- Usando os cálculos obtidos pelo artigo, obteríamos que essa priori seria de fato uma distribuição beta, mas $a = b = 0.5$. Isso, claro, se nossa verossemilhança for uma Binomial. 
+ Nesse método, $p(\theta) \propto \sqrt{\det I(\theta)}$. Como estamos em um caso unidimensional, então:
+ 
+$$
+\begin{split}
+p(\theta) \propto (I(\theta))^{\frac{1}{2}} &= (E[(\frac{d}{d\theta}\log f(y|\theta, u, v))^2])^{\frac{1}{2}} \\
+&= (E[(\frac{d}{d\theta}\log f(y|\theta, u, v))^2])^{\frac{1}{2}} \\
+&= \left(E\left[\left(\frac{y(u + v - 1)}{1 - u + \theta(u + v - 1)} + \frac{(y-n)(u + v - 1)}{u - \theta(u + v - 1)}\right)^2\right]\right)^{\frac{1}{2}} \\
+&= \left((u + v - 1)^2E\left[\left(\frac{y - n + un - n\theta(u + v - 1)}{(1 - u + \theta(u + v - 1))(u - \theta(u + v - 1))}\right)^2\right]\right)^{\frac{1}{2}} \\
+&= \left((u + v - 1)^2E\left[\left(\frac{y - n + un - n\theta(u + v - 1)}{(1 - u + \theta(u + v - 1))(u - \theta(u + v - 1))}\right)^2\right]\right)^{\frac{1}{2}} \\
+&= \frac{(u + v - 1)}{(1 - u + \theta(u + v - 1))(u - \theta(u + v - 1))}E\left[(y - n + un - n\theta(u + v - 1))^2\right]^{\frac{1}{2}} \\
+&= \frac{(u + v - 1)}{(1 - u + \theta(u + v - 1))(u - \theta(u + v - 1))}(Var[y] + E[y - n(1 - u + \theta(u + v - 1))]^2)^{\frac{1}{2}} \\
+&= \frac{(u + v - 1)(n(1 - u + \theta(u+v-1))(u - \theta(u + v - 1)))^{\frac{1}{2}}}{(1 - u + \theta(u + v - 1))(u - \theta(u + v - 1))} \\
+&= \frac{n^{\frac{1}{2}}(u + v - 1)(1 - u + \theta(u+v-1))^{\frac{1}{2}}(u - \theta(u + v - 1))^{\frac{1}{2}}}{(1 - u + \theta(u + v - 1))(u - \theta(u + v - 1))} \\
+&= n^{\frac{1}{2}}(u + v - 1)(1 - u + \theta(u+v-1))^{-\frac{1}{2}}(u - \theta(u + v - 1))^{-\frac{1}{2}} \\
+\end{split}
+$$
+ Assim $p(\theta) \propto f(1 - u + \theta(u + v - 1), \frac{1}{2}, \frac{1}{2}) = \frac{f(\theta, \frac{1}{2}, \frac{1}{2})}{u + v - 1}$, onde $f$ é a função densidade da distribuição Beta. 
+ 
+ Concluimos $p(\theta)$ tem distrição $Beta(0.5, 0.5)$. Essa será nossa priori. 
  
  Vejamos o formato de uma $Beta(0.5,0.5)$
 
@@ -74,10 +88,6 @@ a) Escolha e justifique uma distribuição \textit{a priori} para $\theta$ -- le
 p = seq(0,1, length=100)
 plot(p, dbeta(p, 0.5, 0.5), ylab="density", type ="l", col=4)
 ```
-
-\textcolor{red}{O que acham de usar a distribuição normal truncada?}
-
-[Distribuição Normal Truncada](https://en.wikipedia.org/wiki/Truncated_normal_distribution#Definitions)
  
 b) Derive $\operatorname{Pr}(\theta \mid y, n, u, v)$;
  
