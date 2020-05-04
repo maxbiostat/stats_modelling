@@ -1,0 +1,124 @@
+\documentclass[a4paper, notitlepage, 10pt]{article}
+\usepackage{geometry}
+\fontfamily{times}
+\geometry{verbose,tmargin=30mm,bmargin=25mm,lmargin=25mm,rmargin=25mm}
+% \pagestyle{empty}
+% end configs
+\usepackage{setspace,relsize}               
+\usepackage{moreverb}                        
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,citecolor=blue}
+\usepackage{amsmath}
+\usepackage{mathtools} 
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+\usepackage{todonotes}
+\usepackage[authoryear,round]{natbib}
+\bibliographystyle{apalike}
+\usepackage[pdftex]{lscape}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+
+% Title Page
+\title{\vspace{-9ex}\centering \bf Estimando a prevalência de uma doença a partir de um teste diagnóstico}
+\author{
+Lucas Emanuel Resck Domingues \\
+Lucas Machado Moschen \\
+Vitor Bitarães \\
+Escola de Matematica Aplicada (EMAp), Getulio Vargas Foundation.
+% Program for Scientific Computing (PROCC), Oswaldo Cruz Foundation.\\
+% Institute of Evolutionary Biology, University of Edinburgh.\\
+}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newtheorem{theorem}{Theorem}[]
+\newtheorem{proposition}{Proposition}[]
+\newtheorem{remark}{Remark}[]
+\setcounter{theorem}{0} % assign desired value to theorem counter
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% 
+% Key-words: ;; ; ; . 
+% \end{abstract}
+
+% \section*{Background}
+
+\section*{Introdução}
+
+Suponha que desejamos estimar a proporção $\theta \in (0, 1)$ de indivíduos infectados com um determinado patógeno em uma população.
+Suponha ainda que dispomos de um teste laboratorial, que produz o resultados $r = \{-, +\}$ indicando se o indivíduo ($y_i$) é livre ($0$) ou infectado ($1$).
+Se o teste fosse perfeito, poderíamos escrever a probabilidade de observar $y = \sum_{i =1}^n y_i$ testes positivos em $n$ testes realizados como\footnote{Porquê?}
+\begin{equation}
+\label{eq:prev_simple}
+ \operatorname{Pr}\left( y \mid \theta, n \right) = \binom{n}{y} \theta^y (1-\theta)^{n-y}. 
+\end{equation}
+
+Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilidades fixas da seguinte forma\footnote{Naturalmente, $u, v \in (0, 1) \times (0, 1)$, levando em conta a restrição $u + v > 1$.}
+\begin{align}
+%  \operatorname{Pr}\left(\right)
+ \operatorname{Pr}\left(\ r = + \mid y_i = 0 \right) &:= 1-u,\\
+ \operatorname{Pr}\left( r = - \mid y_i = 1 \right) &:= 1-v,
+\end{align}
+de modo que agora, assumindo $u + v > 1$, escrevemos\footnote{Exercício bônus: mostre porquê.}
+\begin{equation}
+  \begin{split}
+    \operatorname{Pr}\left(r = + \mid \theta, u, v \right) &= Pr\left(r = + \mid y_i = 0\right)Pr\left(y_i = 0\right) + Pr\left(r = + \mid y_i = 1\right)Pr\left(y_i = 1\right) \\
+    &= Pr\left(r = + \mid y_i = 0\right)Pr\left(y_i = 0\right) + (1 - Pr\left(r = - \mid y_i = 1\right))Pr\left(y_i = 1\right) \\
+    &= (1 - u)(1 - \theta) + (1 - (1 - v))\theta \\
+    &= 1 - u + \theta(u + v - 1)
+     \end{split}
+\end{equation}
+e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
+\begin{equation}
+ \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ 1 - u + \theta(u + v - 1) \right]^{y} \left[ u - \theta(u + v - 1)\right]^{n-y}.
+\end{equation}
+
+
+\section*{Problema(s)}
+\begin{itemize}
+ \item[a)] Escolha e justifique uma distribuição~\textit{a priori} para $\theta$ -- lembre-se que neste exercício $u$ e $v$ são fixos;
+ \item[b)] Derive $\operatorname{Pr}(\theta \mid y, n, u, v)$;
+ \item[c)] Suponha que $y = 4$ e $n = 5000$.
+ Qual a média~\textit{a posteriori} de $\theta$?
+ Produza intervalos de credibilidade de $80$, $90$ e $95$\% para $\theta$. 
+ \item[d)] \textbf{Bônus}. Que melhorias você faria neste modelo? Que outras fontes de incerteza estão sendo ignoradas?
+\end{itemize}
+
+\section*{Dicas}
+\begin{itemize}
+ \item Lembrem-se de justificar~\textbf{todas} as suas respostas, tanto matematica quanto estatisticamente. 
+ Isto inclui a escolha de métodos numéricos, se estes forem necessários;
+ \item O tópico abordado aqui é bastante conhecido e existe farta literatura.
+ As palavras-chave são: diagnostic tests, sensitivity, specificity, Bayesian estimation.
+ Por enquanto, não vamos recomendar os artigos pertinentes para que o problema não perca a graça uma vez que vocês vejam a solução. 
+ Quando formos discutir as abordagens para o problema, revelaremos alguns dos artigos que podem ser consultados;
+ \item Vocês podem consultar os capítulos 7.2 e 7.3 de~\cite{DeGroot2012} para o item a) e também o capítulo 3 de~\cite{McElreath2020} para os outros itens.
+ \item Procurem se divertir com os problemas nas notas de rodapé; eles valem o esforço e envolvem apenas relembrar conceitos de probabilidade.
+\end{itemize}
+
+
+\bibliography{../biblio/statmodelling}
+
+% \begin{figure}[!ht]
+% \centering
+% \includegraphics[width=\textwidth, height = 15cm]{figures/}
+% \caption{\textbf{}.
+% }
+% \label{fig:}
+% \end{figure}
+%%
+% \begin{figure}
+% \hfill
+% \subfigure[Title A]{\includegraphics[width=5cm]{img1}}
+% \hfill
+% \subfigure[Title B]{\includegraphics[width=5cm]{img2}}
+% \hfill
+% \caption{\textbf{}.
+% }
+% \label{fig:}
+% \end{figure}
+\end{document}          
