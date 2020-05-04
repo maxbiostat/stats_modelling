@@ -36,6 +36,8 @@ Dúvidas são bem-vindas (via email).
 
 - Sobre elicitação de prioris: [SHeffield ELicitation Framework (SHELF) package](http://www.tonyohagan.co.uk/shelf/).
 
+- Sobre a questão da projeção de prioris não-informativas: [Hidden Dangers of Specifying Noninformative Priors](https://www.tandfonline.com/doi/abs/10.1080/00031305.2012.695938).
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
