@@ -3,7 +3,7 @@ title: "Estimando a prevalência de uma doença a partir de um teste diagnóstic
 author: |
  | Lucas Emanuel Resck Domingues
  | Lucas Machado Moschen
- | Vitor Bitarães
+ | Victor Bitarães
  | 
  | Escola de Matemática Aplicada (EMAp)
  | Fundação Getulio Vargas
