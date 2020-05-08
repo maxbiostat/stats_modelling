@@ -58,18 +58,19 @@ Se o teste fosse perfeito, poderíamos escrever a probabilidade de observar $y =
 Infelizmente, o teste não é perfeito, acertando o diagnóstico com probabilidades fixas da seguinte forma\footnote{Naturalmente, $u, v \in (0, 1) \times (0, 1)$, levando em conta a restrição $u + v > 1$.}
 \begin{align}
 %  \operatorname{Pr}\left(\right)
- \operatorname{Pr}\left(\ r = + \mid y_i = 0 \right) &:= u,\\
- \operatorname{Pr}\left( r = - \mid y_i = 1 \right) &:= v,
+ \operatorname{Pr}\left(\ r = + \mid y_i = 0 \right) &=: u,\\
+ \operatorname{Pr}\left( r = - \mid y_i = 1 \right) &=: v,
 \end{align}
 de modo que agora, assumindo $u + v > 1$, escrevemos\footnote{Exercício bônus: mostre porquê.}
 \begin{equation}
-  \operatorname{Pr}\left(r = + \mid \theta, u, v \right) := \theta ( 1- v) + (1-\theta)u,
+  \operatorname{Pr}\left(r = + \mid \theta, u, v \right) =: \theta ( 1- v) + (1-\theta)u,
 \end{equation}
 e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
 \begin{equation}
  \operatorname{Pr}\left(y \mid \theta, n, u, v\right) = \binom{n}{y} \left[ u + \theta ( 1- (u  + v)) \right]^{y} \left[ 1 -u - \theta (1 -(u + v))\right]^{n-y}.
 \end{equation}
 
+\textbf{Parâmetros para COVID-19:} $u = 1-\text{especificidade} = 1-0.97 = 0.03$ e $v = 1-\text{sensibilidade} = 1-0.75 = 0.25$. 
 
 \section*{Problema(s)}
 \begin{itemize}
@@ -78,8 +79,10 @@ e podemos reescrever a probabilidade em~(\ref{eq:prev_simple}):
  \item[c)] Suponha que $y = 4$ e $n = 5000$.
  Qual a média~\textit{a posteriori} de $\theta$?
  Produza intervalos de credibilidade de $80$, $90$ e $95$\% para $\theta$. 
- \item[d)] \textbf{Bônus}. Que melhorias você faria neste modelo? Que outras fontes de incerteza estão sendo ignoradas?
+ \item[d)]~\textbf{Bônus}. Que melhorias você faria neste modelo? Que outras fontes de incerteza estão sendo ignoradas?
 \end{itemize}
+
+
 
 \section*{Dicas}
 \begin{itemize}
