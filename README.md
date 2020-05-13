@@ -39,6 +39,8 @@ Dúvidas são bem-vindas (via email).
 
 - Sobre a questão da projeção de prioris não-informativas: [Hidden Dangers of Specifying Noninformative Priors](https://www.tandfonline.com/doi/abs/10.1080/00031305.2012.695938).
 
+- [Estimating Prevalence Using an Imperfect Test](http://downloads.hindawi.com/archive/2011/608719.pdf). Paper do Peter Diggle sobre a estimação da prevalencia. Ele aborda a questão pelas óticas frequentista e bayesiana.      
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
