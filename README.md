@@ -39,7 +39,9 @@ Dúvidas são bem-vindas (via email).
 
 - Sobre a questão da projeção de prioris não-informativas: [Hidden Dangers of Specifying Noninformative Priors](https://www.tandfonline.com/doi/abs/10.1080/00031305.2012.695938).
 
-- [Estimating Prevalence Using an Imperfect Test](http://downloads.hindawi.com/archive/2011/608719.pdf). Paper do Peter Diggle sobre a estimação da prevalencia. Ele aborda a questão pelas óticas frequentista e bayesiana.      
+- [Estimating Prevalence Using an Imperfect Test](http://downloads.hindawi.com/archive/2011/608719.pdf). Paper do Peter Diggle sobre a estimação da prevalencia. Ele aborda a questão pelas óticas frequentista e bayesiana.
+
+- Trabalho sobre regressão: escolher uma pergunta científica e respondê-la através do uso de um modelo de regressão (possivelmente um GLM). Tópicos a se discutir: predições _a priori_ e _a posteriori_; análise de pontos influentes (distância de Cook ou PSIS); intepretação dos coeficientes; manipulação dos preditores (covariáveis) para explorar o fenomeno estudado. Aqui está a análise que eu mencionei durante a aula: [An Analysis of the New York City Police Department’s “Stop-and-Frisk” Policy in the Context of Claims of Racial Bias](http://www.stat.columbia.edu/~gelman/research/published/frisk9.pdf).
 
 ### Tópicos de discussão
 
