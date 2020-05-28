@@ -43,6 +43,8 @@ Dúvidas são bem-vindas (via email).
 
 - Trabalho sobre regressão: escolher uma pergunta científica e respondê-la através do uso de um modelo de regressão (possivelmente um GLM). Tópicos a se discutir: predições _a priori_ e _a posteriori_; análise de pontos influentes (distância de Cook ou PSIS); intepretação dos coeficientes; manipulação dos preditores (covariáveis) para explorar o fenomeno estudado. Aqui está a análise que eu mencionei durante a aula: [An Analysis of the New York City Police Department’s “Stop-and-Frisk” Policy in the Context of Claims of Racial Bias](http://www.stat.columbia.edu/~gelman/research/published/frisk9.pdf).
 
+- Sobre o tópico do trabalho anterior, este [artigo](http://www.stat.columbia.edu/~gelman/research/unpublished/specificity.pdf)  faz uma analise da prevalência de COVID-19 levando em conta um série de incertezas e ainda usando pós-estratificação.
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
