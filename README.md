@@ -45,6 +45,8 @@ Dúvidas são bem-vindas (via email).
 
 - Sobre o tópico do trabalho anterior, este [artigo](http://www.stat.columbia.edu/~gelman/research/unpublished/specificity.pdf)  faz uma analise da prevalência de COVID-19 levando em conta um série de incertezas e ainda usando pós-estratificação.
 
+- [Decomposição QR](https://mc-stan.org/users/documentation/case-studies/qr_regression.html) em modelos de regressão.
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
