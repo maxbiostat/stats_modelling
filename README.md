@@ -47,6 +47,8 @@ Dúvidas são bem-vindas (via email).
 
 - [Decomposição QR](https://mc-stan.org/users/documentation/case-studies/qr_regression.html) em modelos de regressão.
 
+- [Artigo](https://www.sciencedirect.com/science/article/pii/S0047259X09000876) sobre a elicitação de uma priori para a matriz de correlação utilizando apenas um parametro (eta).
+
 ### Tópicos de discussão
 
 #### 1) Teste de hipóteses, ou p-valores: yay or nay?
