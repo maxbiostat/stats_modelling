@@ -40,7 +40,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - [Sakia, (1992)](https://www.jstor.org/stable/pdf/2348250.pdf?casa_token=ln4GDMAaMSoAAAAA:5OeirJhCZbzi40n28k3FEUf-pDKYINa0uGxe0P4yWUGV2GxqgWlUzFuzTnDuK10GTj94USu_e51AbA5mBPzFqI-r_lPjGbcsxd6GBLclNu7SuR4taQ). The Box‐Cox transformation technique: a review. Journal of the Royal Statistical Society: Series D (The Statistician), 41(2), 169-178.
 
 ### Reparametrização
-- [Stan guide 24.2](https://mc-stan.org/docs/stan-users-guide/reparameterizations.html)
+- [Stan guide 24.2](https://mc-stan.org/docs/stan-users-guide/reparameterizations.html).
  
 ### Multicolinearidade
 - [Alin (2010)](https://wires.onlinelibrary.wiley.com/doi/pdf/10.1002/wics.84?casa_token=7thEddWWSnMAAAAA:xkd0kOKnD_MJ2653zgulIlXytF-JRAY51DxLYThv2B0-4o3XjnUSoqIu0E5J5Lo_XzlYOtzbcp51kA). Multicollinearity. Wiley interdisciplinary reviews: computational statistics, 2(3), 370-374.
