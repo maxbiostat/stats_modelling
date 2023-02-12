@@ -37,7 +37,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - Mccullagh & Nelder (1989) "Generalised linear models". [[PDF]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf).
  
 ### Transformações
-- [Sakia,(1992)](https://www.jstor.org/stable/pdf/2348250.pdf?casa_token=ln4GDMAaMSoAAAAA:5OeirJhCZbzi40n28k3FEUf-pDKYINa0uGxe0P4yWUGV2GxqgWlUzFuzTnDuK10GTj94USu_e51AbA5mBPzFqI-r_lPjGbcsxd6GBLclNu7SuR4taQ). The Box‐Cox transformation technique: a review. Journal of the Royal Statistical Society: Series D (The Statistician), 41(2), 169-178.
+- [Sakia, (1992)](https://www.jstor.org/stable/pdf/2348250.pdf?casa_token=ln4GDMAaMSoAAAAA:5OeirJhCZbzi40n28k3FEUf-pDKYINa0uGxe0P4yWUGV2GxqgWlUzFuzTnDuK10GTj94USu_e51AbA5mBPzFqI-r_lPjGbcsxd6GBLclNu7SuR4taQ). The Box‐Cox transformation technique: a review. Journal of the Royal Statistical Society: Series D (The Statistician), 41(2), 169-178.
 
 ### Reparametrização
 - [Stan guide 24.2](https://mc-stan.org/docs/stan-users-guide/reparameterizations.html)
