@@ -51,7 +51,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - Parametrização centrada _vs_ não-centrada: https://sjster.github.io/introduction_to_computational_statistics/docs/Production/Reparameterization.html.
 
 ### Tópicos especiais
-- [Simpson's paradox](https://plato.stanford.edu/entries/paradox-simpson/) Seção 5. 
+- [Simpson's paradox](https://plato.stanford.edu/entries/paradox-simpson/), Seção 5. 
 
 ### Recursos úteis
 
