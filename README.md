@@ -20,21 +20,37 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 ### News
 - No dia 15/02 não haverá aula.
 
-### Introdução e motivação
+### Modelos, hipóteses e a lógica da ciência
 
 - SR Ch1;
 - [Box (1976)](https://www-sop.inria.fr/members/Ian.Jermyn/philosophy/writings/Boxonmaths.pdf). Science and statistics. Journal of the American Statistical Association, 71(356), 791-799;
 - [Nester (1996)](http://www.sortie-nd.org/lme/Statistical%20Papers/Nester_1996.pdf). An applied statistician's creed. Journal of the Royal Statistical Society: Series C (Applied Statistics), 45(4), 401-410.
 
-### Modelos, hipóteses e a lógica da ciência
 ### Modelo linear
-### Testes para modelos de regressão 
+
+- [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf) 
+
 ### Família exponencial
+- Duane Rich's videos: [part 1](https://youtu.be/xwM9XcnQ4Us) and [part 2](https://youtu.be/9EgkOn5mWcc) 
+
 ### Modelos lineares generalizados 
+- Mccullagh & Nelder (1989) "Generalised linear models". [[PDF]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf).
+ 
 ### Transformações
+- [Sakia,(1992)](https://www.jstor.org/stable/pdf/2348250.pdf?casa_token=ln4GDMAaMSoAAAAA:5OeirJhCZbzi40n28k3FEUf-pDKYINa0uGxe0P4yWUGV2GxqgWlUzFuzTnDuK10GTj94USu_e51AbA5mBPzFqI-r_lPjGbcsxd6GBLclNu7SuR4taQ). The Box‐Cox transformation technique: a review. Journal of the Royal Statistical Society: Series D (The Statistician), 41(2), 169-178.
+- 
 ### Reparametrização
+- [Stan guide 24.2](https://mc-stan.org/docs/stan-users-guide/reparameterizations.html)
+ 
 ### Multicolinearidade
+- [Alin (2010)](https://wires.onlinelibrary.wiley.com/doi/pdf/10.1002/wics.84?casa_token=7thEddWWSnMAAAAA:xkd0kOKnD_MJ2653zgulIlXytF-JRAY51DxLYThv2B0-4o3XjnUSoqIu0E5J5Lo_XzlYOtzbcp51kA). Multicollinearity. Wiley interdisciplinary reviews: computational statistics, 2(3), 370-374.
+
 ### Modelos multinivel
+- [Why hierarchical models are awesome, tricky, and Bayesian](https://twiecki.io/blog/2017/02/08/bayesian-hierchical-non-centered/);
+- Parametrização centrada _vs_ não-centrada: https://sjster.github.io/introduction_to_computational_statistics/docs/Production/Reparameterization.html.
+
+### Tópicos especiais
+- [Simpson's paradox](https://plato.stanford.edu/entries/paradox-simpson/) Seção 5. 
 
 ### Recursos úteis
 
