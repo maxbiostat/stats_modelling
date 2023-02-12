@@ -28,6 +28,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 
 ### Modelo linear
 - [Teorema de Gauss-Markov](https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem);
+- [Teorema de Frish-Waugh-Lovell](https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem);
 - [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf).
 
 ### Família exponencial
