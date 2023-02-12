@@ -27,7 +27,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - [Nester (1996)](http://www.sortie-nd.org/lme/Statistical%20Papers/Nester_1996.pdf). An applied statistician's creed. Journal of the Royal Statistical Society: Series C (Applied Statistics), 45(4), 401-410.
 
 ### Modelo linear
-
+- [Teorema de Gauss-Markov](https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem);
 - [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf).
 
 ### Família exponencial
