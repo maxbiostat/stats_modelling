@@ -28,7 +28,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 
 ### Modelo linear
 
-- [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf) 
+- [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf).
 
 ### Família exponencial
 - Duane Rich's videos: [part 1](https://youtu.be/xwM9XcnQ4Us) and [part 2](https://youtu.be/9EgkOn5mWcc) 
