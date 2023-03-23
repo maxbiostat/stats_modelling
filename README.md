@@ -30,6 +30,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - [Teorema de Gauss-Markov](https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem);
 - [Teorema de Frish-Waugh-Lovell](https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem);
 - [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf).
+- Uma explicação intuitiva da "hat matrix" ou matriz de projeção **H** está [nesta](https://stats.stackexchange.com/questions/208242/hat-matrix-and-leverages-in-classical-multiple-regression) resposta no CrossValidated.
 
 ### Família exponencial
 - Duane Rich's videos: [part 1](https://youtu.be/xwM9XcnQ4Us) and [part 2](https://youtu.be/9EgkOn5mWcc) 
