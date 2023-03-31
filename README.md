@@ -33,6 +33,12 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - [Linear models can’t keep up with sport gender gap](https://www.nature.com/articles/432147c.pdf).
 - Uma explicação intuitiva da "hat matrix" ou matriz de projeção **H** está [nesta](https://stats.stackexchange.com/questions/208242/hat-matrix-and-leverages-in-classical-multiple-regression) resposta no CrossValidated.
 
+#### Modelo linear: abordagem bayesiana
+
+Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com abordagens levement
+- [Notas](https://ams206-winter19-01.courses.soe.ucsc.edu/system/files/attachments/banerjee-bayesian-linear-model-details.pdf) do grande [Sudipto Banerjee](http://sudipto.bol.ucla.edu/)
+- [Notas](https://tminka.github.io/papers/minka-linear.pdf) de Thomas Minka.  
+
 ### Família exponencial
 - Duane Rich's videos: [part 1](https://youtu.be/xwM9XcnQ4Us) and [part 2](https://youtu.be/9EgkOn5mWcc) 
 
