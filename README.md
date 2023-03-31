@@ -35,7 +35,8 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 
 #### Modelo linear: abordagem bayesiana
 
-Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com abordagens levement
+Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com abordagens levemente diferentes.
+
 - [Notas](https://ams206-winter19-01.courses.soe.ucsc.edu/system/files/attachments/banerjee-bayesian-linear-model-details.pdf) do grande [Sudipto Banerjee](http://sudipto.bol.ucla.edu/);
 - [Notas](https://tminka.github.io/papers/minka-linear.pdf) de Thomas Minka.  
 
