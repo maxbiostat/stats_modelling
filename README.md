@@ -61,7 +61,7 @@ Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com aborda
 ### Modelos multinivel
 
 - [Why hierarchical models are awesome, tricky, and Bayesian](https://twiecki.io/blog/2017/02/08/bayesian-hierchical-non-centered/);
-- Parametrização centrada _vs_ não-centrada: https://sjster.github.io/introduction_to_computational_statistics/docs/Production/Reparameterization.html.
+- Parametrização centrada _vs_ não-centrada: [link](https://sjster.github.io/introduction_to_computational_statistics/docs/Production/Reparameterization.html).
 
 ### Tópicos especiais
 
