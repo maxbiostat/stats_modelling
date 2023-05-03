@@ -1,0 +1,56 @@
+\textcolor{red}{\textbf{Conceitos trabalhados}: regressão logística; modelos lineares generalizados; estimação.}
+\textcolor{purple}{\textbf{Nível de dificuldade}: médio.}\\
+\textcolor{blue}{
+\textbf{Resolução:}
+Para facilitar a notação, vamos escrever $p_i = \pr(Y_i = 1; X_i)$.
+Notando que $\pr(Y_i = 0; X_i) = 1-p_i = \frac{1}{1 + \exp( \boldsymbol{X}_i^T\boldsymbol{\beta})}$, temos
+\begin{align*}
+     \log\left(\frac{\pr(Y_i = 1; \boldsymbol{X}_i)}{\pr(Y_i = 0; \boldsymbol{X}_i)}\right) &=  \log\left(\frac{p_i}{1-p_i}\right),\\
+     &= \log\left(\left[1 + \exp( \boldsymbol{X}_i^T\boldsymbol{\beta})\right]\frac{\exp( \boldsymbol{X}_i^T\boldsymbol{\beta})}{1 + \exp( \boldsymbol{X}_i^T\boldsymbol{\beta})}\right),\\
+     &= \boldsymbol{X}_i^T\boldsymbol{\beta}.
+\end{align*}
+Agora vamos fazer os subitens (a) e (b) do item b).
+A verossimilhança pode ser escrita como
+\begin{align*}
+    f_{\boldsymbol{X}}\left(\boldsymbol{\beta}; \boldsymbol{Y}\right) = \prod_{i=1}^n p_i(\boldsymbol{\beta})^{Y_i}\left(1-p_i(\boldsymbol{\beta})\right)^{1-Y_i},
+\end{align*}
+porque assumimos que os $Y_i$ são condicionalmente independentes uma vez observada a matriz de desenho $\boldsymbol{X}$.
+Tomando o logaritmo, temos
+\begin{align*}
+    l(\beta) &:= \log\left(f_{\boldsymbol{X}}\left(\boldsymbol{\beta}\right); \boldsymbol{Y}\right) = \sum_{i=1}^n \log\left(p_i(\boldsymbol{\beta})^{Y_i}\left(1-p_i(\boldsymbol{\beta})\right)^{1-Y_i}\right),\\
+    &= \sum_{i=1}^n Y_i \log\left(\frac{p_i(\boldsymbol{\beta})}{1-p_i(\boldsymbol{\beta})}\right) = \sum_{i=1}^n Y_i \cdot g\left(p_i(\boldsymbol{\beta})\right).
+\end{align*}
+Usando a regra da cadeia, obtemos
+\begin{align*}
+    \frac{\partial l}{\partial \boldsymbol{\beta}} &= \sum_{i=1}^n Y_i  p_i^{\prime}(\boldsymbol{\beta})g^\prime(p_i(\boldsymbol{\beta})),\\
+    \frac{\partial^2 l }{\partial \boldsymbol{\beta}^2} = \boldsymbol{H}\left(\boldsymbol{\beta}\right) &= \sum_{i=1}^n Y_i  \left\{ \left[p_i^{\prime}(\boldsymbol{\beta})\right]^2 g^{\prime\prime}\left(p_i(\boldsymbol{\beta})\right) + p_i^{\prime\prime}(\boldsymbol{\beta})g^\prime(p_i(\boldsymbol{\beta})) \right\}.
+\end{align*}
+Podemos então escrever
+\begin{align*}
+ \frac{\partial l }{\partial \beta_j} &= \sum_{i=1}^n Y_i  p_i^{\prime}(\beta_j)g^\prime(p_i(\beta_j)),\\
+ \frac{\partial^2 l}{\beta_j\beta_k} &= -\sum_{i=1}^n \left\{X_{ij}X_{ik} p_i(\boldsymbol{\beta})\left(1-p_i(\boldsymbol{\beta})\right)\right\}.
+\end{align*}
+A matriz hessiana é diagonal, e suas entradas diagonais são todas negativas.
+Sendo a hessiana negativa-definida, a função em questão é côncava, e Newton-Raphson deve convergir para um máximo global.
+Para responder c), vamos primeiro calcular 
+\begin{align*}
+    \textrm{OR}_j &= \frac{p_i(1)}{1-p_i(1)} \cdot \frac{1-p_i(0)}{p_i(0)},\\
+    &= \exp\left(\sum_{k\neq j}^{P} \beta_k X_{ik} + \beta_j \cdot 1\right)\exp\left(-\sum_{k\neq j}^{P} \beta_k X_{ik} + \beta_j \cdot 0\right),\\
+    & = \exp\left(\beta_j\right).
+\end{align*}
+Para construir um intervalo de confiança para $\beta_j$, podemos fazer $\hat{\beta}_j \pm Z \textrm{se}_j$.
+Fazendo $Z=1$, temos um intervalo aproximado de 68\%.
+Para completar a questão, só é preciso notar que $\exp(\cdot)$ é uma transformação bijetiva, então podemos simplesmente mapear o intervalo de confiança para $\beta_j$ em
+\begin{equation}
+    \textrm{OR}_j \in \left(\exp\left(\hat{\beta}_j  - \textrm{se}_j \right), \exp\left(\hat{\beta}_j + \textrm{se}_j\right)\right).
+\end{equation}
+$\blacksquare$\\
+\textbf{Comentário:} Nesta questão obtivemos vários resultados importantes a respeito da regressão logística, que é o GLM binomial com link \textit{logit} (canônico).
+Obtivemos as quantidades necessárias para fazer estimação por máxima verossimilhança usando o método de Newton-Raphson -- e outros métodos baseados em gradientes. 
+Por fim, vimos construir intervalos de confiança aproximados para uma quantidade de interesse científico direto, que é a razão de chances, $ \textrm{OR}_j $.
+Para determinar o efeito de uma covariável, podemos inspecionar o intervalo de confiança para $ \textrm{OR}_j $ e verificar se ele inclui $a \in \mathbb{R}$.
+Quanto deve valer $a$?
+O que acontece se $a$ é menor que a cota inferior do intervalo?
+E se for maior que a cota superior?
+Pense sobre isso.
+}

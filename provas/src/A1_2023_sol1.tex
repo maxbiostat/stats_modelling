@@ -1,0 +1,87 @@
+\textcolor{red}{\textbf{Conceitos trabalhados}: regressão linear; estimativas pontuais e intervalares; predição; análise bayesiana; prioris impróprias.}
+\textcolor{purple}{\textbf{Nível de dificuldade}: fácil.}\\
+\textcolor{blue}{
+\textbf{Resolução:}
+O intercepto é o ponto em que a reta $\alpha + \beta x$ \textit{intercepta} o eixo das ordenadas. 
+Acontece que esta reta modela $E[Y]$ e não $Y$; desta forma, não podemos inferir o intercepto \textit{apenas} a partir da observação de um certo par $(0, y)$.
+Vamos lembrar de algumas fórmulas úteis:
+  \begin{align*}
+  \hat{\beta_0} &= \bar{y} - \hat{\beta_1}\bar{x},\\
+  \hat{\beta_1} &= \frac{\sum_{i=1}^n (y_i-\bar{y})(x_i-\bar{x})}{\sum_{i=1}^n \left(x_i - \bar{x}\right)^2},
+ \end{align*}
+ onde $\bar{x} = n^{-1} \sum_{i=1}^n x_i$ e $\bar{y} = n^{-1} \sum_{i=1}^n y_i$.
+ Utilizando estas fórmulas chegamos a $ \hat{\beta_0}= 18.5$ e $\hat{\beta_1} = 0.56$.
+ Para responder à questão b), notamos que queremos $x^\star$ tal que
+ \begin{align*}
+     x^\star + \hat{y}(x^\star) &< 90,\\
+     x^\star + \hat{\beta_0} + \hat{\beta_1}x^\star  &< 90,\\
+     x^\star & < \frac{90 -  \hat{\beta_0} }{1 + \hat{\beta_1}},
+ \end{align*}
+ que dá $x^\star = 45.71$.
+ Isso significa que se Palmirinha sair até as 6h46, não deve se atrasar, \underline{em média}.
+ Esta inferência, conquanto útil, ainda sofre da falta de uma garantia probabilística que ofereça algum controle à Palmirinha. 
+ No item c) portanto, ela busca $x^{\star\star}$ tal que 
+ \begin{equation*}
+ \pr\left( \tilde{Y}(x^{\star\star}) \leq 90 - x^{\star\star} \right) > 0.99.
+\end{equation*}
+Sabendo que $\tilde{Y}(x^{\star\star}) \sim \operatorname{Normal}\left(\hat{\beta_0} + \hat{\beta_1}x^{\star\star}, \sigma^2\right)$ e substituindo $\sigma^2$ pelo seu estimador não-viesado ($\hat{\sigma^2} = 2.76$), podemos começar o nosso problema de otimização notando que queremos encontrar $x^{\star\star}$ tal que
+\begin{equation*}
+    \Phi\left(\frac{90 - \hat{\beta_0} + (\hat{\beta_1}-1)x^{\star\star} }{\sqrt{\hat{\sigma^2}}}\right) > 0.99,
+\end{equation*}
+onde $\Phi$ é f.d.a. de uma normal padrão.
+Resolvendo o problema numericamente, encontramos $x^{\star\star} < 41.6$ minutos.
+Poderíamos obter uma resposta aproximada calculando
+\begin{equation*}
+     \frac{90 -  \hat{\beta_0} - 3\sqrt{\hat{\sigma^2}}}{1 + \hat{\beta_1}} = 40.41,
+\end{equation*}
+que certamente atende ao que foi pedido.
+% \hat{Y} \pm T^{-1}\left(1-\frac{\alpha_0}{2}; n-2\right)\hat{\sigma}^\prime \sqrt{\left[ 1+ \frac{1}{n} + \frac{\left(x_{\text{pred}}-\bar{x}\right)^2}{s_x^2} \right]},
+ Poderíamos também aproveitar o gráfico fornecido por Palmirinha para fazer algumas dessas inferências.
+ Do gráfico é possível deduzir que o intercepto está entre 18 e 19; que o ponto em que a parte superior da banda de predição verde (99\%) intercepta a linha pontilhada (que é a reta $y = -x + 90$).
+ Agora, vamos responder ao item d)\footnote{Vamos adaptar a resposta à questão 3 da A1/2021 de Inferência Estatística: \url{https://github.com/maxbiostat/Statistical_Inference_BSc/blob/master/provas/PDF/A12021_solucoes.pdf}}.
+ Para começar, vamos definir $\mu_{x_i}(\boldsymbol{\beta}) = \beta_0 + \beta_1 x_i$ e escrever a verossimilhança:
+\begin{align*}
+ f_{\boldsymbol{x}}(\boldsymbol{y} \mid \boldsymbol{\beta}, \sigma^2) = \left[\frac{1}{\sqrt{2\pi \sigma^2}}\right]^n \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n (y_i -\mu_{x_i}(\boldsymbol{\beta}))^2\right).
+\end{align*}
+Para facilitar a notação, vamos definir $S_X := \sum_{i=1}^n x_i$, $S_{X,Y} := \sum_{i=1}^n x_iy_i$,  $Q_X := \sum_{i=1}^n x_i^2$, $Q_Y := \sum_{i=1}^n y_i^2$, o que nos permite expandir a verossimilhança e escrever
+\begin{align*}
+ f_{\boldsymbol{x}}(\boldsymbol{y} \mid \boldsymbol{\beta}, \sigma^2) = & \left[\frac{1}{\sqrt{2\pi \sigma^2}}\right]^n  \times \\ & \exp\left(-\frac{1}{2\sigma^2} \left\{Q_Y - 2S_Y\beta_0 - 2S_{X,Y}\beta_1 + n\beta_0^2 + 2S_X\beta_0\beta_1 + Q_X\beta_1^2\right\} \right).
+\end{align*}
+Multiplicando pela priori $\pi(\beta_0, \beta_1, \sigma_2) \propto [\sigma^2]^{-1}$, e coletando todos os termos que dependem de cada parâmetro, conseguimos deduzir que a posteriori é da forma
+\begin{align}
+\nonumber
+ p(\beta_0, \beta_1, \sigma^2 \mid \boldsymbol{y}) &\propto ,\\
+ \nonumber
+ &\propto \underbrace{\exp\left(\frac{2(S_Y\beta_0 + S_{X,Y}\beta_1) - n\beta_0^2 - 2S_X\beta_0\beta_1 - Q_X\beta_1^2}{2\sigma^2}\right)}_{\operatorname{Normal}_2(\boldsymbol{\mu}_B, \sigma^2\boldsymbol{A})} \times\\ &
+ \nonumber
+ \underbrace{(\sigma^2)^{-n/2-1} \exp\left(-\frac{Q_Y}{2\sigma^2}\right)}_{\operatorname{Gama-Inversa}(\frac{n}{2}, \frac{Q_Y}{2})},\\
+ \label{eq:nig_post}
+  &= p_{\boldsymbol{x}}(\beta_0, \beta_1 \mid \boldsymbol{y}, \sigma^2)p_S(\sigma^2 \mid \boldsymbol{y}).
+\end{align}
+Para deduzir a forma de $p_{\boldsymbol{x}}(\beta_0, \beta_1 \mid \boldsymbol{y}, \sigma^2)$, considere que a f.d.p. de uma normal bivariada com vetor de médias $\boldsymbol{m} = (\mu_X, \mu_Y)$ e matriz de variância-covariância
+\begin{equation*}
+\boldsymbol{S} =  \begin{bmatrix}
+ \sigma_X^2 & \rho\sqrt{\sigma_X^2\sigma_Y^2}\\
+ \rho\sqrt{\sigma_X^2\sigma_Y^2} & \sigma_Y^2
+\end{bmatrix},
+\end{equation*}
+é
+\begin{align*}
+    f_{XY}(x, y \mid \boldsymbol{m}, \boldsymbol{S}) \propto \exp\left(-\frac{1}{2(1-\rho)^2}\left[\frac{(x-\mu_X)^2}{\sigma_X^2} + \frac{(y-\mu_Y)^2}{\sigma_Y^2} - 2\rho\frac{(x-\mu_X)(y-\mu_Y)}{\sqrt{\sigma_X^2\sigma_Y^2}}\right]\right).
+\end{align*}
+Igualando termos e rearranjando, chegamos a
+\begin{align*}
+    \mu_0 & = \frac{S_Y}{n} - \mu_1\frac{S_X}{n}, \\
+    \mu_1 & = \frac{S_{X,Y}}{Q_X + \left(\frac{S_X}{n}\right)^2 \left[1 - 2S_X\right]},\\
+ \boldsymbol{A} &=  \begin{bmatrix}
+ \frac{1}{n} + \frac{(S_X)^2}{n^2Q_X}& -\frac{S_X}{nQ_X}\\
+ -\frac{S_X}{nQ_X} & \frac{1}{Q_X}
+\end{bmatrix}.
+\end{align*}
+Usando as propriedades da normal multivariada\footnote{Em particular que a média da $i$-ésima coordenada é $\mu_i$ e que a média não depende da (matriz de) covariância.}, sabemos que $E_p[\beta_0 \mid \boldsymbol{y}, \sigma^2] = E_p[\beta_0 \mid \boldsymbol{y}] = \mu_0$ e $E_p[\beta_0 \mid \boldsymbol{y}, \sigma^2] = E_p[\beta_1 \mid \boldsymbol{y}] = \mu_1$, chegando à brilhante conclusão de que a média \textit{a posteriori} dos coeficientes coincide com os estimadores de máxima verossimilhança no caso de prioris impróprias, como visto em aula.
+$\blacksquare$\\
+\textbf{Comentário} A questão a) pode parecer boba, mas ela fala sobre uma distinção fundamental em ciência: inferências \textit{cruas}, baseadas nos dados apenas e inferências baseadas em modelos (\textit{model-based}); o modelo de regressão pega informação emprestada de \underline{todos} os pontos na amostra para estimar o que acontece para $x = 0$.
+Nas questões b) e c), vimos como utilizar o modelo ajustado para fazer inferências sobre quantidades de interesse, como por exemplo o valor do preditor ($x$) que leva a algum desfecho (\textit{outcome}) de interesse.
+Por fim, fizemos uma análise algebricamente diferente do caso bayesiano que foi feito em aula, especificamente para o caso da regressão linear simples (um preditor).
+Note que a priori imprópria que utilizamos aqui pode ser vista como um limite particular da Normal-Inversa-Gamma, que é própria. Interessante, não?
+}

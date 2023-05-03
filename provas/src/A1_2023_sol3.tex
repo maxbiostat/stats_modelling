@@ -1,0 +1,50 @@
+\textcolor{red}{\textbf{Conceitos trabalhados}: transformações lineares; matriz chapéu; estimador de mínimos quadrados.}\\ \textcolor{purple}{\textbf{Nível de dificuldade}: fácil.}\\
+\textcolor{blue}{
+\textbf{Resolução:}
+Para o item a), note que cada coluna de $\boldsymbol{Z}$ é uma combinação linear das colunas de $\bX$. É fácil ver que, definindo o vetor $c_j = (c_{j,0},c_{j,1}, \dots, c_{j,P+1})^T$, temos 
+\begin{equation*}
+    Z_j = \bX c_j,
+\end{equation*}
+e portanto
+\begin{equation*}
+    Z = \bX \begin{bmatrix}\vline & \vline&\vline&\vline \\ c_1&c_2&\dots&c_{P+1} \\ \vline&\vline&\vline&\vline \end{bmatrix} = \bX \bt.
+\end{equation*}
+Basta então tomar as colunas de $\bt$ como sendo os vetores $\boldsymbol{c}_j$.
+Para o item b) podemos escrever a matriz chapéu do modelo II como 
+\begin{equation*}
+    H_{II} = \boldsymbol{Z} \left(\boldsymbol{Z}^T\boldsymbol{Z} \right)^{-1} \boldsymbol{Z}^T.
+\end{equation*}
+Substituindo o resultado obtido no item a) obtemos
+\begin{align*}
+    H_{II} &= \boldsymbol{Z} \left(\boldsymbol{Z}^T\boldsymbol{Z} \right)^{-1} \boldsymbol{Z}^T, \\
+    &= (\boldsymbol{Xt}) \left((\boldsymbol{Xt})^T(\boldsymbol{Xt}) \right)^{-1} (\boldsymbol{Xt})^T, \\
+    &= \bX \bt \left(\bt^T \bX^T \bX \bt\right)^{-1}\bt^T \bX^T, \\
+    &= \bX \bt \bt^{-1} \left( \bX^T \bX \right)^{-1} \left(\bt^{T}\right)^{-1} \bt^T \bX^T, \\
+    &= \bX \left( \bX^T \bX \right)^{-1} \bX^T = H_{I}.
+\end{align*}
+Logo $$H_{II} = H_{I} = H.$$
+Para o item c) sabemos que o estimador de mínimos quadrados para o modelo de regressão múltipla como em II toma forma 
+\begin{equation*}
+    \hat{\boldsymbol{\alpha}} = \left( \boldsymbol{Z}^T\boldsymbol{Z}\right)^{-1}\boldsymbol{Z}^T \boldsymbol{Y}.
+\end{equation*}
+Substituindo o resultado do item a) na equação acima obtemos:
+\begin{align*}
+    \hat{\boldsymbol{\alpha}} &= \left( \boldsymbol{Z}^T\boldsymbol{Z}\right)^{-1}\boldsymbol{Z}^T \boldsymbol{Y}, \\
+    &= \left( (\boldsymbol{Xt})^T(\boldsymbol{Xt}) \right)^{-1}(\boldsymbol{Xt})^T \boldsymbol{Y}, \\
+    &= \left( \boldsymbol{t}^T\boldsymbol{X}^T\boldsymbol{X} \boldsymbol{t}\right)^{-1}\boldsymbol{t}^T\boldsymbol{X}^T \boldsymbol{Y}, \\
+    &= \boldsymbol{t}^{-1}\left( \boldsymbol{X}^T\boldsymbol{X} \right)^{-1}{\boldsymbol{t}^T}^{-1}\boldsymbol{t}^T\boldsymbol{X}^T \boldsymbol{Y}, \\
+    &= \boldsymbol{t}^{-1}\left( \boldsymbol{X}^T\boldsymbol{X} \right)^{-1}\boldsymbol{X}^T \boldsymbol{Y}, \\
+    &= \boldsymbol{t}^{-1} \hat{\boldsymbol{\beta}}.
+\end{align*}
+Podemos resolver também usando o resultado da matriz chapéu:
+\begin{equation*}
+    \boldsymbol{Z} \hat{\boldsymbol{\alpha}} = H_{II} \boldsymbol{Y} = H \boldsymbol{Y} = \bX \boldsymbol{\beta}.
+\end{equation*}
+Substituindo o resultado do item a) no lado esquerdo da equação
+\begin{equation*}
+    \bX \bt \hat{\boldsymbol{\alpha}} = \bX \hat{\boldsymbol{\beta}} \implies \bt \hat{\boldsymbol{\alpha}} = \hat{\boldsymbol{\beta}} \implies \hat{\boldsymbol{\alpha}} = \bt^{-1} \hat{\boldsymbol{\beta}}.
+\end{equation*}
+$\blacksquare$\\
+\textbf{Comentário:} Nesta questão vimos que uma das benesses de um modelo ser linear nos parâmetros é que é possível recuperar as estimativas dos coeficientes uma vez que se saiba qual transformação (linear) foi aplicada na matriz de desenho.
+Este tipo de procedimento é útil pois transformações da matriz de desenho podem ser utilizadas para melhorar a interpretabilidade e a estabilidade numérica das estimativas; com o resultado que acabamos de derivar, podemos ajustar o modelo apenas uma vez e estudar como as estimativas mudariam sem precisar refazer o procedimento de estimação -- que pode ser custoso no caso de milhões de pontos de dados, por exemplo.
+}
