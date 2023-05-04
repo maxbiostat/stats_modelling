@@ -18,7 +18,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - [[GH]](http://www.stat.columbia.edu/~gelman/arm/) Gelman, A., & Hill, J. (2006). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
 
 ### News
-- O CMT desta semana (10/04) já está disponível [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/exercicios/CMT_3_2023.pdf).
+- Manual de soluções da A1 [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
 
 ### Modelos, hipóteses e a lógica da ciência
 
