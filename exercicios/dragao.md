@@ -1,6 +1,6 @@
 ## Modelando a postura de ovos por dragões
 
-Dragões^1 podem viver milhares de anos e são conhecidos por cuspirem fogo. Danny, a fazendeira de dragões, vem de uma longa linhagem de criadores de dragoẽs. A mãe de Danny -- que também é sua tia --  lhe dá a tarefa de entender o que influencia o tamanho da ninhada produzida por um dragão.
+Dragões[^1] podem viver milhares de anos e são conhecidos por cuspirem fogo. Danny, a fazendeira de dragões, vem de uma longa linhagem de criadores de dragoẽs. A mãe de Danny -- que também é sua tia --  lhe dá a tarefa de entender o que influencia o tamanho da ninhada produzida por um dragão.
 
 Danny consulta o _meistre_ da cidade sobre o assunto e ele lhe diz que possui um conjunto de dados de `n=100` observações correspondendo a um dragão cada, coletado no ano passado.Os dados consistem nas seguintes variáveis do dragão:
 - Idade em anos (`age`);
