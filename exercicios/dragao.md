@@ -15,7 +15,7 @@ Danny precisa ser capaz de
 - Entender o relacionamento entre as variáveis medidas e o desfecho: qual o efeito de cada covariável? Qual a forma funcional deste relacionamento? Isso é importante pois ela precisa saber o que medir em seus próprios dragões, além é claro de saber o que preservar e o que eliminar da sua criação (melhoramento genético);
 - Prever o tamanho da ninhada dos dragões de sua propriedade;
 
-Ajude Danny em sua tarefa de se tornar a melhor fazendeira de dragões em Westeros!
+Ajude Danny em sua tarefa de se tornar a melhor fazendeira de dragões em Westeros! Baixe os dados em [`mystery_dragon.csv`](https://github.com/maxbiostat/stats_modelling/blob/master/data/mystery_dragon.csv) e mãos à obra.
 
 
 
