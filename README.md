@@ -7,6 +7,8 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 **AVISO 1**: caso haja dificuldade em obter quaisquer dos materiais listados (PDFs de artigos, por exemplo), entrar em contato com o professor para que eu possa compartilhar o material _para fins acadêmicos e de uso pessoal_.
 
+**AVISO 2**: Os materiais listados aqui são **adicionais** à bibliografia recomendada (ver abaixo).
+
 **Monitor**: [**@isaquepim**](https://github.com/isaquepim)
 
 Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJzZ3vPQ9nj3W0kaKNELU5suCHgXUPV77z-Bs/edit?usp=sharing).
@@ -18,7 +20,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 - [[GH]](http://www.stat.columbia.edu/~gelman/arm/) Gelman, A., & Hill, J. (2006). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
 
 ### News
-- Manual de soluções da A1 [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
+- Exercícios da semana (postura de ovos de dragão) [aqui]().
 
 ### Modelos, hipóteses e a lógica da ciência
 
@@ -44,7 +46,10 @@ Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com aborda
 
 ### Modelos lineares generalizados 
 - Mccullagh & Nelder (1989) "Generalised linear models". [[PDF]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf).
- 
+
+### Critérios de bondade do ajuste (_goodness-of-fit_)
+- [Notas](https://faculty.washington.edu/yenchic/19A_stat535/Lec7_model.pdf) sobre a derivação do AIC e BIC. Notem como para o modelo linear, os critérios de informação podem ser escritos em função da soma de quadrados. Acidente?
+
 ### Transformações
 
 - [Sakia, (1992)](https://www.jstor.org/stable/pdf/2348250.pdf?casa_token=ln4GDMAaMSoAAAAA:5OeirJhCZbzi40n28k3FEUf-pDKYINa0uGxe0P4yWUGV2GxqgWlUzFuzTnDuK10GTj94USu_e51AbA5mBPzFqI-r_lPjGbcsxd6GBLclNu7SuR4taQ). The Box‐Cox transformation technique: a review. Journal of the Royal Statistical Society: Series D (The Statistician), 41(2), 169-178.
