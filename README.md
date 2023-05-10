@@ -71,6 +71,7 @@ Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com aborda
 
 - [Simpson's paradox](https://plato.stanford.edu/entries/paradox-simpson/), Seção 5; 
 - [Does model averaging make sense?](https://atyre2.github.io/2017/06/16/rebutting_cade.html).
+- Modelos com inflação de zeros (e _hurdle models_): (i) [Seção relevante do Stan guide](https://mc-stan.org/docs/stan-users-guide/zero-inflated.html), (ii) [Posthttps://stats.stackexchange.com/a/81854/387680) no StackExchange e (iii) [Discussão](https://stats.stackexchange.com/questions/320924/is-a-hurdle-model-really-one-model-or-just-two-separate-sequential-models) sobre _hurdle models_ no StackExchange.  
 
 ### Recursos úteis
 
