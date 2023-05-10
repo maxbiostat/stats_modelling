@@ -13,11 +13,9 @@ Danny consulta o _meistre_ da cidade sobre o assunto e ele lhe diz que possui um
 
 Danny precisa ser capaz de 
 - Entender o relacionamento entre as variáveis medidas e o desfecho: qual o efeito de cada covariável? Qual a forma funcional deste relacionamento? Isso é importante pois ela precisa saber o que medir em seus próprios dragões, além é claro de saber o que preservar e o que eliminar da sua criação (melhoramento genético);
-- Prever o tamanho da ninhada dos dragões de sua propriedade;
+- Prever o tamanho da ninhada dos dragões de sua propriedade. Os dados da Danny estão [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/data/Dannys_dragons.csv). **IMPORTANTE**: não vale olhar os dados que ela de fato mediu para melhorar suas predições!
 
 Ajude Danny em sua tarefa de se tornar a melhor fazendeira de dragões em Westeros! Baixe os dados em [`mystery_dragon.csv`](https://github.com/maxbiostat/stats_modelling/blob/master/data/mystery_dragon.csv) e mãos à obra.
-
-
 
 
 [^1]: Animais mitológicos com quatro patas e um par de asas. Sim, eu sei que os de Game of Thrones também são _wyverns_.
