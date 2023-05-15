@@ -2,7 +2,7 @@
 
 Palmirinha[^1] quer estudar os fatores que fazem uma batelada de pamonha ser classificada como boa ou ruim.
 
-Sendo extremamente meticulosa, Palmirinha anotou, ao longo de sua longa carreira os resultados de milhares de experimentos de degustação, disponíveis em [`qualidade_pamonha.csv`]().
+Sendo extremamente meticulosa, Palmirinha anotou, ao longo de sua longa carreira os resultados de milhares de experimentos de degustação, disponíveis em [`qualidade_pamonha.csv`](https://github.com/maxbiostat/stats_modelling/blob/master/data/qualidade_pamonha.csv).
 Nestes experimentos, temos informações sobre o 
 `ano` em que o experimento foi feito, a `temperatura` (em graus Celsius) em que a pamonha foi servida, o potencial de hidrogênio (`pH`) da pamonha,  o tipo de `milho` que foi utilizado para a pamonha, o teor de `sacarose` na pamonha (em `%`) e, finalmente, se foi considerada boa (`1`) ou ruim (`0`).
 
