@@ -1,0 +1,19 @@
+name: Check markdown links
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * 0" # Every week
+
+jobs:
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Run markdown-link-check
+        run: npm_config_yes=true find . -name \*.md -print0 | xargs -0 -n1 npx markdown-link-check --quiet --progress
