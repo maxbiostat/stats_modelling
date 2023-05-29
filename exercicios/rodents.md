@@ -13,3 +13,5 @@ completo <- merge(apt, rato, by = "bldg")
 
 write.csv(completo, file = "mickey_mouse.csv", row.names = FALSE)
 ```
+
+Documentação [aqui](https://github.com/tjmahr/GelmanHill/blob/master/datasets/rodents/rodents.doc).
