@@ -2,7 +2,7 @@
 
 Neste exercício queremos estudar a probabilidade de um adolescente fumar a partir de dados _longitudinais_, isto é, amostrados ao longo do tempo.
 
-Os dados foram medidos em três "ondas" de amostragem (waves) e variáveis como se os pais fumam e o sexo do adolescente foram medidas. Os dados (`[edgy_teens.csv](https://github.com/maxbiostat/stats_modelling/blob/master/data/edgy_teens.csv)`) têm essa cara:
+Os dados foram medidos em três "ondas" de amostragem (waves) e variáveis como se os pais fumam e o sexo do adolescente foram medidas. Os dados ([edgy_teens.csv](https://github.com/maxbiostat/stats_modelling/blob/master/data/edgy_teens.csv)) têm essa cara:
 ```r
 > head(smoke.pub)
   newid sex.1.F. parsmk wave smkreg
