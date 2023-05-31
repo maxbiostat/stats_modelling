@@ -79,3 +79,4 @@ Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com aborda
 
 - O [livro](http://webcom.upmf-grenoble.fr/LIP/Perso/DMuller/M2R/R_et_Mixed/documents/Bates-book.pdf) de Douglas Bates sobre como usar o **lme4** para ajustar modelos "mistos".
 - Dados de `GH` costumam ficar [aqui](http://www.stat.columbia.edu/~gelman/arm/). Como backup, usar [este](https://github.com/tjmahr/GelmanHill/tree/master/datasets) repo. 
+- Os dados de `ROS` têm repositório próprio, [aqui](https://github.com/avehtari/ROS-Examples/tree/master). 
