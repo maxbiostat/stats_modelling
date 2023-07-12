@@ -14,7 +14,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJzZ3vPQ9nj3W0kaKNELU5suCHgXUPV77z-Bs/edit?usp=sharing).
 
 Portifólio de trabalhos finais (A2):
-- [2023](https://github.com/maxbiostat/A2_StatMod_2023)
+- [2023](https://github.com/maxbiostat/A2_StatMod_2023).
 
 ### Bibliografia
 
