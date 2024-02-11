@@ -13,7 +13,10 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJzZ3vPQ9nj3W0kaKNELU5suCHgXUPV77z-Bs/edit?usp=sharing).
 
-Portifólio de trabalhos finais (A2):
+### Provas anteriores
+- [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
+
+**Portifólio de trabalhos finais (A2):**
 - [2023](https://github.com/maxbiostat/A2_StatMod_2023).
 
 ### Bibliografia
@@ -23,7 +26,6 @@ Portifólio de trabalhos finais (A2):
 - [[GH]](http://www.stat.columbia.edu/~gelman/arm/) Gelman, A., & Hill, J. (2006). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
 
 ### News
-- Exercícios da semana (postura de ovos de dragão) [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/exercicios/dragao.md).
 
 ### Modelos, hipóteses e a lógica da ciência
 
