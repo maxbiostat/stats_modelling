@@ -16,7 +16,7 @@ Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJz
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
 
-**Portifólio de trabalhos finais (A2):**
+### Portifólio de trabalhos finais (A2):
 - [2023](https://github.com/maxbiostat/A2_StatMod_2023).
 
 ### Bibliografia
