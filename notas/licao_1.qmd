@@ -16,32 +16,34 @@ editor: visual
 
 ## Motivação
 
-Em Inferência Estatística, em geral temos como ponto de partida um modelo estatístico e um conjunto de dados, e nossa tarefa é produzir inferências ótimas.
-A otimalidade dos procedimentos e estimativas obtidos é contingente na adequação das premissas feitas à realidade.
-Em Modelagem Estatística, vamos primeiro desafiar a ideia de um modelo fixo e construir vários modelos para o mesmo fenômeno, buscando sempre confrontar os ajustes obtidos aos dados no sentido de checar a adequação das premissas feitas.
-Nesta primeira lição, veremos o que pode ser feito sob poucas premissas acerca do processo gerador dos dados (_data generating process_, DGP).
+Em Inferência Estatística, em geral temos como ponto de partida um modelo estatístico e um conjunto de dados, e nossa tarefa é produzir inferências ótimas. A otimalidade dos procedimentos e estimativas obtidos é contingente na adequação das premissas feitas à realidade. Em Modelagem Estatística, vamos primeiro desafiar a ideia de um modelo fixo e construir vários modelos para o mesmo fenômeno, buscando sempre confrontar os ajustes obtidos aos dados no sentido de checar a adequação das premissas feitas. Nesta primeira lição, veremos o que pode ser feito sob poucas premissas acerca do processo gerador dos dados (*data generating process*, DGP).
 
 ## Os dados
 
-Vamos analizar medições da concentração (em partes por milhão, ppm) de um composto químico em  $n=100$ amostras de bateladas de um determinado produto.
+Vamos analizar medições da concentração (em partes por milhão, ppm) de um composto químico em $n=100$ amostras de bateladas de um determinado produto.
 
 ```{r carregando}
 conc <- read.csv("../data/chem.csv", header = FALSE)$V1
 ```
 
 Vamos explorar um pouco os dados plotando um histograma.
+
 ```{r hist}
 hist(conc, probability = TRUE,
      main = "Concentração em ppm",
      xlab = "X")
 ```
+
 Será que os dados apresentam alguma tendência em relação ao número da batelada (índice da observação)
+
 ```{r}
 plot(conc, type = "b", lwd = 2)
 ```
 
 ## Estatísticas descritivas
+
 Vamos olhar quartis, amplitude e desvio padrão:
+
 ```{r}
 summary(conc)
 sd(conc)
@@ -49,8 +51,8 @@ sd(conc)
 
 ## Inferência
 
-Vamos raciocinar sobre algumas quantidades, a saber a média ($\sM$) e a mediana ($\hat{M}$) amostrais. 
-Em particular, vamos pensar sobre como construir intervalos de confiança para essas quantidades.
+Vamos raciocinar sobre algumas quantidades, a saber a média ($\sM$) e a mediana ($\hat{M}$) amostrais. Em particular, vamos pensar sobre como construir intervalos de confiança para essas quantidades.
+
 ```{r computa_mediana}
 ## Ver exercícios ao final
 med_app <- function(x, gamma = 0.95){
@@ -75,8 +77,8 @@ med_np <- function(x, gamma = 0.95){
 }
 ```
 
-Agora, vamos aplicar estas funções aos nossos dados.
-Primeiro, a média amostral:
+Agora, vamos aplicar estas funções aos nossos dados. Primeiro, a média amostral:
+
 ```{r}
 Nivel <- 0.95
 xbar <- mean(conc)
@@ -84,6 +86,7 @@ c(xbar, xbar + c(-1, 1) * qnorm(p = (1 + Nivel)/2) * sd(conc)/length(conc))
 ```
 
 Depois, a mediana:
+
 ```{r estima_mediana}
 med_np(conc)
 med_app(conc)
@@ -91,31 +94,32 @@ med_app(conc)
 
 ## Investigando a função de distribuição empírica
 
-Um ótimo descritor de uma distribuição de probabilidade é a função de distribuição acumulada (f.d.a.) também chamada de _cumulative distribution function_, CDF:
-$$
+Um ótimo descritor de uma distribuição de probabilidade é a função de distribuição acumulada (f.d.a.) também chamada de *cumulative distribution function*, CDF: $$
 F(x) := \pr(X \leq x).
-$$
-Como discutido nos exercícios abaixo, podemos aproximar $F$ a partir da amostra através do estimador
-$$
+$$ Como discutido nos exercícios abaixo, podemos aproximar $F$ a partir da amostra através do estimador $$
 Y_n(x) = \frac{1}{n} \sum_{i=1}^n \mathbb{I}\left(X_i \leq x\right)
-$$
-Vamos ver como ficam as estimativas usando os dados sob análise:
+$$ Vamos ver como ficam as estimativas usando os dados sob análise:
 
 ```{r}
 fda.empirica <- ecdf(conc)
 
 plot(fda.empirica)
 ```
+
 Desta forma, se o alvo inferencial é $\pr(X \leq 30)$, podemos obter uma estimativa fazendo
+
 ```{r}
 ( P30.hat <- fda.empirica(30) )
 ```
+
 Para quantificar a incerteza, podemos fazer (porquê?)
+
 ```{r}
 P30.hat + c(-1, 1) * qnorm(p = (1 + Nivel)/2) * (P30.hat * (1-P30.hat))/length(conc) 
 ```
 
-Para finalizar, vamos olhar o que acontece se fizermos (i) uma transformação  e (ii) uma premissa paramétrica:
+Para finalizar, vamos olhar o que acontece se fizermos (i) uma transformação e (ii) uma premissa paramétrica:
+
 ```{r}
 lg.conc <- log(conc)
 hist(lg.conc, probability = TRUE,
@@ -129,7 +133,6 @@ plot(fda.empirica)
 curve(plnorm(x, meanlog = mu.hat, sdlog = sd.hat), min(conc), max(conc), lwd = 3, lty = 2, col = 2, add = TRUE)
 ```
 
-
 ## Exercícios de fixação
 
 1.  Tome $X_1, X_2, \ldots, X_n$ uma amostra de uma distribuição conjunta $F_n$. Sejam $\theta_i := E[X_i]$ e $v_i := \operatorname{Var}(X_i)$. Considere a média amostral $\sM := \frac{1}{n}\sum_{i=1}^n X_i$. Deduza que para $\varepsilon >0$ : $$
@@ -138,13 +141,12 @@ curve(plnorm(x, meanlog = mu.hat, sdlog = sd.hat), min(conc), max(conc), lwd = 3
 
 2.  **O método Delta**. Suponha que $Y_1, Y_2, \ldots$ é uma sequência de variáveis aleatórias i.i.d. para as quais vale um teorema central do limite, isto é, $$
     \sqrt{n}\frac{\left(Y_n - \mu\right)}{\sigma} \implies \operatorname{Normal}(0, 1),
-    $$ onde $\mu := E[Y_1]$ e $\sigma := \sqrt{\vr(Y_1)}$ e a convergência é em distribuição. Tome $g: \mathcal{Y} \to \mathbb{R}$ uma função[^1] tal que $g^\prime(\mu) \neq 0$.
-    Prove que $$
+    $$ onde $\mu := E[Y_1]$ e $\sigma := \sqrt{\vr(Y_1)}$ e a convergência é em distribuição. Tome $g: \mathcal{Y} \to \mathbb{R}$ uma função[^1] tal que $g^\prime(\mu) \neq 0$. Prove que $$
     \sqrt{n}\frac{\left(g\left(Y_n\right) - g(\mu)\right)}{\sigma|g^\prime(\mu)|} \implies \operatorname{Normal}(0, 1).
     $$ **Dica:** use o teorema de Taylor, o teorema do mapeamento contínuo e o teorema de Slutsky.
 
-3.  Tome $X_1, X_2, \ldots, X_n$ uma amostra aleatória de uma distribuição com f.d.a. (cdf) comum $F$. Para $x \in \mathbb{R}$, defina $Y_n(x) = \frac{1}{n} \sum_{i=1}^n \mathbb{I}\left(X_i \leq x\right)$.
-Mostre que
+3.  Tome $X_1, X_2, \ldots, X_n$ uma amostra aleatória de uma distribuição com f.d.a. (cdf) comum $F$. Para $x \in \mathbb{R}$, defina $Y_n(x) = \frac{1}{n} \sum_{i=1}^n \mathbb{I}\left(X_i \leq x\right)$. Mostre que
+
     a.  $E[\mathbb{I}\left(X_i \leq x\right)] = F(x)$ e que $\vr\left(\mathbb{I}\left(X_i \leq x\right)\right) = F(x)[1-F(x)]$.
     b.  $\sqrt(n)(Y_n(x) - F(x)) \implies \operatorname{Normal}\left(0, F(x)[1-F(x)]\right)$.
     c.  Considere a função $g(t) = F^{-1}(t)$ para $t \in (0, 1)$, isto é a inversa generalizada de $F$. Calcule $g^\prime(t)$ em termos de $F$ e da densidade $f$.
@@ -170,34 +172,26 @@ app.pdf <- approxfun(dens)
 
 para obter uma pdf aproximada usando como amostra um conjunto de v.a.s. normal padrão, por exemplo.
 
-5.  (**Desafio**) A discussão dos itens anteriores supõe amostras grandes, para as quais faça sentido falar em teorema central do limite. Agora vamos estudar uma maneira de construir um intervalo de confiança para a mediana que seja válido para amostras finitas.
-Suponha uma amostra aleatória de tamanho $n$ ímpar de uma distribuição $F$ e considere sua versão ordenada:
-$$
-X_{(1)}, X_{(2)}, \ldots, X_{\left(\frac{n + 1}{2}\right)}, \ldots, X_{(n)}.
-$$
- Seja $\tilde{X}$ a mediana de $F$, i.e., $F(\tilde{X}) = \pr(X \leq \tilde{X}) = 1/2$.
-Defina $\pi_m = \pr(Y \leq \tilde{X})$.
-    a. Mostre que
- $$
- \pr(X_{i} > \tilde{X}) = \sum_{j=0}^{i-1} \binom{n}{j} \pi_m^{j} \left(1 - \pi_m\right)^{n-j}.
- $$
-    b. Argumente que $\pi_m \geq 1/2$.
-    Em seguida, escreva $\pi_m = 1/2 + \varepsilon$ e mostre que para $2(j-1) \leq n$ vale que
-  $$
- \pi_m^{j} \left(1 - \pi_m\right)^{n-j} \leq 2^{-n},
-  $$
-e que, então,
-$$
-\pr(X_{(i)} > \tilde{X}) \leq 2^{-n}\sum_{j=0}^{i-1}\binom{n}{j}.
-$$
-   c. Use os resultados anteriores para mostrar que _sempre_ existem $l\leq u \in \{1, \ldots, n\}$ tais que 
-   $$
-   \pr\left(X_{(l)} \leq \tilde{X} \leq X_{(u)}\right) \geq 2^{-n}\sum_{j=0}^{i-1}\binom{n}{j}.
-   $$
-   d. Para terminar, use os resultados anteriores para construir um intervalo de confiança de $\gamma \times 100 \%$ para $\tilde{X}$.
-   
+5.  (**Desafio**) A discussão dos itens anteriores supõe amostras grandes, para as quais faça sentido falar em teorema central do limite. Agora vamos estudar uma maneira de construir um intervalo de confiança para a mediana que seja válido para amostras finitas. Suponha uma amostra aleatória de tamanho $n$ ímpar de uma distribuição $F$ e considere sua versão ordenada: $$
+    X_{(1)}, X_{(2)}, \ldots, X_{\left(\frac{n + 1}{2}\right)}, \ldots, X_{(n)}.
+    $$ Seja $\tilde{X}$ a mediana de $F$, i.e., $F(\tilde{X}) = \pr(X \leq \tilde{X}) = 1/2$. Defina $\pi_m = \pr(Y \leq \tilde{X})$.
+    a.  Mostre que $$
+         \pr(X_{i} > \tilde{X}) = \sum_{j=0}^{i-1} \binom{n}{j} \pi_m^{j} \left(1 - \pi_m\right)^{n-j}.
+         $$
+    b.  Argumente que $\pi_m \geq 1/2$. Em seguida, escreva $\pi_m = 1/2 + \varepsilon$ e mostre que para $2(j-1) \leq n$ vale que $$
+         \pi_m^{j} \left(1 - \pi_m\right)^{n-j} \leq 2^{-n},
+          $$ e que, então, $$
+        \pr(X_{(i)} > \tilde{X}) \leq 2^{-n}\sum_{j=0}^{i-1}\binom{n}{j}.
+        $$
+
+<!-- -->
+
+c.  Use os resultados anteriores para mostrar que *sempre* existem $l\leq u \in \{1, \ldots, n\}$ tais que $$
+       \pr\left(X_{(l)} \leq \tilde{X} \leq X_{(u)}\right) \geq 2^{-n}\sum_{j=0}^{i-1}\binom{n}{j}.
+       $$
+d.  Para terminar, use os resultados anteriores para construir um intervalo de confiança de $\gamma \times 100 \%$ para $\tilde{X}$.
+
 ## Referências
 
 -   Seção 6.4.3 de [Evans & Rosenthal (2023)](https://www.utstat.toronto.edu/mikevans/jeffrosenthal/book.pdf).
-- Capítulo 5 de [Hahn & Meeker](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316771).
-
+-   Capítulo 5 de [Hahn & Meeker](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316771).

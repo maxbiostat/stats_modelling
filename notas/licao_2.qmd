@@ -1,0 +1,71 @@
+---
+title: "Modelos, hipóteses e a lógica da ciência"
+author: ""
+format: pdf
+editor: visual
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\sM{\bar{X}_n}
+```
+:::
+
+## Motivação
+A construção de modelos matemáticos e estatísticos é fundamental para a Ciência moderna.
+Nesta lição vamos discutir aspectos da construção de modelos, bem como suas fundações filosóficas.
+No processo, vamos entender a relação entre hipóteses científicas e hipóteses estatísticas e entre hipóteses e modelos.
+Além disso, vamos aprender a evitar [reificação](https://en.wikipedia.org/wiki/Reification_(statistics)) e entender melhor o papel de modelos em Ciência.
+
+
+
+## Exercícios de fixação
+
+1. **Modelos com erro de observação**:
+Em muitos problemas estatísticos, temos erros de medição ou observação.
+Em Epidemiologia, por exemplo, raramente observamos o verdadeiro número de casos de uma doença; em vez disso, temos acesso aos números de casos _notificados_.
+Neste exercício vamos estudar alguns aspectos de modelos de contagem com erro de observação.
+Suponha que $X_1, X_2, \ldots, X_n$ são contagens ($X_i \in \mathbb{N}\cup\{0\}$), assumidas i.i.d.
+Suponha ainda que postulamos o seguinte modelo para os dados:
+\begin{align}
+Y_i & \sim \operatorname{Binomial-Negativa}(\mu, \phi),  \\
+X_i \mid Y_i & \sim \operatorname{Binomial}(Y_i, \theta),  
+\end{align}
+para $i = 1, 2, \ldots, n$ e onde a binomial negativa é parametrizada em termos de [média e dispersão](https://mc-stan.org/docs/functions-reference/nbalt.html)[^1]. 
+   a. Compute $E[X_1]$ e $\vr(X_1)$ usando a [propriedade da torre](https://en.wikipedia.org/wiki/Law_of_total_expectation).
+   b. Calcule a probabilidade marginal conjunta $\pr(X_1 = x_1, \ldots, X_n = x_n)$. 
+   c. O modelo em questão é identificável?
+   d. Como você modificaria  $\pr(X_1 = x_1, \ldots, X_n = x_n)$ se o evento $X_i = 0$ não fosse observável? 
+   e. Suponha que o modelo fosse:
+\begin{align}
+N & \sim \operatorname{Binomial-Negativa}(\mu, \phi),  \\
+X_i \mid N & \sim \operatorname{Binomial}(N, \theta). 
+\end{align}
+Como isso mudaria suas respostas aos itens a-d?
+   f. Suponha agora que o processo de observação fosse: "Se pelo menos um indivíduo do cluster Y_i é observado, então todos são observados".
+  Como você escreveria  $\pr(X_1 = x_1, \ldots, X_n = x_n)$?
+  
+[^1]: Ver também [estas](https://www.johndcook.com/negative_binomial.pdf) notas do grande John Cook.
+
+2. **Todos os modelos são errados, bla bla bla**:
+Neste exercício vamos estudar com mais cuidado o famoso aforismo ["All models are wrong, some are useful"](https://en.wikipedia.org/wiki/All_models_are_wrong).
+Para tanto, vamos nos debruçar sobre o artigo seminal "Science and statistics" (1976) do estatístico britânico [George E.P.Box](https://en.wikipedia.org/wiki/George_E._P._Box) (1919-2013).
+Em particular, você deve escrever um ensaio de no máximo duas laudas sobre o paper em questão.
+Aqui estão algumas perguntas para lhe estimular:
+
+   a. Qual a importância que Box dá à flexibilidade nos exercícios de modelagem?
+   b. Como o autor vê o papel da parcimônia? Aliás, o que é parcimônia neste contexto? Tem relação com algum objeto perfuro-cortante?
+   c. Discuta o ciclo teoria-prática.
+   d. Discuta como aplicações de matemática sofisticada aparecem na prática.
+   
+   **Dica**: considere as seções 3.6 e 3.11.
+
+
+
+## Referências
+- Capítulo 1 de [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/);
+- [Box (1976)](https://www-sop.inria.fr/members/Ian.Jermyn/philosophy/writings/Boxonmaths.pdf). Science and statistics. Journal of the American Statistical Association, 71(356), 791-799;
+- [Nester (1996)](http://www.sortie-nd.org/lme/Statistical%20Papers/Nester_1996.pdf). An applied statistician's creed. Journal of the Royal Statistical Society: Series C (Applied Statistics), 45(4), 401-410.
