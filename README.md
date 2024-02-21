@@ -9,9 +9,9 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 **AVISO 2**: Os materiais listados aqui são **adicionais** à bibliografia recomendada (ver abaixo).
 
-**Monitor**: [**@isaquepim**](https://github.com/isaquepim)
+**Monitores**: [Eduardo Adame](https://github.com/adamesalles) e [Ezequiel Braga](https://github.com/EzequielEBS)
 
-Programa **aproximado** [aqui](https://docs.google.com/spreadsheets/d/1biX7q_WJzZ3vPQ9nj3W0kaKNELU5suCHgXUPV77z-Bs/edit?usp=sharing).
+Programa **aproximado** em breve.
 
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
