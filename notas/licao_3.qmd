@@ -1,0 +1,251 @@
+---
+title: "Regressão linear: o melhor modelo ruim que você já viu"
+author: ""
+format:
+  pdf:
+    fig-pos: H
+latex-auto-install: true
+editor: visual
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\sM{\bar{X}_n}
+\def\indep{\perp \!\!\! \perp}
+```
+:::
+
+## Motivação
+
+Nesta lição vamos estudar um dos cavalos de batalha da estatística: o modelo linear. Em particular, vamos discutir um modelo que relaxa a premissa de identidade de distribuição ao propor uma estrutura linear para a média condicional. Suponha que temos o seguinte conjunto de dados:
+
+```{r bwfig1}
+#| echo: false
+#| warning: false
+#| label: fig-baby1
+#| fig-cap: "Peso ao nascer _vs_ semanas de gestação para $n=24$ bebês."
+#| fig-width: 14
+#| fig-height: 8
+library(ggplot2)
+
+birthweight <- read.csv("../data/birthweight.csv")
+
+ggplot(birthweight,
+       aes(x = age, y = weight)) +
+  geom_point(size = 4) +
+  scale_x_continuous("Semanas de gestação",
+                     expand = c(0, 0)) +
+  scale_y_continuous("Peso ao nascer (gramas)",
+                     expand = c(0, 0)) +
+  # geom_smooth(method = "lm") +
+  # facet_wrap(.~erro, scales = "free_y") +
+  theme_bw(base_size = 26)
+```
+
+que apresenta o peso ao nascer (em gramas) da $i$-ésima criança, $Y_i$, contra a sua idade gestacional no parto (em semanas), $X_i$. Queremos estimar a probabilidade (condicional) de uma criança nascer com baixo peso, $\omega(x_i) =\pr(Y_i \leq 2500 \mid X_i = x_i)$. Este será o nosso alvo inferencial pelas próximas lições.
+
+Vamos assumir que o **desfecho** do $i$-ésimo indivíduo, $Y_i, \: i = 1, 2, \ldots, n$, depende do **preditor** ou **covariável** $X_i$ através da seguinte estrutura: \begin{equation*}
+E\left[Y_i \mid X_i\right] = \beta_0 + \beta_1X_i =: \theta_i,
+\end{equation*} onde $\boldsymbol{\beta} = (\beta_0, \beta_1) \in \mathbb{R}^2$ são os **coeficientes**. Em particular, chamos $\beta_0$ de **intercepto** e $\beta_1$ de **coeficiente angular**.
+
+Se definimos \begin{align}
+L(\boldsymbol{\theta}, \boldsymbol{Z}) &:= \sum_{i=1}^n\left(Y_i - \theta_i\right)^2,\\
+& = \sum_{i=1}^n\left(Y_i - [\beta_0 + \beta_1X_i]\right)^2,
+\end{align} podemos sem muita dificuldade mostrar que a função de perda é convexa em $\boldsymbol{\beta}$.
+
+Pensando de forma estatística, vamos escrever \begin{equation}
+Y_i = \theta_i + \varepsilon_i,
+\end{equation} e assumir que
+
+1.  $E[\epsilon_i] = 0$ para todo $i = 1, 2, \ldots, n$;
+
+2.  $\cv(\boldsymbol{\varepsilon}) = \sigma^2\boldsymbol{I}$;
+
+3.  $Y_i \indep Y_j \mid X_i, X_j$ para todo $i \neq j$.
+
+## But are you really BLUE?
+
+Vamos pôr nossas premissas à prova e estudar o que acontece com os estimadores dos coeficientes sob diversas distribuições para os erros.
+
+Vamos simular dados sob três modelos[^1] para os erros: \begin{align*}
+\mathcal{M}_1 &: \varepsilon_i \sim \operatorname{Uniforme}(-1, 1),\\
+\mathcal{M}_2 &: \varepsilon_i \sim \operatorname{Normal}(0, (1/3)^2),\\
+\mathcal{M}_3 &: \varepsilon_i \sim \operatorname{Gama}(1/3, 1),
+\end{align*}
+
+[^1]: : Esta formulação está **errada**, de propósito. Você consegue encontrar o erro? **Dica**: o que assumimos sobre $E[\varepsilon_i]$?
+
+```{r funs}
+#| echo: false
+#| warning: false
+gera_dados <- function(b0, b1, X){
+  
+  N <- length(X)
+  
+  e1 <- runif(N, -1, 1)
+  e2 <- rnorm(N, sd = sqrt(0.33))
+  e3 <- rgamma(N, shape = 1/3, rate = 1)  - 1/3
+  
+  Xmat <- matrix(cbind(rep(1, N), X), ncol = 2)
+  betas <- c(b0, b1)
+  
+  linpred <- Xmat %*% betas
+  
+  Y1 <- linpred + e1
+  Y2 <- linpred + e2
+  Y3 <- linpred + e3
+  
+  
+  D1 <- data.frame(X = X, Y = Y1, erro = "uniforme")
+  D2 <- data.frame(X = X, Y = Y2, erro = "normal")
+  D3 <- data.frame(X = X, Y = Y3, erro = "gama")
+  
+  dados <- do.call(rbind, list(D1, D2, D3))
+  
+  return(dados)
+}
+ajusta <- function(dados){
+  spp <- split(dados, dados$erro)
+  fits <- lapply(spp, function(dd){
+    fit <- lm(Y~X, dd)
+    out <- data.frame(
+      par = c("beta_0", "beta_1"),
+      estimativa = as.numeric(coef(fit)),
+      erro = dd$erro[1]
+    )
+  })
+  res <- do.call(rbind, fits)
+  rownames(res) <- NULL
+  return(res)
+}
+```
+
+Para começar o experimento, vamos preparar as coisas:
+
+```{r prep}
+library(ggplot2)
+beta0 <- -2
+beta1 <- 1.3
+Nobs <- 50
+X <- rnorm(Nobs) ## gerando a covariada
+```
+
+e olhar o resultado de **uma** simulação, apresentado na @fig-regexample.
+
+```{r regfig}
+#| echo: false
+#| warning: false
+#| label: fig-regexample
+#| fig-cap: "Regressão sob diversos modelos para erros."
+#| fig-width: 14
+#| fig-height: 8
+
+ex1 <- gera_dados(b0 = beta0, b1 = beta1, X = X)
+
+ggplot(ex1, aes(x = X, y = Y, colour = erro)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(.~erro, scales = "free_y") +
+  theme_bw(base_size = 20)
+```
+
+Vamos agora conduzir um experimento de Monte Carlo estudar a distribuição amostral dos estimadores dos coeficientes sob cada um dos *DGPs*. Vamos rodar $M=1000$ experimentos e apresentar os resultados na @fig-regsimu.
+
+```{r MC_simu}
+#| echo: false
+#| warning: false
+#| label: fig-regsimu
+#| fig-cap: "Distribuição amostral dos coeficientes sob diversos modelos para erros. A linha pontilhada vertical marca os valores 'verdadeiros'."
+#| fig-width: 14
+#| fig-height: 8
+#| cache: true
+M <- 1000
+
+simu <- lapply(1:M,
+               function(i) gera_dados(b0 = beta0,
+                                      b1 = beta1,
+                                      X = X))
+
+ests <- do.call(rbind,
+                lapply(simu, ajusta))
+
+plvl <- c(expression(beta[0]), 
+          expression(beta[1]))
+
+ests$par <- as.factor(ests$par)
+levels(ests$par) <- plvl
+
+true.pars <- data.frame(par = unique(ests$par),
+                        value = c(beta0, beta1))
+
+ggplot(ests, 
+       aes(x = estimativa, fill = par)) +
+  geom_histogram() +
+  geom_vline(data = true.pars,
+             aes(xintercept = value),
+             linetype = "dashed") +
+  facet_grid(erro~par,
+             scales = "free",
+             labeller = label_parsed) +
+  theme_bw(base_size = 20)
+```
+
+Vamos agora calcular a média de Monte Carlo dos coeficientes:
+
+```{r coef_means}
+aggregate(estimativa~erro+par, ests, mean)
+
+```
+
+## Exercícios de fixação
+
+Em várias aplicações científicas, temos interesse em estudar se dois grupos diferem quanto à sua composição em algum aspecto, por exemplo, a média do processo gerador dos dados.
+O modelo de regressão permite especificar uma relação entre duas variáveis, em particular uma estrutura condicional para a média.
+Podemos utilizar modelos de regressão para testar hipóteses sobre diferenças de grupos na presença de uma variável que influencia a média.
+Neste exercício vamos nos basear no exemplo apresentado na seção 2.2.2 de Dobson(2001) e modelar o peso ao nascer de bebês (em gramas) em relação à idade gestacional (em semanas) para bebês do sexo masculino e do sexo feminino.
+A pergunta principal aqui é se o sexo da criança influencia no seu peso ao nascer uma vez que ajustamos para o tempo de gestação.
+
+Seja $Y_{jk}$ o peso ao nascer de uma criança do sexo $j$ e seja $x_{jk}$ sua idade gestacional.
+Considere o modelo
+$$
+E\left[Y_{jk}\right] = \alpha_j + \beta_j x_{jk} = \mu_{jk},
+$$
+para o $k$-ésimo bebê no grupo $j$.
+Note que este modelo presume que as linhas de base dos sexos são diferentes e que os coeficientes angulares também são.
+
+Aqui vamos explorar hipóteses sobre os coeficientes angulares, isto é, sobre o desenvolvimento do bebê ao longo das semanas de gestação.
+
+   1. Que outras premissas são necessárias para abordar essa questão sob o ponto de vista do modelo de regressão linear?
+    
+   2. Considere a hipótese 
+    $$
+    H_0 : \beta_1 = \beta_2 = \beta,
+    $$
+    para $\beta \in \mathbb{R}$.
+    Elabore dois modelos, um mais geral e outro menos geral, para avaliar $H_0$ frente aos dados.
+    
+      **Dica**: Considere o que acontece com o coeficiente angular quando $H_0$ é verdadeira e quando ela é falsa.
+    
+   3. Escreva a função de densidade de probabilidade de $Y_{jk}$ sob cada modelo.
+
+      **Dica**: Considere o logaritmo da f.d.p.
+    
+   4. Mostre como obter estimativas de máxima verossimilhança sob os dois modelos considerados no item 2;
+   
+   5. Liste as estatísticas suficientes necessárias para proceder à estimação no item anterior;
+   
+   6. Descreva em detalhes a elaboração de um teste estatístico para testar $H_0$ contra $H_1$.
+    Não se esqueça de descrever o procedimento para cálculo da estatística de teste, bem como deduzir a sua distribuição de probabilidade sob $H_0$ -- veja também o próximo item.
+    
+      **Dica**: Considere o que esperamos a respeito da soma de erros quadráticos dos dois modelos do item 2.
+  
+   7. Sobre o item anterior, mostre como se livrar do parâmetro de estorvo $\sigma^2$ no cálculo da estatística de teste. 
+   
+   8. Faça o teste desenvolvido utilizando os dados na @fig-baby1, disponíveis [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/data/birthweight.csv) e discuta se o sexo do bebê parece influenciar o peso ao nascer. 
+
+## Referências
+
+- Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press.
