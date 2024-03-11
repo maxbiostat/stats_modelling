@@ -1,0 +1,146 @@
+---
+title: "Regressão linear múltipla: _the madness continues_"
+author: ""
+format:
+  pdf:
+    fig-pos: H
+latex-auto-install: true
+editor: visual
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\sM{\bar{X}_n}
+\def\indep{\perp \!\!\! \perp}
+```
+:::
+
+## Motivação
+
+O modelo de regressão é extremamente  útil como ferramenta explanatória e preditiva, mas até agora nos limitamos à  situação ao em que temos apenas uma variavel independente.
+Na vida real é comum estudarmos fenômenos com múltiplas causas.
+Em aplicações reais, em geral dispomos de muitas covariaveis que podem, em princípio, estar relacionadas à variável dependente (desfecho/resposta).
+
+Nesta lição vamos fazer o nosso modelo de regressão ficar mais realista incluindo múltiplas covariáveis (ou variáveis explanatórias) de uma vez. Vamos entender como estimar quantidades-chaves do modelo e também como diagnosticar o seu ajuste.
+
+## O modelo
+Vamos escrever
+$$
+\boldsymbol{y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon},
+$$
+com 
+$$
+\boldsymbol{\varepsilon} \sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{I}),
+$$
+onde $\boldsymbol{V}$ é uma matriz positiva semi-definida **conhecida**.
+
+## Estimação
+
+É possível mostrar que os estimadores de máxima verossimilhança das quantidades desconhecidas são
+
+\begin{align}
+\hat{\boldsymbol{\beta}} &= \left(\boldsymbol{X}^T\boldsymbol{X}\right)^{-1}\boldsymbol{X}^T\boldsymbol{y},\\
+\hat{\sigma^2} &= \frac{1}{n-2} \left(\boldsymbol{y}-\boldsymbol{X}^T\boldsymbol{\beta}\right)^T\left(\boldsymbol{y}-\boldsymbol{X}^T\boldsymbol{\beta}\right).
+\end{align}
+
+Nos exercícios abaixo, você vai mostrar que estes estimadores têm boas propriedades, como não-viesamento.
+Em particular,
+\begin{equation}
+\hat{\boldsymbol{\beta}} \sim \operatorname{Normal}(\boldsymbol{\beta}, \sigma^2 \left(\boldsymbol{X}^T\boldsymbol{X}\right)^{-1})
+\end{equation}
+Além disso, a informação de Fisher vale
+\begin{equation}
+\boldsymbol{I}(\boldsymbol{\beta}) = \frac{\boldsymbol{X}^T\boldsymbol{X}}{\sigma^2}.
+\end{equation}
+
+## Diagnóstico
+
+Parte integral de qualquer análise é diagnosticar o ajuste do modelo aos dados.
+Em uma análise de regressão, um diagnóstico importante é a *análise de resíduos*.
+Defina
+$$ \hat{e}_i = y_i - \hat{\theta_i}.$$
+Como o resíduo da $i$-ésima observação em relação ao seu valor ajustado.
+Podemos  então escrever
+$$ E[\hat{\boldsymbol{e}}\hat{\boldsymbol{e}}^T] = \sigma^2 \left[\boldsymbol{I} - \boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T\right], $$
+para a matriz de covariância dos resíduos.
+Um passo importante é _padronizar_ os resíduos:
+$$r_i = \frac{\hat{e}_i}{\hat{\sigma}\sqrt{1-h_{ii}}}.$$ 
+Uma boa medida para a _influência_ de uma observação é a distância de Cook:
+\begin{equation}
+D_i := \frac{1}{p}\left(\frac{h_{ii}}{1-h_{ii}}\right)r_i^2.
+\end{equation}
+
+
+## Os dados
+
+Os dados que vamos analisar aqui são as notas (_scores_) em um teste padronizado de $n=$ crianças, para os quais foram medidos o quociente de inteligência (QI) da mãe e também se a mãe completou o ensino médio (_high school_, `hs`).
+Os dados estão [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/data/kidiq.csv) e são discutidos no capítulo 10 de  Gelman, Hill & Vehtari (2020).
+
+Nosso objetivo é entender como a habilidade inata da criança (predita presumivelmente pelo QI da mãe) e sua condição socioeconômica (sinalizado pelo `hs` da mãe) influenciam no desempenho.
+
+```{r data_prep}
+#| echo: false
+#| warning: false
+library(tidyverse)
+kidiq <- read_csv("../data/kidiq.csv")
+```
+
+Vamos olhar as principais estatísticas descritivas
+```{r}
+head(kidiq)
+summary(kidiq)
+```
+
+
+## As perguntas
+
+De posse desses dados, podemos nos fazer várias perguntas sobre _associações_ nos dados.
+Por exemplo, queremos saber se o QI da mãe tem alguma associação (leia-se: capacidade preditiva) com as notas (_scores_) da criança.
+Além disso, essa associação é mediada pelo nível educacional da mãe?
+Como o fato de que a mãe trabalha fora impacta a variável resposta (na presença das outras covariáveis relevantes)?
+
+# Análise
+## Exercícios de fixação
+
+Tome $\boldsymbol{X}$ uma matriz real $n \times P$ e $\boldsymbol{Y} = \{Y_1, \ldots, Y_n\}^T \in \mathbb{R}^n$ um vetor contendo os valores da variável dependente.
+
+Nosso modelo (um pouco menos geral que o dado acima) é
+\begin{equation*}
+    E[Y_i] =: \mu_i(\boldsymbol{\beta}) = \boldsymbol{\tilde{X}}_i^T\boldsymbol{\beta},
+\end{equation*}
+onde $\boldsymbol{\beta} \in \mathbb{R}^{P + 1}$ é o vetor de coeficientes e parâmetro de interesse e $\boldsymbol{\tilde{X}}$ é uma matriz obtida adicionando uma coluna de uns, $\boldsymbol{X_0} = \{ 1, \ldots, 1\}^T$, a $\boldsymbol{X}$.
+Para completar a especificação do modelo, vamos assumir que os erros em torno do preditor linear são normalmente distribuídos com variância comum:
+\begin{align*}
+    Y_i &= \mu_i(\boldsymbol{\beta}) + \epsilon_i\\
+    \epsilon_i &\overset{\text{i.i.d.}}{\sim}  \operatorname{Normal}(0, \sigma^2),
+\end{align*}
+com $\sigma^2 \in \mathbb{R}_+$ desconhecida.
+
+ 1. Escreva a log-verossimilhança e deduza seu gradiente e a sua derivada segunda (hessiana);
+    \item Com base nos cálculos do item anterior, mostre a forma do estimador de máxima verossimilhança para $\boldsymbol{\beta}$, $\boldsymbol{\hat{\beta}}$;
+    
+ 2. Mostre que $\boldsymbol{\hat{\beta}}$ é não-viesado;
+ 3. Considere um outro estimador \underline{não-viesado} de $\boldsymbol{\beta}$: $\boldsymbol{\tilde{\beta}} = \boldsymbol{M}\boldsymbol{y}$, onde
+    $$\boldsymbol{M} = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T + \boldsymbol{D},$$
+    e $\boldsymbol{D}$ é uma matriz $P \times n$ cujas entradas são não-zero.
+    Mostre que $\boldsymbol{R} := \operatorname{Var}(\boldsymbol{\tilde{\beta}}) - \operatorname{Var}(\boldsymbol{\hat{\beta}})$ é positiva-definida.
+    
+    **Dica:**  Compute $E[\boldsymbol{\tilde{\beta}}]$ e considere o que deve valer para $\boldsymbol{D}$ sob a premissa de que  $\boldsymbol{\tilde{\beta}}$ é não-viesado.
+
+   **Comentário:** Ao resolver o último item, você terá mostrado que o estimador de máxima verossimilhança (e também o estimador de mínimos quadrados) é o melhor estimador linear não-viesado (\textit{best linear unbiased linear estimator, BLUE}).
+  Em particular esta é a versão de Gauss\footnote{Carl Friedrich Gauss (1777-1855), matemático alemão conhecido como o Príncipe dos Matemáticos.} do famoso teorema de Gauss-Markov.
+  
+ 5. Considere o seguinte modelo alternativo:
+ $$
+\boldsymbol{\varepsilon} \sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{V}),
+$$
+Deduza $\hat{\boldsymbol{\beta}}_\text{EMV}$ e sua distribuição amostral, além de $I(\boldsymbol{\beta})$.
+Discuta como este modelo viola as premissas de Gauss-Markov e quais os efeitos desta viola
+
+## Referências
+
+-   Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press. (Cap 6)
+-  Gelman, A., Hill, J., & Vehtari, A. (2020). [Regression and other stories](https://avehtari.github.io/ROS-Examples/). Cambridge University Press.

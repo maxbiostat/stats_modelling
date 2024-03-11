@@ -136,7 +136,7 @@ curve(plnorm(x, meanlog = mu.hat, sdlog = sd.hat), min(conc), max(conc), lwd = 3
 ## Exercícios de fixação
 
 1.  Tome $X_1, X_2, \ldots, X_n$ uma amostra de uma distribuição conjunta $F_n$. Sejam $\theta_i := E[X_i]$ e $v_i := \operatorname{Var}(X_i)$. Considere a média amostral $\sM := \frac{1}{n}\sum_{i=1}^n X_i$. Deduza que para $\varepsilon >0$ : $$
-    \operatorname{Pr}\left(\left|\bar{X}_n- \frac{1}{n}\sum_{i=1}^n \theta_i\right| \geq \varepsilon\right) \leq \frac{\sum_{i=1}^n v_i + \sum_{i < j} \operatorname{Cov}(X_i, X_j)}{(n\varepsilon)^2},
+    \operatorname{Pr}\left(\left|\bar{X}_n- \frac{1}{n}\sum_{i=1}^n \theta_i\right| \geq \varepsilon\right) \leq \frac{\sum_{i=1}^n v_i + 2\sum_{i < j} \operatorname{Cov}(X_i, X_j)}{(n\varepsilon)^2},
     $$ e argumente sobre o que acontece à medida que $n \to \infty$ sob as premissas de (a) independência (b) indentidade de distribuição. O que precisamos assumir sobre $v_i$? E sobre as covariâncias?
 
 2.  **O método Delta**. Suponha que $Y_1, Y_2, \ldots$ é uma sequência de variáveis aleatórias i.i.d. para as quais vale um teorema central do limite, isto é, $$
