@@ -33,9 +33,9 @@ $$
 $$
 com 
 $$
-\boldsymbol{\varepsilon} \sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{I}),
+\boldsymbol{\varepsilon} \sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{I}).
 $$
-onde $\boldsymbol{V}$ é uma matriz positiva semi-definida **conhecida**.
+
 
 ## Estimação
 
@@ -51,12 +51,12 @@ Em particular,
 \begin{equation}
 \hat{\boldsymbol{\beta}} \sim \operatorname{Normal}(\boldsymbol{\beta}, \sigma^2 \left(\boldsymbol{X}^T\boldsymbol{X}\right)^{-1})
 \end{equation}
-Além disso, a informação de Fisher vale
+Além disso, a informação de Fisher para $\boldsymbol{\beta}$ vale
 \begin{equation}
 \boldsymbol{I}(\boldsymbol{\beta}) = \frac{\boldsymbol{X}^T\boldsymbol{X}}{\sigma^2}.
 \end{equation}
 
-## Diagnóstico
+## Diagnósticos
 
 Parte integral de qualquer análise é diagnosticar o ajuste do modelo aos dados.
 Em uma análise de regressão, um diagnóstico importante é a *análise de resíduos*.
@@ -73,6 +73,9 @@ Uma boa medida para a _influência_ de uma observação é a distância de Cook:
 D_i := \frac{1}{p}\left(\frac{h_{ii}}{1-h_{ii}}\right)r_i^2.
 \end{equation}
 
+# Análise
+
+Agora vamos empregar o modelo sob estudo e os resultados listados para analisar dados reais.
 
 ## Os dados
 
@@ -85,15 +88,17 @@ Nosso objetivo é entender como a habilidade inata da criança (predita presumiv
 #| echo: false
 #| warning: false
 library(tidyverse)
+library(ggplot2)
 kidiq <- read_csv("../data/kidiq.csv")
+kidiq$mom_hs <- as.factor(kidiq$mom_hs)
 ```
 
 Vamos olhar as principais estatísticas descritivas
 ```{r}
 head(kidiq)
 summary(kidiq)
+boxplot(kid_score ~ mom_hs, kidiq)
 ```
-
 
 ## As perguntas
 
@@ -102,8 +107,129 @@ Por exemplo, queremos saber se o QI da mãe tem alguma associação (leia-se: ca
 Além disso, essa associação é mediada pelo nível educacional da mãe?
 Como o fato de que a mãe trabalha fora impacta a variável resposta (na presença das outras covariáveis relevantes)?
 
-# Análise
-## Exercícios de fixação
+## Ajustando e investigando modelos
+
+Em primeiro lugar, vamos ajustar o modelo 
+
+$$\text{kid\_score} = \beta_0 + \beta_{\text{hs}} \text{mom\_hs} + \varepsilon.$$
+```{r model_1}
+modelo1 <- lm(kid_score ~ mom_hs, kidiq)
+summary(modelo1)
+```
+Deste ajuste fica claro que que a média dos scores é $\approx 77.5$ e que condicionado em `mom_hs=1`, em média a criança tem pontuação $\approx 11.8$ maior.
+Isso não é exatamente surpresa, já que se compararmos as médias nos boxplots acima, vemos uma diferença mais ou menos igual a essa.
+
+Vamos visualizar a reta ajustada:
+
+```{r vis_mod1}
+#| echo: false
+#| warning: false
+ggplot(kidiq,
+       aes(x = mom_hs, y = kid_score)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw(base_size = 20)
+```
+
+
+Vamos agora olhar o modelo
+
+$$\text{kid\_score} = \beta_0 + \beta_{\text{iq}} \text{mom\_iq} + \varepsilon.$$
+```{r model_2}
+modelo2 <- lm(kid_score ~ mom_iq, kidiq)
+summary(modelo2)
+```
+Vemos que a estimativa do intercepto muda (porquê?) e vemos também que para cada ponto de QI da mãe, a pontuação da criança aumenta $\approx 0.61$ pontos.
+Nessa situação fica claro que é difícil intepretar $\hat{\beta_0}$ (porquê?).
+Para resolver isso, vamos centrar a variável contínua e reajustar o modelo.
+```{r iq_centre}
+kidiq$c_mom_iq <- kidiq$mom_iq - mean(kidiq$mom_iq)
+modelo3 <- lm(kid_score ~ c_mom_iq, kidiq)
+summary(modelo3)
+```
+Agora fica mais fácil interpretar $\hat{\beta_0} \approx 86.8$ como o valor esperado da nota quando a mãe tem um QI médio.
+Agora vamos olhar a reta ajustada junto com um intervalo de confiança para o preditor linear.
+
+```{r vis_mod2}
+#| echo: false
+#| warning: false
+ggplot(kidiq,
+       aes(x = mom_iq, y = kid_score)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw(base_size = 20)
+```
+
+Agora vamos finalmente ajustar o modelo com as duas covariáveis:
+$$\text{kid\_score} = \beta_0 + \beta_{\text{hs}} \text{mom\_hs} +  \beta_{\text{iq}} \text{mom\_iq} + \varepsilon.$$
+```{r model_4}
+modelo4 <- lm(kid_score ~ c_mom_iq + mom_hs, kidiq)
+summary(modelo4)
+```
+Como `mom_iq` está centrada, conseguimos interpretar o intercepto estimado como a média da nota quando a mãe tem um QI médio e não completou o ensino médio.
+
+```{r prepvis_mod4}
+#| echo: false
+#| warning: false
+c_iqs <- seq(min(kidiq$c_mom_iq), max(kidiq$c_mom_iq), length.out = 50)
+pred.grid <- expand.grid(c_mom_iq = c_iqs, mom_hs = c(0, 1))
+pred.grid$mom_hs <- as.factor(pred.grid$mom_hs)
+conf.line <- predict(modelo4, pred.grid, interval = "confidence")
+conf.pred <- predict(modelo4, pred.grid, interval = "prediction")
+forplot <- data.frame(pred.grid,
+                      linpred = conf.line[, "fit"],
+                      linpred_lwr = conf.line[, "lwr"],
+                      linpred_upr = conf.line[, "upr"],
+                      yrep_lwr = conf.pred[, "lwr"],
+                      yrep_upr = conf.pred[, "upr"])
+forplot$mom_iq <- forplot$c_mom_iq + mean(kidiq$mom_iq)
+```
+Vamos dar uma olhada em duas coisas: (i) as retas induzidas pelo modelo que inclui as duas covariáveis e (ii) como ficariam modelos ajustados separadamente para os grupos `mom_hs =0` e `mom_hs=1`. 
+
+```{r vis_mod4}
+#| echo: false
+#| warning: false
+ggplot(kidiq,
+       aes(x = mom_iq, y = kid_score,
+           colour = mom_hs, fill = mom_hs)) +
+  geom_point() +
+  geom_line(data = forplot,
+            aes(x = mom_iq, y = linpred, colour = mom_hs),
+            size = 1.5) +
+  theme_bw(base_size = 20)
+ggplot(kidiq,
+       aes(x = mom_iq, y = kid_score,
+           colour = mom_hs, fill = mom_hs)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw(base_size = 20)
+```
+A primeira figura não traz muitas surpresas; o modelo que ajustamos força o coeficiente angular a ser o mesmo, enquanto os interceptos diferem por $\beta_{\text{hs}}$.
+A segunda figura sugere que o coeficiente angular dos dois grupos pode ser bem diferente. 
+Para avaliar essa possiblidade formalmente sem dividir os dados (isto é, ajustando um modelo só), vamos incluir um termo de *interação*:
+$$\text{kid\_score} = \beta_0 + \beta_{\text{hs}} \text{mom\_hs} +  \beta_{\text{iq}} \text{mom\_iq} + \beta_{\text{hs:iq}} \text{mom\_hs} \times \text{mom\_iq} + \varepsilon,$$
+onde vamos entender $\beta_{\text{hs:iq}}$ como a _diferença_ entre os coeficientes angulares dos dois grupos.
+
+```{r model_5}
+modelo5 <- lm(kid_score ~ c_mom_iq + mom_hs + mom_hs:c_mom_iq, kidiq)
+summary(modelo5)
+```
+```{r lines}
+conf.line.m5 <- predict(modelo5, pred.grid)
+preds.m5 <- data.frame(pred.grid, linpred = conf.line.m5)
+preds.m5$mom_iq <- preds.m5$c_mom_iq + mean(kidiq$mom_iq)
+ggplot(kidiq,
+       aes(x = mom_iq, y = kid_score,
+           colour = mom_hs, fill = mom_hs)) +
+  geom_point() +
+  geom_line(data = preds.m5,
+            aes(x = mom_iq, y = linpred,
+                colour = mom_hs),
+            size = 1.5) +
+  theme_bw(base_size = 20)
+```
+
+# Exercícios de fixação
 
 Tome $\boldsymbol{X}$ uma matriz real $n \times P$ e $\boldsymbol{Y} = \{Y_1, \ldots, Y_n\}^T \in \mathbb{R}^n$ um vetor contendo os valores da variável dependente.
 
@@ -133,12 +259,15 @@ com $\sigma^2 \in \mathbb{R}_+$ desconhecida.
    **Comentário:** Ao resolver o último item, você terá mostrado que o estimador de máxima verossimilhança (e também o estimador de mínimos quadrados) é o melhor estimador linear não-viesado (\textit{best linear unbiased linear estimator, BLUE}).
   Em particular esta é a versão de Gauss\footnote{Carl Friedrich Gauss (1777-1855), matemático alemão conhecido como o Príncipe dos Matemáticos.} do famoso teorema de Gauss-Markov.
   
- 5. Considere o seguinte modelo alternativo:
+ 5. (*Desafio*) Considere o seguinte modelo alternativo:
  $$
 \boldsymbol{\varepsilon} \sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{V}),
 $$
+onde $\boldsymbol{V}$ é uma matriz positiva semi-definida **conhecida**.
+
 Deduza $\hat{\boldsymbol{\beta}}_\text{EMV}$ e sua distribuição amostral, além de $I(\boldsymbol{\beta})$.
-Discuta como este modelo viola as premissas de Gauss-Markov e quais os efeitos desta viola
+Discuta como este modelo viola as premissas de Gauss-Markov e quais os efeitos desta violação sobre as estimativas (são viesadas? De que ordem é o viés?).
+   *Dica*: Ver seção 10.8 de ROS.
 
 ## Referências
 
