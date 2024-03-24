@@ -3,9 +3,8 @@ title: "Regressão linear: o melhor modelo ruim que você já viu"
 author: ""
 format:
   pdf:
+    mathspec: true
     fig-pos: H
-latex-auto-install: true
-editor: visual
 ---
 
 ::: hidden
@@ -202,50 +201,38 @@ aggregate(estimativa~erro+par, ests, mean)
 
 ## Exercícios de fixação
 
-Em várias aplicações científicas, temos interesse em estudar se dois grupos diferem quanto à sua composição em algum aspecto, por exemplo, a média do processo gerador dos dados.
-O modelo de regressão permite especificar uma relação entre duas variáveis, em particular uma estrutura condicional para a média.
-Podemos utilizar modelos de regressão para testar hipóteses sobre diferenças de grupos na presença de uma variável que influencia a média.
-Neste exercício vamos nos basear no exemplo apresentado na seção 2.2.2 de Dobson(2001) e modelar o peso ao nascer de bebês (em gramas) em relação à idade gestacional (em semanas) para bebês do sexo masculino e do sexo feminino.
-A pergunta principal aqui é se o sexo da criança influencia no seu peso ao nascer uma vez que ajustamos para o tempo de gestação.
+Em várias aplicações científicas, temos interesse em estudar se dois grupos diferem quanto à sua composição em algum aspecto, por exemplo, a média do processo gerador dos dados. O modelo de regressão permite especificar uma relação entre duas variáveis, em particular uma estrutura condicional para a média. Podemos utilizar modelos de regressão para testar hipóteses sobre diferenças de grupos na presença de uma variável que influencia a média. Neste exercício vamos nos basear no exemplo apresentado na seção 2.2.2 de Dobson(2001) e modelar o peso ao nascer de bebês (em gramas) em relação à idade gestacional (em semanas) para bebês do sexo masculino e do sexo feminino. A pergunta principal aqui é se o sexo da criança influencia no seu peso ao nascer uma vez que ajustamos para o tempo de gestação.
 
-Seja $Y_{jk}$ o peso ao nascer de uma criança do sexo $j$ e seja $x_{jk}$ sua idade gestacional.
-Considere o modelo
-$$
+Seja $Y_{jk}$ o peso ao nascer de uma criança do sexo $j$ e seja $x_{jk}$ sua idade gestacional. Considere o modelo $$
 E\left[Y_{jk}\right] = \alpha_j + \beta_j x_{jk} = \mu_{jk},
-$$
-para o $k$-ésimo bebê no grupo $j$.
-Note que este modelo presume que as linhas de base dos sexos são diferentes e que os coeficientes angulares também são.
+$$ para o $k$-ésimo bebê no grupo $j$. Note que este modelo presume que as linhas de base dos sexos são diferentes e que os coeficientes angulares também são.
 
 Aqui vamos explorar hipóteses sobre os coeficientes angulares, isto é, sobre o desenvolvimento do bebê ao longo das semanas de gestação.
 
-   1. Que outras premissas são necessárias para abordar essa questão sob o ponto de vista do modelo de regressão linear?
-    
-   2. Considere a hipótese 
-    $$
-    H_0 : \beta_1 = \beta_2 = \beta,
-    $$
-    para $\beta \in \mathbb{R}$.
-    Elabore dois modelos, um mais geral e outro menos geral, para avaliar $H_0$ frente aos dados.
-    
-      **Dica**: Considere o que acontece com o coeficiente angular quando $H_0$ é verdadeira e quando ela é falsa.
-    
-   3. Escreva a função de densidade de probabilidade de $Y_{jk}$ sob cada modelo.
+1.  Que outras premissas são necessárias para abordar essa questão sob o ponto de vista do modelo de regressão linear?
 
-      **Dica**: Considere o logaritmo da f.d.p.
-    
-   4. Mostre como obter estimativas de máxima verossimilhança sob os dois modelos considerados no item 2;
-   
-   5. Liste as estatísticas suficientes necessárias para proceder à estimação no item anterior;
-   
-   6. Descreva em detalhes a elaboração de um teste estatístico para testar $H_0$ contra $H_1$.
-    Não se esqueça de descrever o procedimento para cálculo da estatística de teste, bem como deduzir a sua distribuição de probabilidade sob $H_0$ -- veja também o próximo item.
-    
-      **Dica**: Considere o que esperamos a respeito da soma de erros quadráticos dos dois modelos do item 2.
-  
-   7. Sobre o item anterior, mostre como se livrar do parâmetro de estorvo $\sigma^2$ no cálculo da estatística de teste. 
-   
-   8. Faça o teste desenvolvido utilizando os dados na @fig-baby1, disponíveis [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/data/birthweight.csv) e discuta se o sexo do bebê parece influenciar o peso ao nascer. 
+2.  Considere a hipótese $$
+        H_0 : \beta_1 = \beta_2 = \beta,
+        $$ para $\beta \in \mathbb{R}$. Elabore dois modelos, um mais geral e outro menos geral, para avaliar $H_0$ frente aos dados.
+
+    **Dica**: Considere o que acontece com o coeficiente angular quando $H_0$ é verdadeira e quando ela é falsa.
+
+3.  Escreva a função de densidade de probabilidade de $Y_{jk}$ sob cada modelo.
+
+    **Dica**: Considere o logaritmo da f.d.p.
+
+4.  Mostre como obter estimativas de máxima verossimilhança sob os dois modelos considerados no item 2;
+
+5.  Liste as estatísticas suficientes necessárias para proceder à estimação no item anterior;
+
+6.  Descreva em detalhes a elaboração de um teste estatístico para testar $H_0$ contra $H_1$. Não se esqueça de descrever o procedimento para cálculo da estatística de teste, bem como deduzir a sua distribuição de probabilidade sob $H_0$ -- veja também o próximo item.
+
+    **Dica**: Considere o que esperamos a respeito da soma de erros quadráticos dos dois modelos do item 2.
+
+7.  Sobre o item anterior, mostre como se livrar do parâmetro de estorvo $\sigma^2$ no cálculo da estatística de teste.
+
+8.  Faça o teste desenvolvido utilizando os dados na @fig-baby1, disponíveis [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/data/birthweight.csv) e discuta se o sexo do bebê parece influenciar o peso ao nascer.
 
 ## Referências
 
-- Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press.
+-   Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press.

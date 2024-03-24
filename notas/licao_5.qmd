@@ -3,9 +3,8 @@ title: "Regressão linear múltipla bayesiana: _girl put your bayesian hat on_"
 author: ""
 format:
   pdf:
+    mathspec: true
     fig-pos: H
-latex-auto-install: true
-editor: visual
 ---
 
 ::: hidden

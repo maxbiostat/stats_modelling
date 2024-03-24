@@ -1,8 +1,10 @@
 ---
 title: "Inferência aproximada: o valor de uma premissa"
 author: ""
-format: pdf
-editor: visual
+format:
+  pdf:
+    mathspec: true
+    fig-pos: H
 ---
 
 ::: hidden
