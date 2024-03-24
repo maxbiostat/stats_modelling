@@ -1,0 +1,190 @@
+---
+title: "Regressão linear múltipla bayesiana: _girl put your bayesian hat on_"
+author: ""
+format:
+  pdf:
+    fig-pos: H
+latex-auto-install: true
+editor: visual
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\sM{\bar{X}_n}
+\def\indep{\perp \!\!\! \perp}
+```
+:::
+
+## Motivação
+
+Como vimos até aqui, o modelo linear (gaussiano) é extremamente útil para modelar a relação entre possíveis variáveis explanatórias (i.e. covariáveis) e uma variável dependente/resposta contínua. Até agora vimos como fazer inferência para esse modelo sob a ótica clássica/frequentista. Vamos então nos debruçar sobre o tratamento bayesiano do problema.
+
+## O modelo
+
+Vamos trabalhar com o mesmo modelo de antes: $$
+\boldsymbol{y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}, \: \boldsymbol{\varepsilon} \sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{I}).
+$$ Vamos suplementar a estrutura condicional dos dados com uma estrutura probabilística para as quantidades desconhecidas do modelo, isto é, uma distribuição *a priori* $\pi_{B,S}(\boldsymbol{\beta}, \sigma^2)$.
+
+## Uma análise bayesiana não cojugada
+
+Vamos mostrar agora uma análise do conjunto de dados 'kid score' usando o pacote **rstanarm**, que não utiliza prioris conjugadas (ver exercícios abaixo para a análise conjugada).
+Vamos preparar as coisas
+```{r prep}
+#| warning: false
+library(ggplot2)
+library(bayesplot)
+theme_set(theme_bw())
+library(rstanarm)
+data(kidiq)
+```
+e agora ajustar o modelo que desenvolvemos na lição anterior (i.e. com interação) usando mínimos quadrados/máxima verossimilhança.
+```{r freq}
+fmod <- glm(kid_score ~ mom_hs * mom_iq, data = kidiq)
+summary(fmod)
+```
+Em seguida, vamos ajustar o seguinte modelo
+\begin{align*}
+\boldsymbol{y} &= \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon},\\
+\boldsymbol{\varepsilon} &\sim \operatorname{Normal}(\boldsymbol{0}, \sigma^2\boldsymbol{I}),\\
+\boldsymbol{\beta} & \sim \operatorname{Normal}(\boldsymbol{0}, \operatorname{diag}(25/4)),\\
+\sigma &\sim \operatorname{Exponencial}(1).
+\end{align*}
+que corresponde às prioris _default_ do **rstanarm**.
+Note que a priori é  sobre $\sigma$ e não $\sigma^2$ -- uma boa ideia é derivar a densidade sobre a variância dos erros.
+A ideia por trás desta especificação _a priori_ é ter prioris _fracamente informativas_ (_weakly informative_); em particular, a ideia é dizer que os coeficientes são independentes _a priori_ e têm desvio padrõa de $2.5$, permitindo a estimação de efeitos razoavelmente grandes.
+Além disso, a priori sobre o erro de observação ($\sigma^2$) encoraja fortemente pequenos erros -- tem muita massa perto de zero.
+
+Vamos agora ajustar o modelo usando a função ``stan_glm`` que utiliza um algoritmo de cadeias de Markov Monte Carlo (MCMC) chamado [Hamiltonian Monte Carlo]() para obter amostras aproximadas da _posteriori_ $p_{\boldsymbol{X}}(\boldsymbol{\beta}, \sigma^2 \mid \boldsymbol{y}) \propto f_{\boldsymbol{X}}(\boldsymbol{y} \mid \boldsymbol{\beta}, \sigma^2)\pi_{B,S}(\boldsymbol{\beta}, \sigma^2)$:
+```{r bayesfit}
+bmod <- stan_glm(kid_score ~ mom_hs * mom_iq,
+                     data = kidiq, refresh = 0)
+summary(bmod)
+```
+Depois de checar os diagnósticos do MCMC (Rhat < 1.01 e ESS > 500 para todos os parâmetros), vemos que as estimativas dos coeficientes não são radicalmente diferentes daquelas obtidas com o método clássico/frequentista.
+Isso não chega a ser surpresa porque temos uma quantidade razoável de observações ($n=434$) em relação ao número de parâmetros (quantos são?).
+
+### Interrogando o modelo usando predições _a posteriori_
+
+Agora que temos uma distribuição _a posteriori_ para as quantidades desconhecidas do modelo, vamos utilizá-la para explorar o modelo e analisar o seu ajuste aos dados.
+Vamos computar a distribuição preditiva _a posteriori_ de certas quantidades e comparar essas distribuições com os valores observados nos dados.
+Chamamos esse procedimento genérico de checagem preditiva _a posteriori_ (em inglês, _posterior predictive checks_ [PPC]).
+Vamos começar com densidade da variável dependente,
+$$ \tilde{p}_{\tilde{\boldsymbol{X}}}(\tilde{\boldsymbol{y}} \mid \boldsymbol{y}) = \int_{\boldsymbol{\Omega}}f_{\tilde{\boldsymbol{X}}}(\tilde{\boldsymbol{y}} \mid \theta)p_{\tilde{\boldsymbol{X}}}(\boldsymbol{\theta} \mid\boldsymbol{y})\,d\boldsymbol{\theta},$$
+para $\boldsymbol{\theta} = (\boldsymbol{\beta}, \sigma^2)$ e uma (potencialmente nova) matriz de desenho $\tilde{\boldsymbol{X}}$.
+Um bom exercício é escrever a integral acima como uma marginalização sobre a distribuição conjunta de $\tilde{\boldsymbol{y}}$ e as outras quantidades desconhecidas do modelo e entender que essa manipulação segue diretamente as regras do cálculo de probabilidades.
+Vamos olhar $\tilde{\boldsymbol{y}} \mid \boldsymbol{\theta}$ para cinco amostras da posteriori
+```{r ppc_tilde_y}
+pp_check(bmod, plotfun = "hist", nreps = 5)
+```
+Uma aproximação de $\tilde{p}(\tilde{\boldsymbol{y}} \mid \boldsymbol{y})$ pode ser obtida tomando uma média sobre muitas amostras.
+Agora vamos olhar a distribuição conjunta de $\mu_{\tilde{\boldsymbol{X}}, \boldsymbol{y}} := E\left[\tilde{\boldsymbol{y}} \mid \boldsymbol{y}, \boldsymbol{\theta}\right]$ e $v_{\tilde{\boldsymbol{X}}, \boldsymbol{y}} := \vr(\tilde{\boldsymbol{y}} \mid \boldsymbol{y}, \boldsymbol{\theta})$:
+```{r ppc_mean_var}
+pp_check(bmod, plotfun = "stat_2d", stat = c("mean", "var"))
+```
+Onde vemos que o modelo parece produzir dados que têm os dois primeiros momentos bem parecidos com os observados.
+Por último, vamos estudar a capacidade do modelo de modelar a cauda da distribuição de $\boldsymbol{y}$:
+```{r ppc_quantile}
+q95 <- function(x) quantile(x, .95)
+pp_check(bmod, plotfun = "stat", stat = "q95")
+```
+Vemos que no que toca à modelagem do quantil $95\%$, nosso modelo não faz um ótimo trabalho.
+E tudo bem.
+Em um modelo de regressão linear, estamos interessados em modelar bem a média condicional e a variância dos dados.
+Porque será que a cauda da distribuição preditiva parece ser mais pesada que a cauda dos dados observados?
+Será que você consegue responder usando os resultados da análise conjugada?
+
+Para terminar, vamos produzir predições da variável dependente para vários valores do QI da mãe (`mom_iq`) para os dois grupos (`mom_hs =0` e `mom_hs=1`):
+```{r pred_hs}
+IQ_SEQ <- seq(from = 75, to = 135, by = 5)
+y_nohs <- posterior_predict(bmod, newdata = data.frame(mom_hs = 0, mom_iq = IQ_SEQ))
+y_hs <- posterior_predict(bmod, newdata = data.frame(mom_hs = 1, mom_iq = IQ_SEQ))
+
+par(mfrow = c(1:2), mar = c(5,4,2,1))
+boxplot(y_hs, axes = FALSE, outline = FALSE, ylim = c(10,170),
+        xlab = "Mom IQ", ylab = "Predicted Kid score", main = "Mom HS")
+axis(1, at = 1:ncol(y_hs), labels = IQ_SEQ, las = 3)
+axis(2, las = 1)
+boxplot(y_nohs, outline = FALSE, col = "red", axes = FALSE, ylim = c(10,170),
+        xlab = "Mom IQ", ylab = NULL, main = "Mom No HS")
+axis(1, at = 1:ncol(y_hs), labels = IQ_SEQ, las = 3)
+```
+Isto é, aqui nós construímos duas $\tilde{\boldsymbol{X}}$ diferentes e amostramos (aproximadamente) de $\tilde{p}_{\tilde{\boldsymbol{X}}}$ para produzir as nossas predições.
+Note que essas predições já levam em conta a incerteza sobre os parâmetros (veja exercício 5 abaixo).
+
+# Exercícios de fixação
+
+Considere o modelo discutido acima. Uma escolha interessante para auxiliar no entendimento e na análise é $$\pi_{B,S}(\boldsymbol{\beta}, \sigma^2) =  \pi_{B \mid S}(\boldsymbol{\beta} \mid\sigma^2)\pi_{S}(\sigma^2),$$ isto é, uma estrutura *a priori* que modela os coeficientes de forma condicional à variância dos erros e uma distribuição marginal na variância. As consequências matemáticas dessas escolhas são bem discutidas [aqui](https://ams206-winter19-01.courses.soe.ucsc.edu/system/files/attachments/banerjee-bayesian-linear-model-details.pdf) e [aqui](https://irvinggomez.com/courses/bayesian/GoryDetailsStudentsVersion.pdf) -- mas você deve tentar deduzir os resultados de forma independente primeiro.
+
+1.  Mostre que a verossimilhança $f_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid \theta)$ pode ser escrita na forma $$
+     f_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid \theta) = g_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} | \boldsymbol{\beta}, \sigma^2) h_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} | \sigma^2) . 
+     $$
+2.  Utilize o resultado anterior para deduzir que a priori conjugada para este caso é da forma $$
+     \pi_{B, S}\left(\boldsymbol{\beta}, \sigma^2\right) = \pi_{B\mid S}\left(\boldsymbol{\beta}\mid \sigma^2\right) \pi_S(\sigma^2). 
+     $$ Em particular, mostre que $$
+     \pi_{B, S}\left(\boldsymbol{\beta}, \sigma^2\right) \propto \left(\frac{1}{\sigma^2}\right)^{a + (P + 1)/2 + 1} \times \quad  \exp\left(-\frac{1}{\sigma^2}\left\{b + \frac{1}{2} (\boldsymbol{\beta} - \boldsymbol{\mu}_\beta)^T \boldsymbol{V}_\beta^{-1} (\boldsymbol{\beta} - \boldsymbol{\mu}_\beta) \right\}\right), 
+     $$ onde $\boldsymbol{\mu}_\beta \in \mathbb{R}^{P+1}$, $\boldsymbol{V}_\beta$ é uma matriz positiva definida e $a, b \in \mathbb{R}_+$.
+
+**Dica:** Que escolhas para $\pi_{B\mid S}$ e $\pi_S$ eu preciso fazer?
+
+3.  A priori anterior chama-se \textbf{normal inversa gama} (NIG) e tem quatro parâmetros: $\boldsymbol{m}$, $\boldsymbol{V}$, $a$ e $b$. Mostre que a posteriori de $\theta$ também é NIG e exiba seus hiperparâmetros.
+
+4.  **Distribuições marginais:** um objeto muito importante em qualquer análise bayesiana é a distribuição marginal de cada parâmetro, porque ela permite inferências mais interpretáveis ao mesmo tempo que acomoda a incerteza sobre as outras quantidades desconhecidas do modelo. Vamos agora calcular algumas marginais importantes.
+
+**Dica:** Antes de começar os cálculos para essa seção, vale considerar a seguinte representação do nosso modelo:
+
+\begin{align*}
+            \boldsymbol{y} &= \boldsymbol{\tilde{X}}\boldsymbol{\beta} + \boldsymbol{\epsilon}_1, \: \textrm{com}\: \boldsymbol{\epsilon}_1 \sim \operatorname{MVN}_n\left(\boldsymbol{0}_n, \boldsymbol{\Sigma_1}\right),\\
+            \boldsymbol{\beta} &= \boldsymbol{\mu}_\beta + \boldsymbol{\epsilon}_2, \: \textrm{com}\: \boldsymbol{\epsilon}_2 \sim \operatorname{MVN}_{P+1}\left(\boldsymbol{0}_{P+1}, \boldsymbol{\Sigma_2}\right),
+        \end{align*} onde $\boldsymbol{\epsilon}_1$ e $\boldsymbol{\epsilon}_2$ são erros \underline{independentes}.
+
+```{=tex}
+\begin{enumerate}
+        \item Determine $\boldsymbol{\Sigma}_1$ e $\boldsymbol{\Sigma}_2$;
+        \item Compute a verossimilhança marginal com respeito a $\sigma^2$:
+        $$\tilde{f}_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid \sigma^2) := \int_{\mathbb{R}^{P+1}} f_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid \boldsymbol{b}, \sigma^2)\pi_{B\mid S}(\boldsymbol{b} \mid \sigma^2)\,d\boldsymbol{b}.$$
+        \item Usando o item anterior, compute a verossimilhança marginal ou \textit{preditiva a priori}:
+           $$
+        m_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y}) := \int_{0}^\infty \tilde{f}_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid s)\pi_S(s)\,ds.
+        $$
+        \item Mostre $\bar{f}_{\boldsymbol{\tilde{X}}}(\boldsymbol{\beta} \mid \boldsymbol{y})$ e comente sobre como calcular, por exemplo, $\operatorname{Pr}( \beta_1 > a \mid \boldsymbol{y})$, para $a \in \mathbb{R}$.
+    \end{enumerate}
+```
+5.  Suponha que eu coletei uma nova matriz de desenho $m \times P$, $\boldsymbol{X}^\prime$ e quero prever o valor de $\boldsymbol{y}^\prime$ a partir do que eu aprendi usando $\boldsymbol{X}$ e $\boldsymbol{y}$. Compute $$\bar{p}_{\boldsymbol{\tilde{X}}, \boldsymbol{X^\prime}}(\boldsymbol{y}^\prime \mid \boldsymbol{y}) := \int_{\mathbb{R}^{P+1} \times \mathbb{R}_+} p_{\boldsymbol{\tilde{X}}}(\boldsymbol{b}, s \mid \boldsymbol{y})f_{\boldsymbol{X}^\prime}(\boldsymbol{y}^\prime \mid \boldsymbol{b}, s)\,d\boldsymbol{b}\,ds,$$ e esboce o seu gráfico para uma observação (linha de $\boldsymbol{X}^\prime$) de um conjunto de dados da sua escolha. Compare essas predições com a execução da mesma tarefa sob o ponto de vista frequentista/clássico.
+
+**Dica:** use um conjunto de dados que você conheça bem. Bons exemplos são os bancos de 'peso ao nascer' e 'kid score', que já analisamos em sala.
+
+### Resultados úteis
+
+Aqui estão enunciados alguns resultados úteis para o desenvolvimento das questões acima.
+Estes resultados são dados sem demonstração, que você está convidada a fazer.
+
+```{=tex}
+\begin{itemize}
+    \item \textbf{Completando o ``quadrado'' em múltiplas dimensões}: tome $\boldsymbol{A}$ matriz simétrica positiva definida $d \times d$ e $\boldsymbol{\alpha}, \boldsymbol{u} \in \mathbb{R}^d$.
+    Vale que:
+    \begin{equation}
+        \label{eq:ellipsoidal}
+        \boldsymbol{u}^T \boldsymbol{A} \boldsymbol{u} - 2\boldsymbol{\alpha}^T\boldsymbol{u} = (\boldsymbol{u}-\boldsymbol{A}^{-1}\boldsymbol{\alpha})^T \boldsymbol{A} (\boldsymbol{u}-\boldsymbol{A}^{-1}\boldsymbol{\alpha})- \boldsymbol{\alpha}^T \boldsymbol{A}^{-1} \boldsymbol{\alpha}.
+    \end{equation}
+    
+    \textbf{Dica:}  Expanda o produto e procure por cancelamentos de termos da forma $\boldsymbol{a}^T \boldsymbol{M}^{-1}\boldsymbol{a}$.
+    
+    \item \textbf{Sherman-Woodbury-Morrisson}: tome $\boldsymbol{A}$  matriz quadrada $d \times d$  \underline{inversível}, $\boldsymbol{B}$  matriz $k \times d$,  $\boldsymbol{C}$  matriz $d \times k$ e $\boldsymbol{D}$  matriz quadrada $k \times k$ inversível.
+    Então
+    $$
+    \left(\boldsymbol{A} + \boldsymbol{B}\boldsymbol{D}\boldsymbol{C}\right)^{-1} = \boldsymbol{A}^{-1} - \left(\boldsymbol{D}^{-1} + \boldsymbol{C}\boldsymbol{A}^{-1}\boldsymbol{B}\right)^{-1}\boldsymbol{C}\boldsymbol{A}^{-1}.
+    $$
+    \item \textbf{Determinantes}: tome $\boldsymbol{A}$, $\boldsymbol{B}$, $\boldsymbol{C}$ e $\boldsymbol{D}$ como antes.
+    Então,
+$$
+\operatorname{det} \left( \boldsymbol{A} + \boldsymbol{B}\boldsymbol{D}\boldsymbol{C}\right) = \operatorname{det}(\boldsymbol{A})\operatorname{\det}(\boldsymbol{D})\operatorname{det}\left(\boldsymbol{D}^{-1} + \boldsymbol{C}\boldsymbol{A}^{-1}\boldsymbol{B}\right).
+$$
+\end{itemize}
+```
+## Referências
+
+-   Banerjee, S. Bayesian Linear Model: Gory Details. Pubh7440 Notes.
+-   Gelman, A., Hill, J., & Vehtari, A. (2020). [Regression and other stories](https://avehtari.github.io/ROS-Examples/). Cambridge University Press.
