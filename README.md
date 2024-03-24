@@ -9,7 +9,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 **AVISO 2**: Os materiais listados neste repositório são **adicionais** à bibliografia recomendada (ver abaixo).
 
-**Monitores**: [Eduardo Adame](https://github.com/adamesalles) e [Ezequiel Braga](https://github.com/EzequielEBS)
+**Monitores**: [Eduardo Adame](https://github.com/adamesalles) e [Ezequiel Braga](https://github.com/EzequielEBS).
 
 ### Notas de aula
 
