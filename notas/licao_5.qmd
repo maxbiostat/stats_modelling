@@ -139,18 +139,17 @@ Considere o modelo discutido acima. Uma escolha interessante para auxiliar no en
             \boldsymbol{\beta} &= \boldsymbol{\mu}_\beta + \boldsymbol{\epsilon}_2, \: \textrm{com}\: \boldsymbol{\epsilon}_2 \sim \operatorname{MVN}_{P+1}\left(\boldsymbol{0}_{P+1}, \boldsymbol{\Sigma_2}\right),
         \end{align*} onde $\boldsymbol{\epsilon}_1$ e $\boldsymbol{\epsilon}_2$ são erros \underline{independentes}.
 
-```{=tex}
-\begin{enumerate}
-        \item Determine $\boldsymbol{\Sigma}_1$ e $\boldsymbol{\Sigma}_2$;
-        \item Compute a verossimilhança marginal com respeito a $\sigma^2$:
+\begin{itemize}
+        \item[4.1] Determine $\boldsymbol{\Sigma}_1$ e $\boldsymbol{\Sigma}_2$;
+        \item[4.2] Compute a verossimilhança marginal com respeito a $\sigma^2$:
         $$\tilde{f}_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid \sigma^2) := \int_{\mathbb{R}^{P+1}} f_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid \boldsymbol{b}, \sigma^2)\pi_{B\mid S}(\boldsymbol{b} \mid \sigma^2)\,d\boldsymbol{b}.$$
-        \item Usando o item anterior, compute a verossimilhança marginal ou \textit{preditiva a priori}:
+        \item[4.3] Usando o item anterior, compute a verossimilhança marginal ou \textit{preditiva a priori}:
            $$
         m_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y}) := \int_{0}^\infty \tilde{f}_{ \boldsymbol{\tilde{X}}}(\boldsymbol{y} \mid s)\pi_S(s)\,ds.
         $$
-        \item Mostre $\bar{f}_{\boldsymbol{\tilde{X}}}(\boldsymbol{\beta} \mid \boldsymbol{y})$ e comente sobre como calcular, por exemplo, $\operatorname{Pr}( \beta_1 > a \mid \boldsymbol{y})$, para $a \in \mathbb{R}$.
-    \end{enumerate}
-```
+        \item[4.4] Mostre $\bar{f}_{\boldsymbol{\tilde{X}}}(\boldsymbol{\beta} \mid \boldsymbol{y})$ e comente sobre como calcular, por exemplo, $\operatorname{Pr}( \beta_1 > a \mid \boldsymbol{y})$, para $a \in \mathbb{R}$.
+    \end{itemize}
+
 5.  Suponha que eu coletei uma nova matriz de desenho $m \times P$, $\boldsymbol{X}^\prime$ e quero prever o valor de $\boldsymbol{y}^\prime$ a partir do que eu aprendi usando $\boldsymbol{X}$ e $\boldsymbol{y}$. Compute $$\bar{p}_{\boldsymbol{\tilde{X}}, \boldsymbol{X^\prime}}(\boldsymbol{y}^\prime \mid \boldsymbol{y}) := \int_{\mathbb{R}^{P+1} \times \mathbb{R}_+} p_{\boldsymbol{\tilde{X}}}(\boldsymbol{b}, s \mid \boldsymbol{y})f_{\boldsymbol{X}^\prime}(\boldsymbol{y}^\prime \mid \boldsymbol{b}, s)\,d\boldsymbol{b}\,ds,$$ e esboce o seu gráfico para uma observação (linha de $\boldsymbol{X}^\prime$) de um conjunto de dados da sua escolha. Compare essas predições com a execução da mesma tarefa sob o ponto de vista frequentista/clássico.
 
 **Dica:** use um conjunto de dados que você conheça bem. Bons exemplos são os bancos de 'peso ao nascer' e 'kid score', que já analisamos em sala.
