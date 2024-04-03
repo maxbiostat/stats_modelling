@@ -37,6 +37,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
  - [[MN]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf) McCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models (Vol. 37). CRC Press.
    
 ### News
+- 2024-04-03: (**alguns**) Exercícios de revisão para a A1 [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/notas/revisao_A1_2024.pdf).
 
 ### Modelos, hipóteses e a lógica da ciência
 
