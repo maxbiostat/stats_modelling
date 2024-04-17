@@ -1,0 +1,49 @@
+\textcolor{red}{\textbf{Conceitos trabalhados}: regressão múltipla, coeficiente de determinação, máxima verossimilhança.}\\ 
+\textcolor{purple}{\textbf{Nível de dificuldade}: médio .}\\
+{\color{blue}{
+\textbf{Resolução:}
+Para o item (a), basta observar que $\boldsymbol{Y} \sim \text{MVN}(\boldsymbol{X} \boldsymbol{\beta}, \sigma^2 I)$. Assim, segue que
+
+\begin{align*}
+    L_{\boldsymbol{Y}} (\boldsymbol{y}; \boldsymbol{\beta}, \sigma^2) = - \frac{n}{2} \log(2 \pi \sigma^2) - \frac{1}{2 \sigma^2} (\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta})^\top (\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}).
+\end{align*}
+
+Como $\sigma^2$ também é um parâmetro, temos $P+1$ parâmetros no modelo. Além disso, sabemos que o MLE de $\sigma$ é dado por $\widehat{\sigma} = n^{-1} (\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta})^\top (\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta})$. Logo, substituindo na log-verossimilhança, temos
+
+\begin{align*}
+    \operatorname{AIC}_{\mathcal{M}_1} &= 2(P+1) +  n \log(2 \pi \widehat{\sigma}^2) + \frac{1}{\widehat{\sigma}^2} n \widehat{\sigma}^2, \\
+    &= 2(P+1) +  n [\log(2 \pi \widehat{\sigma}^2) + 1].
+\end{align*}
+
+Para o item (b), tome $\widehat{\sigma}_i^2$ o MLE de $\sigma^2$ do modelo $\mathcal{M}_i$. Assim, usando o resultado anterior, temos 
+
+\begin{align*}
+    \operatorname{AIC}_{\mathcal{M}_2} - \operatorname{AIC}_{\mathcal{M}_1} &= 2(P + Q + 1) +  n [\log(2 \pi \widehat{\sigma}_2^2) + 1] - 2(P + 1) -  n [\log(2 \pi \widehat{\sigma}_1^2) + 1], \\
+    &= 2Q + n \log \frac{\widehat{\sigma}_2^2}{\widehat{\sigma}_1^2}.
+\end{align*}
+
+Observando que $\widehat{\sigma}_i^2 = n^{-1} \text{SSE}_i$, a fórmula acima equivale a $2Q + n \log \frac{\text{SSE}_2}{\text{SSE}_1}$. Logo,
+
+\begin{align*}
+    \operatorname{AIC}_{\mathcal{M}_2} < \operatorname{AIC}_{\mathcal{M}_1} &\iff 2Q + n \log \frac{\text{SSE}_2}{\text{SSE}_1} < 0, \\
+    &\iff -\frac{2Q}{n} > \log \frac{\text{SSE}_2}{\text{SSE}_1}, \\
+    &\iff \exp \left[-\frac{2Q}{n} \right] > \frac{\text{SSE}_2}{\text{SSE}_1},
+\end{align*}
+
+onde a última equivalência decorre do fato de que a função $\exp$ é monotônica não decrescente.
+
+Para o último item, basta notar que $R_i^2 = 1 - \frac{\text{SSE}_i}{\text{SSE}_0}$. Desse modo, $R_2^2 - R_1^2 = \frac{\text{SSE}_1 - \text{SSE}_2}{\text{SSE}_0}$. Logo,
+
+\begin{align*}
+    R_2^2 - R_1^2 > \left(1 - \exp\left(-2Q/n\right)\right) \frac{\text{SSE}_1}{\text{SSE}_0} &\iff \frac{\text{SSE}_1 - \text{SSE}_2}{\text{SSE}_0} > \left(1 - \exp\left(-2Q/n\right)\right) \frac{\text{SSE}_1}{\text{SSE}_0}, \\
+    &\iff 1 - \frac{\text{SSE}_2}{\text{SSE}_1} > \left(1 - \exp\left(-2Q/n\right)\right), \\
+    &\iff \frac{\text{SSE}_2}{\text{SSE}_1} < \left(\exp\left(-2Q/n\right)\right).
+\end{align*}
+
+$\blacksquare$\\
+\textbf{Comentário:} Nesta questão estamos olhando indicadores de bondade do ajuste (\textit{goodness-of-fit}) no  modelo de regressão linear múltipla.
+O AIC foi pensando como uma medida da capacidade preditiva do modelo fora da amostra, e procura penalizar a verossimilhança máxima atingida pelo tamanho do modelo em questão. 
+Já o coeficiente de determinação procura medir a quantidade de variância presente na variável resposta (dependente) que é explicada pelo modelo comparado com um modelo que só tem o intercepto (i.e. um modelo i.i.d.).
+Nós estabelecemos uma equivalência entre a diferença nos coeficientes de determinação e o AIC de um modelo ser menor que o outro -- o que levaria à sua preferência.
+% Fica claro que os ranqueamentos induzidos por esses indicadores (AIC e $R^2$) não precisam coincidir.
+}}

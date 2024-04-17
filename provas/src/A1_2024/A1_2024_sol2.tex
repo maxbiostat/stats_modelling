@@ -1,0 +1,53 @@
+\textcolor{red}{\textbf{Conceitos trabalhados}: modelos lineares generalizados.}
+\textcolor{purple}{\textbf{Nível de dificuldade}: médio.}\\
+{\color{blue}{
+\textbf{Resolução:}
+Como visto em aula, uma variável aleatória $\boldsymbol{X}$ está na família exponencial canônica se sua p.d.f. é dada por 
+
+\begin{align*}
+    f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\eta}) = h(\boldsymbol{x}) \exp \left[ \boldsymbol{\eta}^\top T(\boldsymbol{x}) - A(\boldsymbol{\eta}) \right]. 
+\end{align*}
+
+Para a Bernoulli do modelo em (\ref{eq:bern}), temos
+
+\begin{align*}
+    f_{Y_i | X_i} (y; \theta(X_i)) &= \theta(X_i)^y (1 - \theta(X_i))^{1 - y}, \\
+    &= \exp \left[ y \log\theta(X_i) + (1 - y) \log (1 - \theta(X_i)) \right], \\
+    &= \exp \left[ y \log \frac{\theta(X_i)}{1 - \theta(X_i)} + \log(1 - \theta(X_i)) \right].
+\end{align*}
+
+Logo, segue que $h(y) = 1$, $\eta = \log \frac{\theta(X_i)}{1 - \theta(X_i)}$ e $A(\eta) = \log(1 + \exp(\eta))$. 
+
+Para o item (b), observe que usando as propriedades da função logit, temos 
+
+\begin{align*}
+    \theta^{\prime}(x) &= \frac{\partial}{\partial x} (1 + \exp(-(\beta_0 + \beta_1 x))^{-1}, \\
+    &= (1 + \exp(-\beta_0 - \beta_1 x))^{-2} \exp(-\beta_0 - \beta_1 x) \beta_1, \\
+    &= \theta(x) (1 - \theta(x)) \beta_1.
+\end{align*}
+
+Analogamente, para o modelo probit, $\theta^{\prime}(x) = \phi(\beta_0 + \beta_1 x) \beta_1$, onde $\phi$ é a p.d.f. da normal padrão. Para computar o valor de $a$, basta usar a premissa de que $\theta_{\text{logit}}^{\prime}(x^{\star}) \approx \theta_{\text{probit}}^{\prime }(x^{\star})$ e que $\theta(x^{\star}) = 1/2$, ou seja, $\beta_0 + \beta_1 x^{\star} = \Phi^{-1}(1/2) = 0$. Daí, segue que $\theta_{\text{probit}}^{\prime }(x^{\star}) = \phi(0) \beta_1^{\text{probit}} = 1/\sqrt{2\pi}\beta_1^{\text{probit}}$ e $\theta_{\text{logit}}^{\prime}(x^{\prime}) = 1/4 \beta_1^{\text{logit}}$. Logo, 
+
+\begin{align*}
+    1/4 \beta_1^{\text{logit}} \approx 1/\sqrt{2\pi} \beta_1^{\text{probit}},
+\end{align*}
+
+isto é, $a = 2 \sqrt{\frac{2}{\pi}} \approx 1.6$.
+Se olharmos no \textit{output}, temos $0.017837/0.009833 \approx 1.81$, o que não está longe do valor teórico.
+Para computar $x^{\star \star}$, basta calcular
+
+\begin{align*}
+    \theta(x^{\star \star}) &= \frac{1}{1 + \exp(\beta_0 + \beta_1 x^{\star \star})} = 0.8, \\
+    \theta(x^{\star \star}) &= \Phi(\beta_0 + \beta_1 x^{\star \star}) = 0.8.
+\end{align*}
+
+Isso nos dá $x_{\text{logit}}^{\star \star} = \frac{-\log(4) - \beta_0}{\beta_1}$ e $x_{\text{probit}}^{\star \star} = \frac{\Phi^{-1}(0.8) - \beta_0}{\beta_1}$.
+
+$\blacksquare$\\
+\textbf{Comentário:}
+Nesta questão vimos como um GLM para uma variável resposta binária pode ser construído com diferentes funções de ligação.
+Além disso, nos aproveitamos do fato de que as curvas são parecidas em um particular ponto para obter uma razão aproximada entre os coeficientes "angulares" dos dois modelos.
+Então da próxima vez que você vir um coeficiente estimado sob um modelo \textit{logit} e se perguntar "Qual seria a estimativa sob um modelo \textit{probit}?", você já sabe como converter aproximadamente.
+Vimos como utilizar o GLM ajustado para responder a perguntas sobre que dose de \textit{pamonha da Palmirinha} \textsuperscript{TM} causa  dor de barriga em  80\% da amostra? 
+}
+}

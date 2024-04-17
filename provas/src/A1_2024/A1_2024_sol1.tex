@@ -1,0 +1,43 @@
+\textcolor{red}{\textbf{Conceitos trabalhados}: regressão linear,  estimação, interação.}
+\textcolor{purple}{\textbf{Nível de dificuldade}: fácil.}\\
+{\color{blue}
+\textbf{Resolução:} 
+
+Para responder o item (a), sabemos que em um problema de regressão linear simples,
+
+\begin{align*}
+    \widehat{\beta_0} = \bar y - \widehat{\beta_1} \bar x, \\
+    \widehat{\beta_1} = \frac{\sum_{i=1}^n (y_i - \bar y) (x_i - \bar x)}{\sum_{i=1}^n (x_i - \bar x)^2}.
+\end{align*}
+
+Seja $X_i^c = X_i - \bar X_n$. Assim, é fácil notar que $\bar x_n^c = 0$ e, usando a fórmula anterior, segue que $\widehat{\alpha_0} = \bar y$ e $\widehat{\beta_1} = \widehat{\alpha_1}$. Isso significa que uma mudança de $1$ em $X_i$ ou $X_i^c$ provoca o mesmo efeito em $Y$, em média.
+
+Para o modelo do item (b), observe que $\beta_0$ representa o efeito sobre $Y_i$ marginalmente, isto é, quando as outras covariáveis são nulas. Para os outros coeficientes, é importante considerar a seguinte reescrita do modelo:
+
+\begin{align*}
+    Y_i = \beta_0 + (\beta_1 + \beta_3 X_{2,i}) X_{1,i} + \beta_2 X_{2,i} + \varepsilon_i
+\end{align*}
+
+Fica mais fácil perceber que $\beta_2$ representa o efeito de $X_{1,i}$ sobre $Y_i$ quando $X_{2,i} = 0$. Analogamente, $\beta_2$ mede o efeito de $X_{2,i}$ sobre $Y_i$ quando $X_{1,i} = 0$. Por fim, $\beta_3$ mede o efeito da interação de $X_{1,i} X_{2,i}$ sobre $Y_i$. Ao centralizar as covariáveis em torno da média, observe agora que a função dos coeficientes é a mesma, mas representam efeitos diferentes: $\beta^{\star}_1$ representa o efeito de $X_{1,i}^c$ sobre $Y_i$ quando $X_{2,i}^c = 0$, ou seja, quando $X_{2,i} = m_j$. Porém, observe também que é equivalente dizer que $\beta^{\star}_1$ representa o efeito de $X_{1,i}^c$ sobre $Y_i$ quando $X_{2,i}^c = \bar X_{2,i}$, já que $\bar X_{2,i} = 0$. A mesma ideia segue para os demais coeficientes.
+
+Para responder o último item, vale reescrever o modelo da seguinte forma:
+
+\begin{align*}
+    Y_i &= \beta^{\star}_0 + \beta^{\star}_1 (X_{1, i} - m_1) + \beta^{\star}_2 (X_{2, i} - m_2) + \beta^{\star}_3 (X_{1, i} - m_1) (X_{2, i} - m_2) + \varepsilon_i, \\
+    &= (\beta^{\star}_0 - \beta^{\star}_1 m_1 - \beta^{\star}_2 m_2 + \beta^{\star}_3 m_1 m_2) + (\beta^{\star}_1 - \beta^{\star}_3 m_2) X_{1,i} +  \\
+    &+ (\beta^{\star}_2 - \beta^{\star}_3 m_1) X_{2,i} + \beta^{\star}_3 X_{1,i} X_{2,i}
+\end{align*}
+
+Isto resulta no seguinte mapeamento:
+
+\begin{align*}
+    \beta_0 &= \beta^{\star}_0 - \beta^{\star}_1 m_1 - \beta^{\star}_2 m_2 + \beta^{\star}_3 m_1 m_2, \\
+    \beta_1 &= \beta^{\star}_1 - \beta^{\star}_3 m_2, \\
+    \beta_2 &= \beta^{\star}_2 - \beta^{\star}_3 m_1, \\
+    \beta_3 &= \beta^{\star}_3.
+\end{align*}
+
+$\blacksquare$\\
+\textbf{Comentário:}Nesta questão bem simples, vimos o alguns resultados básicos de regressão linear, além de cobrar a interpretação dos coeficientes no caso centrado, que foi discutido em aula. 
+Além disso, descobrimos como mapear os coeficientes entre um modelo onde as covariáveis estão centradas e um em que não estão.
+Descobrimos assim que o coeficiente do termo de interação não muda.} 
