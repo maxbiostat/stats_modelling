@@ -59,7 +59,7 @@ Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com aborda
 - [Notas](https://tminka.github.io/papers/minka-linear.pdf) de Thomas Minka.  
 
 ### Família exponencial
-- Duane Rich's videos: [part 1](https://youtu.be/xwM9XcnQ4Us) and [part 2](https://youtu.be/9EgkOn5mWcc) 
+- Esses dois videos (em inglês) do canal _Mutual Information_ de Duane Rich são bem interessantes: [parte 1](https://youtu.be/xwM9XcnQ4Us) and [parte 2](https://youtu.be/9EgkOn5mWcc) 
 
 ### Modelos lineares generalizados 
 - Mccullagh & Nelder (1989) "Generalised linear models". [[PDF]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf).
