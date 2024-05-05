@@ -17,7 +17,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 - Lição 2: [Modelos, hipóteses e a lógica da ciência](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_2.pdf).
 - Lição 3: [Regressão linear: o melhor modelo ruim que você já viu](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_3.pdf).
 - Lição 4: [Regressão linear múltipla: _the madness continues_](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_4.pdf).
-- Lição 5: [Regressão linear múltipla bayesiana: 🎶_girl put your bayesian hat on_🎶:](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_5.pdf).
+- Lição 5: [Regressão linear múltipla bayesiana: 🎶_girl put your Bayesian hat on_🎶:](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_5.pdf).
 
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
