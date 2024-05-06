@@ -34,6 +34,18 @@ Com a ajuda de seu fiel escudeiro, Guinho, ela pretende utilizar esses dados par
 Ajude Palmirinha e Guinho nesta tarefa.
 Lembre-se de empregar ferramentas de vizualização de dados e de avaliação de modelos que façam sentido para o tipo de dado disponível.
 
+# Análise dirigida
+
+1. Vizualize a relação entre cada covariável e a variável-resposta.
+Se preciso, discretize as covariáveis contínuas para obter sumários mais suaves.
+2. Vizualize a relação entre as covariáveis.
+3. Ajuste um modelo de regressão logística (com intercepto) para cada covariável e compare os resultados.
+Se estiver usando o R, explore a função `confint()`. 
+4. Agora desenvolva modelos mais complexos: que covariáveis você incluiria em um modelo conjunto? Porquê?
+5. Considere a necessidade de interações.
+6. Analise o poder preditivo de cada modelo proposto -- considere validação cruzada e indicadores como AIC.
+
+
 [^1]: Palmira Nery da Silva Onofre (Bauru, 29 de junho de 1931 – São Paulo, 7 de maio de 2023) foi uma grande apresentadora de programas culinários. No _StatVerso_ da EMAp, é também uma grande estatística _old school_,  com treinamento clássico **e** bayesiano!
 
 
