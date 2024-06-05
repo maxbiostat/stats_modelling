@@ -56,7 +56,8 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com abordagens levemente diferentes.
 
 - [Notas](https://ams206-winter19-01.courses.soe.ucsc.edu/system/files/attachments/banerjee-bayesian-linear-model-details.pdf) do grande [Sudipto Banerjee](http://sudipto.bol.ucla.edu/);
-- [Notas](https://tminka.github.io/papers/minka-linear.pdf) de Thomas Minka.  
+- [Notas](https://tminka.github.io/papers/minka-linear.pdf) de Thomas Minka.
+- [Monografia](https://arxiv.org/pdf/2406.01819v1) de J. Andrés Christen.
 
 ### Família exponencial
 - Esses dois videos (em inglês) do canal _Mutual Information_ de Duane Rich são bem interessantes: [parte 1](https://youtu.be/xwM9XcnQ4Us) and [parte 2](https://youtu.be/9EgkOn5mWcc) 
