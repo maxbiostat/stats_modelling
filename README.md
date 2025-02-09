@@ -27,12 +27,13 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 ### Bibliografia
 
+ - [[DB]](https://books.google.com.br/books?hl=en&lr=&id=AS_3DwAAQBAJ&oi=fnd&pg=PP1&ots=JbfEyj69P9&sig=XFYw6n60M1woXu5BmO047WujoG8&redir_esc=y#v=onepage&q&f=false) Dobson, A. J., & Barnett, A. G. (2018). An introduction to generalized linear models. CRC press.
 - [[ROS]](https://avehtari.github.io/ROS-Examples/) Gelman, A., Hill, J., & Vehtari, A. (2020). Regression and other stories. Cambridge University Press.
 - [[SR]](https://xcelab.net/rm/statistical-rethinking/) McElreath, R. (2020). Statistical rethinking: A Bayesian course with examples in R and Stan. Chapman and Hall/CRC.
 - [[GH]](http://www.stat.columbia.edu/~gelman/arm/) Gelman, A., & Hill, J. (2006). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
 
 #### Bibliografia auxiliar
- - [[DB]](https://books.google.com.br/books?hl=en&lr=&id=AS_3DwAAQBAJ&oi=fnd&pg=PP1&ots=JbfEyj69P9&sig=XFYw6n60M1woXu5BmO047WujoG8&redir_esc=y#v=onepage&q&f=false) Dobson, A. J., & Barnett, A. G. (2018). An introduction to generalized linear models. CRC press.
+
  - [[FH]](https://link.springer.com/book/10.1007/978-3-662-63882-8) Fahrmeir, L., Kneib, T., Lang, S., & Marx, B. (2013). Regression: Models, Methods and Applications. Springer Science & Business Media.
  - [[MN]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf) McCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models (Vol. 37). CRC Press.
    
