@@ -52,7 +52,7 @@ Se estiver usando o R, explore a função `confint()`.
 # Exercícios de fixação
 
 1. Suponha que $Z_i \sim \operatorname{Poisson}(\mu_i)$ para $i = 1, 2, \ldots, n$ são amostras independentes.
-Suponha ainda que $E[Z_i] = \mu0_i = \exp(\boldsymbol{X}\boldsymbol{\beta})$.
+Suponha ainda que $E[Z_i] = \mu_i = \exp(\boldsymbol{X}\boldsymbol{\beta})$.
 Defina $Y_i = \mathbb{I}(Z_i > 0)$ e defina $\theta_i = \pr(Y_i = 1)$.
 Mostre que:
    a. $Y_i \sim \operatorname{Binomial}(\theta_i)$;

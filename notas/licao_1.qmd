@@ -36,7 +36,7 @@ hist(conc, probability = TRUE,
      xlab = "X")
 ```
 
-Será que os dados apresentam alguma tendência em relação ao número da batelada (índice da observação)
+Será que os dados apresentam alguma tendência em relação ao número da batelada (índice da observação)? 
 
 ```{r}
 plot(conc, type = "b", lwd = 2)
@@ -53,7 +53,8 @@ sd(conc)
 
 ## Inferência
 
-Vamos raciocinar sobre algumas quantidades, a saber a média ($\sM$) e a mediana ($\hat{M}$) amostrais. Em particular, vamos pensar sobre como construir intervalos de confiança para essas quantidades.
+Vamos raciocinar sobre algumas quantidades, a saber a média ($\sM$) e a mediana ($\hat{M}$) amostrais.
+Em particular, vamos pensar sobre como construir intervalos de confiança para essas quantidades.
 
 ```{r computa_mediana}
 ## Ver exercícios ao final
