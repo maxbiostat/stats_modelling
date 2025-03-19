@@ -34,7 +34,7 @@ A construção de modelos matemáticos e estatísticos é fundamental para a Ci�
         N & \sim \operatorname{Binomial-Negativa}(\mu, \phi),  \\
         X_i \mid N & \sim \operatorname{Binomial}(N, \theta). 
         \end{align} Como isso mudaria suas respostas aos itens a-d?
-    f.  Suponha agora que o processo de observação fosse: "Se pelo menos um indivíduo do cluster Y_i é observado, então todos são observados". Como você escreveria $\pr(X_1 = x_1, \ldots, X_n = x_n)$?
+    f.  Suponha agora que o processo de observação fosse: "Se pelo menos um indivíduo do cluster $Y_i$ é observado, então todos são observados". Como você escreveria $\pr(X_1 = x_1, \ldots, X_n = x_n)$?
 
 [^1]: Ver também [estas](https://www.johndcook.com/negative_binomial.pdf) notas do grande John Cook.
 
