@@ -38,7 +38,7 @@ $$
 ```{=tex}
 \begin{align}
 \hat{\boldsymbol{\beta}} &= \left(\boldsymbol{X}^T\boldsymbol{X}\right)^{-1}\boldsymbol{X}^T\boldsymbol{y},\\
-\hat{\sigma^2} &= \frac{1}{n-2} \left(\boldsymbol{y}-\boldsymbol{X}^T\boldsymbol{\beta}\right)^T\left(\boldsymbol{y}-\boldsymbol{X}^T\boldsymbol{\beta}\right).
+\hat{\sigma^2} &= \frac{1}{n} \left(\boldsymbol{y}-\boldsymbol{X}\hat{\boldsymbol{\beta}}\right)^T\left(\boldsymbol{y}-\boldsymbol{X}\hat{\boldsymbol{\beta}}\right).
 \end{align}
 ```
 Nos exercícios abaixo, você vai mostrar que estes estimadores têm boas propriedades, como não-viesamento. Em particular, \begin{equation}
@@ -226,7 +226,7 @@ Nosso modelo (um pouco menos geral que o dado acima) é \begin{equation*}
 
 2.  Mostre que $\boldsymbol{\hat{\beta}}$ é não-viesado;
 
-3.  Considere um outro estimador \underline{não-viesado} de $\boldsymbol{\beta}$: $\boldsymbol{\tilde{\beta}} = \boldsymbol{M}\boldsymbol{y}$, onde $$\boldsymbol{M} = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T + \boldsymbol{D},$$ e $\boldsymbol{D}$ é uma matriz $P \times n$ cujas entradas são não-zero. Mostre que $\boldsymbol{R} := \operatorname{Var}(\boldsymbol{\tilde{\beta}}) - \operatorname{Var}(\boldsymbol{\hat{\beta}})$ é positiva-definida.
+3.  Considere um outro estimador \underline{não-viesado} de $\boldsymbol{\beta}$: $\boldsymbol{\tilde{\beta}} = \boldsymbol{M}\boldsymbol{y}$, onde $$\boldsymbol{M} = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T + \boldsymbol{D},$$ e $\boldsymbol{D}$ é uma matriz $P \times n$ cujas entradas são não-zero. Mostre que $\boldsymbol{R} := \operatorname{Var}(\boldsymbol{\tilde{\beta}}) - \operatorname{Var}(\boldsymbol{\hat{\beta}})$ é positiva semi-definida.
 
     **Dica:** Compute $E[\boldsymbol{\tilde{\beta}}]$ e considere o que deve valer para $\boldsymbol{D}$ sob a premissa de que $\boldsymbol{\tilde{\beta}}$ é não-viesado.
 
