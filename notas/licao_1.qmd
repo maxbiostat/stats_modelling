@@ -177,11 +177,11 @@ para obter uma pdf aproximada usando como amostra um conjunto de v.a.s. normal p
 
 5.  (**Desafio**) A discussão dos itens anteriores supõe amostras grandes, para as quais faça sentido falar em teorema central do limite. Agora vamos estudar uma maneira de construir um intervalo de confiança para a mediana que seja válido para amostras finitas. Suponha uma amostra aleatória de tamanho $n$ ímpar de uma distribuição $F$ e considere sua versão ordenada: $$
     X_{(1)}, X_{(2)}, \ldots, X_{\left(\frac{n + 1}{2}\right)}, \ldots, X_{(n)}.
-    $$ Seja $\tilde{X}$ a mediana de $F$, i.e., $F(\tilde{X}) = \pr(X \leq \tilde{X}) = 1/2$. Defina $\pi_m = \pr(X \leq \tilde{X})$, onde $X$ tem f.d.a. $F$.
+    $$ Seja $\tilde{X}$ a mediana de $F$, i.e., $\tilde{X} = \inf\{ x : F(x) \ge 1/2 \}$. Defina $\pi_m = \pr(X \leq \tilde{X})$, onde $X$ tem f.d.a. $F$.
     a.  Mostre que $$
          \pr(X_{(i)} > \tilde{X}) = \sum_{j=0}^{i-1} \binom{n}{j} \pi_m^{j} \left(1 - \pi_m\right)^{n-j}.
          $$
-    b.  Argumente que $\pi_m \geq 1/2$. Em seguida, escreva $\pi_m = 1/2 + \varepsilon$ e mostre que para $2(j-1) \leq n$ vale que $$
+    b.  Argumente que $\pi_m \geq 1/2$. Em seguida, escreva $\pi_m = 1/2 + \varepsilon$ e mostre que para $2j \leq n$ vale que $$
          \pi_m^{j} \left(1 - \pi_m\right)^{n-j} \leq 2^{-n},
           $$ e que, então, $$
         \pr(X_{(i)} > \tilde{X}) \leq 2^{-n}\sum_{j=0}^{i-1}\binom{n}{j}.
