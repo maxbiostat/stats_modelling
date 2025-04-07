@@ -12,14 +12,67 @@ format:
 \def\pr{\operatorname{Pr}}
 \def\vr{\operatorname{Var}}
 \def\cv{\operatorname{Cov}}
+\def\bY{\boldsymbol{Y}}
+\def\bX{\boldsymbol{X}}
+\def\by{\boldsymbol{y}}
+\def\bx{\boldsymbol{x}}
+\def\bb{\boldsymbol{\beta}}
 \def\sM{\bar{X}_n}
 \def\indep{\perp \!\!\! \perp}
+\def\bth{\boldsymbol{\theta}}
+\def\bmu{\boldsymbol{\mu}}
 ```
 :::
 
 ## Motivação
 
 Como vimos, os modelos lineares generalizados (GLMs) são ferramentas que permitem estender os modelos de regressão para dados em vários domínios, como dados estritamente positivos, proporções e dados composicionais e, como vamos ver aqui, dados binários, onde $Y_i \in \{0, 1\}$.
+
+Vimos na lição anterior como ajustar esses modelos e agora vamos aprender a interpretar e avaliar os resultados obtidos para um problema de classificação.
+
+## Métricas de avaliação
+
+Para avaliar a qualidade de um modelo de classificação, é comum utilizar métricas como a matriz de confusão, acurácia, a sensibilidade, a especificidade, a precisão, o recall e a F1-score. Vamos definir cada uma delas:
+
+- **Matriz de confusão**: é uma tabela que mostra a frequência de classificações corretas e incorretas feitas pelo modelo. A matriz de confusão para um problema de classificação binária é dada por:
+
+\begin{tabular}{|c|c|c|}
+\hline
+& \textbf{Predito 0} & \textbf{Predito 1} \\
+\hline
+\textbf{Real 0} & Verdadeiro Negativo (VN) & Falso Positivo (FP) \\
+\hline
+\textbf{Real 1} & Falso Negativo (FN) & Verdadeiro Positivo (VP) \\
+\hline
+\end{tabular}
+
+- **Acurácia**: é a proporção de classificações corretas feitas pelo modelo. É dada por $\frac{VP + VN}{VP + VN + FP + FN}$.
+
+- **Sensibilidade (Recall)**: é a proporção de verdadeiros positivos em relação ao total de positivos reais. É dada por $\frac{VP}{VP + FN}$.
+
+- **Especificidade**: é a proporção de verdadeiros negativos em relação ao total de negativos reais. É dada por $\frac{VN}{VN + FP}$.
+
+- **Precisão**: é a proporção de verdadeiros positivos em relação ao total de positivos preditos. É dada por $\frac{VP}{VP + FP}$.
+
+- **Recall**: é a proporção de verdadeiros positivos em relação ao total de positivos reais. É dada por $\frac{VP}{VP + FN}$.
+
+- **F1-score**: é a média harmônica entre precisão e recall. É dada por $2 \times \frac{\text{Precisão} \times \text{Recall}}{\text{Precisão} + \text{Recall}}$.
+
+Outra métrica comum é a curva ROC (Receiver Operating Characteristic), que é um gráfico da sensibilidade em função da especificidade para diferentes pontos de corte. A área sob a curva ROC (AUC) é uma medida da qualidade do modelo, onde um valor de 1 indica um modelo perfeito e um valor de 0.5 indica um modelo aleatório.
+
+## Interpretação dos coeficientes
+
+### Regra da divisão por $4$
+
+A curva logística é mais íngrime no ponto médio entre 0 e 1, ou seja, quando $\bx_i^T\bb = 0$. Assim, a inclinação é maximizada neste ponto e atinge o valor de $\beta_j/4$. Logo, a esse valor corresponde a mudança máxima em $\pr(Y_i = 1)$ para uma mudança unitária em $x_{ij}$.
+
+### Odds ratio
+
+Outra maneira de interpretar os coeficientes de um modelo logístico é por meio de _odds_. Se $\pr(Y_i = 1 \mid \bX) = p_i$, então a _odds_ é dada por $\frac{p_i}{1 - p_i}$. É possível mostrar que esse valor é dado por $\exp(\bx_i^T\bb)$. Além disso, o _odds ratio_ é a razão entre duas _odds_. Logo, se quisermos saber o efeito de mudar em uma unidade a variável $x_{ij}$ na _odds_ de $Y_i = 1$, basta calcular
+
+$$
+\pr(Y_i = 1 \mid X_{ij} = x_{ij} + 1) / \pr(Y_i = 1 \mid X_{ij} = x_{ij}) = \exp(\beta_j).
+$$
 
 ## Em busca da pamonha perfeita
 
