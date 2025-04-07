@@ -17,9 +17,14 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 - Lição 4: [Regressão linear múltipla: _the madness continues_](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_4.pdf).
 - Lição 5: [Regressão linear múltipla bayesiana: 🎶_girl put your Bayesian hat on_🎶:](https://github.com/maxbiostat/stats_modelling/blob/master/notas/licao_5.pdf).
 
+### News
+
+- [Exercícios de revisão para a A1 2025](https://github.com/maxbiostat/stats_modelling/blob/master/notas/revisao_A1_2025.pdf)
+
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
 - [A1 2024](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2024_solucoes.pdf).
+- [AS 2024](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/PS_ModEst_BSc_2024_solucoes.pdf).
 
 ### Portifólio de trabalhos finais (A2):
 - [2023](https://github.com/maxbiostat/A2_StatMod_2023).
