@@ -1,0 +1,263 @@
+---
+title: "Modelos lineares generalizados: linearidade com esteróides"
+author: ""
+format:
+  pdf:
+    mathspec: true
+    fig-pos: H
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\bY{\boldsymbol{Y}}
+\def\bX{\boldsymbol{X}}
+\def\by{\boldsymbol{y}}
+\def\bx{\boldsymbol{x}}
+\def\bb{\boldsymbol{\beta}}
+\def\sM{\bar{X}_n}
+\def\indep{\perp \!\!\! \perp}
+\def\bth{\boldsymbol{\theta}}
+\def\bmu{\boldsymbol{\mu}}
+```
+:::
+
+## Motivação
+
+Como vimos até aqui, o modelo linear é bastante flexível e poderoso.
+No entanto, o modelo normal tem uma limitação importante: o suporte da distribuição dos dados, que fica limitado a $\mathbb{R}$.
+Como muitos fenômenos de interesse podem ser modelados como variáveis aleatórias com suporte restrito (e.g. $(0, 1)$ ou $\mathbb{R}_{+}$) e também discreto, como é o caso do modelos de contagem. 
+
+A solução se encontra na formulação dos chamados **modelos lineares generalizados** (_generalised linear models_, GLM), em que o preditor linear é conectado à esperança condicional por meio de uma função especial, chamada função de ligação.
+
+# A estrutura básica de um GLM
+
+Sejam $\bY = (Y_1, \ldots, Y_n)$ e $\bX$ o vetor de variáveis dependentes e a matriz ($n \times P$) de desenho, respectivamente. 
+Defina $\mu_i(\bX) = \mu_i := E[Y_i \mid \bX]$ como a média condicional de cada $Y_i$.
+Em um GLM, escrevemos 
+\begin{equation*}
+\label{eq:glm_I}
+g(\bmu) = \bX\bb,
+\end{equation*}
+onde $g(\cdot)$ é uma função monotônica e diferenciável, chamada de **função de ligação**.
+Além disso, suponha que cada $Y_i$ tenha distribuição da família exponencial com parâmetro canônico $\theta_i$, isto é,
+\begin{equation*}
+\label{eq:exp_fam_I}
+f(y_i ; \theta_i) = \exp\left\{y_i \theta_i - b(\theta_i) + c(y_i) \right\}.
+\end{equation*}
+Logo,
+\begin{align*}
+\label{eq:exp_fam_II}
+f(\by ; \bth) &= \prod_{i=1}^{n} f(y_i ; \theta_i), \\
+&= \exp\left\{\sum_{i=1}^{n} y_i \theta_i - \sum_{i=1}^{n} b(\theta_i) + \sum_{i=1}^{n} c(y_i) \right\}.
+\end{align*}
+
+Suponha que $g$ é a função de ligação canônica, isto é,  que $g(\mu_i) = \bx_i^T \bb = \theta_i$. Então, a log-verossimilhança para $\bb$ é
+
+\begin{align*}
+\ell(\bb) &= \sum_{i=1}^{n} y_i \theta_i - \sum_{i=1}^{n} b(\theta_i) + \sum_{i=1}^{n} c(y_i), \\
+&= \sum_{i=1}^{n} y_i \bx_i^T\bb - \sum_{i=1}^{n} b(\bx_i^T\bb) + \sum_{i=1}^{n} c(y_i).
+\end{align*}
+
+Em notação matricial, temos
+
+\begin{align*}
+\ell(\bb) &= \by^T\bX\bb - \boldsymbol{1}^T b(\bX\bb) + \boldsymbol{1}^T c(\by),
+\end{align*}
+
+onde $\boldsymbol{1}$ é um vetor de uns de dimensão $n$. Logo,
+
+\begin{align*}
+\frac{\partial \ell(\bb)}{\partial \beta_k} &= \sum_{i=1}^{n} y_i x_{ik} - \sum_{i=1}^{n} x_{ik} b'(\bx_i^T\bb), \\
+\frac{\partial^2 \ell(\bb)}{\partial \beta_k \partial \beta_l} &= -\sum_{i=1}^{n} x_{ik} x_{il} b''(\bx_i^T\bb),
+\end{align*}
+
+ou seja,
+
+\begin{align*}
+\nabla \ell(\bb) &= \bX^T(\by - b'(\bX\bb)), \\
+\nabla^2 \ell(\bb) &= -\bX^T \text{diag}\left\{b''(\bX\bb)\right\} \bX.
+\end{align*}
+
+# Ajustando um GLM: métodos numéricos
+
+<!-- Parte da discussão aqui está baseada [neste](https://andrmenezes.github.io/post/2023-01-30-apts-statistical-computing-assessment/) excelente post do [André Menezes](https://github.com/AndrMenezes). -->
+
+
+Para estimar $\bb$ por máxima verossimilhança, podemos usar o método de Newton-Raphson ou o método de Fisher scoring. Dado um valor inicial $\bb^{(0)}$, a iteração $t$ do primeiro é dada por
+
+\begin{align*}
+\bb^{(t+1)} &= \bb^{(t)} - \left[\nabla^2 \ell(\bb^{(t)})\right]^{-1} \nabla \ell(\bb^{(t)}),
+\end{align*}
+
+enquanto a iteração $t$ do segundo é dada por
+
+\begin{align*}
+\bb^{(t+1)} &= \bb^{(t)} + \left[\mathcal{I}(\bb^{(t)})\right]^{-1} \nabla \ell(\bb^{(t)}),
+\end{align*}
+
+onde $\mathcal{I}(\bb^{(t)})$ é a informação de Fisher. Se a função de ligação for canônica, então os métodos são equivalentes.
+
+Para maior eficiência computacional, podemos definir $\bX_t = \text{diag}\left\{b''(\bX\bb^{(t)})\right\}^{1/2} \bX$ e obter a decomposição QR, $\bX_t = Q_t R_t$. Definindo $w_t = b''(\bX\bb^{(t)})$ e $z_t = \by - b'(\bX\bb^{(t)})$, é possível mostrar que 
+
+\begin{align*}
+\bb^{(t+1)} &= \bb^{(t)} + R_t^{-1} Q_t^T \left\langle \text{diag}\{w_t\}^{-1/2}, z_t \right\rangle,
+\end{align*}
+
+o que resulta no seguinte sistema linear:
+
+\begin{align*}
+R_t (\bb^{(t+1)} - \bb^{(t)}) &= Q_t^T \left\langle \text{diag}\{w_t\}^{-1/2}, z_t \right\rangle.
+\end{align*}
+
+# Exemplo: regressão Poisson
+
+Considere $Y_i \mid \bX \sim \text{Poisson}(\theta_i)$. Primeiro, vamos expressar a f.d.p. em termos da família exponencial. Temos
+
+\begin{align*}
+f(y ; \theta) &= \frac{\exp\{-\theta\} \theta^{y}}{y!}, \\
+&= \exp\left\{y \log(\theta) - \theta - \log(y!)\right\},
+\end{align*}
+
+ou seja, o parâmetro canônico é $\eta = \log(\theta)$, $b(\eta) = \exp(\eta)$ e $c(y) = -\log(y!)$. Lembre-se que a função de ligação canônica é aquela que conecta o parâmetro canônico $\eta_i$ com $\mu_i$ e $\bx_i^T \beta$ de modo que $\eta_i = \bx_i^T \beta$. Logo, como $\mu_i = \exp(\eta_i)$, temos que $g(t) = \log(t)$ e, portanto, $\mu_i = \exp(\bx_i^T \beta)$. 
+
+Agora vamos obter a função score e a Hessiana, necessárias para a estimação dos parâmetros. Pelos cálculos anteriores, a função score é dada por
+
+\begin{align*}
+\nabla \ell(\bb) &= \bX^T(\by - \exp(\bX\bb))
+\end{align*}
+
+e a Hessiana,
+
+\begin{align*}
+\nabla^2 \ell(\bb) &= -\bX^T \text{diag}\left\{\exp(\bX\bb)\right\} \bX.
+\end{align*}
+
+Por fim, basta usar o método de Newton-Raphson:
+
+\begin{align*}
+\bb^{(t+1)} &= \bb^{(t)} + \left[\bX^T \text{diag}\left\{\exp(\bX\bb^{(t)})\right\} \bX\right]^{-1} \bX^T(\by - \exp(\bX\bb^{(t)})),
+\end{align*}
+
+o que leva ao seguinte sistema, como visto anteriormente:
+
+\begin{align*}
+R_t (\bb^{(t+1)} - \bb^{(t)}) &= Q_t^T \left\langle \exp\left( -\frac{1}{2} \bX\bb^{(t)} \right), \by - \exp(\bX\bb^{(t)}) \right\rangle.
+\end{align*}
+
+Para fazer isso no R, vamos implmentar uma função que ajusta um modelo GLM para distribuições com um parâmetro:
+
+```{r}
+# função para ajustar um GLM para distribuições com um parâmetro
+glm1 <- function(y, X, bp, bpp) {
+  # pega o número de variáveis
+  p <- NCOL(X)
+  # inicializa o vetor de parâmetros
+  beta_k <- rep(0, p)
+  # inicializa a lista de parâmetros
+  list_beta <- list()
+  # critério de parada
+  stop_error <- 1e-6
+  # inicializa o contador
+  j <- 1L
+  # inicializa o erro
+  current_error <- 1
+  
+  while (current_error > stop_error) {
+    # define variaveis auxiliares
+    eta_k <- X %*% beta_k
+    z_k <- y - bp(eta_k)
+    w_k <- bpp(eta_k)
+    X_k <- drop(w_k^(1/2)) * X
+    wz_k <- w_k^(-1/2) * z_k
+    # calcula a decomposição QR
+    qr_out <- qr(X_k)
+    Q_k <- qr.Q(qr_out)
+    R_k <- qr.R(qr_out)
+    # calcula a solução do sistema
+    a_k <- backsolve(R_k, crossprod(Q_k, wz_k))
+    
+    # guarda o valor de beta_k
+    list_beta[[j]] <- a_k + beta_k
+    # atualiza o erro
+    current_error <- max(abs(beta_k - list_beta[[j]]))
+    # atualiza o valor de beta_k
+    beta_k <- list_beta[[j]]
+    # atualiza o contador
+    j <- j + 1L
+  }
+  
+  do.call(cbind, list_beta)
+}
+```
+
+Agora, vamos construir uma função para o GLM Poisson:
+
+```{r}
+# função para ajustar um GLM Poisson
+poiReg <- function(formula, data) {
+  # constroi o modelo
+  mf <- model.frame(formula, data = data)
+  # pega a variável resposta
+  y <- model.response(mf)
+  # pega a matriz de desenho
+  X <- model.matrix(formula, mf)
+  # define a derivada de b(eta)
+  bp <- function(theta) exp(theta)
+  # define a segunda derivada de b(eta)
+  bpp <- function(theta) exp(theta)
+  glm1(y, X, bp, bpp)
+}
+```
+
+Para checar as funções, vamos simular dados::
+
+```{r}
+# define a semente
+set.seed(20032025)
+
+# define os parâmetros
+n <- 500
+X <- cbind(1, rnorm(n), runif(n))
+betas <- c(1, -0.5, 0.5)
+eta <- drop(X %*% betas)
+lambda <- exp(eta)
+# simula os dados
+y <- rpois(n, lambda)
+sim_data <- data.frame(y = y, x1 = X[, 2], x2 = X[, 3])
+```
+
+Agora, vamos comparar os resultados:
+
+```{r}
+# ajusta o modelo com a função poiReg
+out_poiReg <- poiReg(formula = y ~ x1 + x2, data = sim_data)
+# ajusta o modelo com a função nativa glm
+out_glm <- glm(formula = y ~ x1 + x2, data = sim_data, family = "poisson")
+cbind(true = betas,
+      logReg = out_poiReg[, ncol(out_poiReg)],
+      glm = coef(out_glm))
+```
+
+# Exercícios de fixação: **Regressão logística**
+
+Seja $Y_i \mid \bX \sim \text{Bernoulli}(\theta_i)$, com $E[Y_i \mid \bX] = \mu_i = g^{-1}(\bx_i^\top \bb)$.
+
+1. Mostre que a distribuição de $Y_i$ pertence à família exponencial e encontre a função de ligação canônica.
+
+2. Encontre a log-verossimilhança e exiba a função score e a Hessiana.
+
+3. Mostre como obter o estimador de máxima verossimilhança para $\bb$.
+
+4. Implemente uma função para ajustar uma regressão logística e compare os resultados com a função `glm` usando dados de sua escolha.
+
+5.  (**Desafio**) Mostre como obter intervalos de confiança para $\bb$ usando o método de Wald -- ver 
+Seção 5.4 de Dobson (2018).
+Calcule os intervalos para um exemplo empírico e compare com o output da função `confint()` do R.
+
+## Referências
+
+-   Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press. (Caps 3, 4 e 5)
+-   Gelman, A., Hill, J., & Vehtari, A. (2020). [Regression and other stories](https://avehtari.github.io/ROS-Examples/). Cambridge University Press. (Cap 15)
