@@ -22,6 +22,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 ### News
 
 - [Exercícios de revisão para a A1 2025](https://github.com/maxbiostat/stats_modelling/blob/master/notas/revisao_A1_2025.pdf)
+- `2025-05-14`: Trabalho valendo 30% da nota da A2 [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/notas/StatMod2025_sobredispersao.pdf). Entrega **28/05/2025**.  
 
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
@@ -44,9 +45,6 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
  - [[FH]](https://link.springer.com/book/10.1007/978-3-662-63882-8) Fahrmeir, L., Kneib, T., Lang, S., & Marx, B. (2013). Regression: Models, Methods and Applications. Springer Science & Business Media.
  - [[MN]](https://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf) McCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models (Vol. 37). CRC Press.
    
-### News
-- 2025-05-14: Trabalho valendo 30% da nota da A2 [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/notas/StatMod2025_sobredispersao.pdf). Entrega **28/05/2025**.  
-
 ### Modelos, hipóteses e a lógica da ciência
 
 - SR Ch1;
