@@ -31,6 +31,12 @@ mod2 <- polr(response ~ action + intention + contact,
 
 summary(mod2)
 
+# Incluindo interações
+mod3 <- polr(response ~ action*intention*contact,
+             data = bonde, Hess = TRUE)
+
+summary(mod3)
+
 ## Comparando
 grid.tratamento <- expand.grid(
   action = c(0, 1),
