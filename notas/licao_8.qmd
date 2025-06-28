@@ -1,0 +1,119 @@
+---
+title: "Modelos multinível: _turtles all the way down_"
+author: "Luiz Max Carvalho"
+format:
+  pdf:
+    mathspec: true
+    fig-pos: H
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\bY{\boldsymbol{Y}}
+\def\bX{\boldsymbol{X}}
+\def\by{\boldsymbol{y}}
+\def\bx{\boldsymbol{x}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\sM{\bar{X}_n}
+\def\indep{\perp \!\!\! \perp}
+\def\bth{\boldsymbol{\theta}}
+\def\bmu{\boldsymbol{\mu}}
+\def\bSigma{\boldsymbol{\Sigma}}
+\def\bZ{\boldsymbol{Z}}
+\def\bU{\boldsymbol{U}}
+\def\bu{\boldsymbol{u}}
+\def\eps{\varepsilon}
+\def\beps{\boldsymbol{\varepsilon}}
+\def\bE{\mathbb{E}}
+```
+:::
+
+## Motivação
+
+O modelo multinível é uma extensão do modelo linear generalizado (GLM) que permite a análise de dados agrupados ou hierárquicos. Ele é especialmente útil quando os dados são coletados em diferentes níveis, como alunos dentro de escolas ou pacientes dentro de hospitais.
+
+Por exemplo, considere um estudo sobre o desempenho acadêmico de alunos em diferentes escolas, onde o objetivo é prever as notas dos alunos, $y$, com base em um pré-teste, $x$, e outra informação.
+Um modelo de regressão pode ser ajustado considerando as características das escolas, como o tamanho da escola, a proporção de alunos por professor, etc.
+Para isso, podemos considerar que as notas dos alunos são influenciadas por características individuais e por características da escola: 
+
+- Modelo de intercepto aleatório: 
+  \begin{align*}
+    y_{ij} &= \beta_0 + \beta_1 x_{ij} + u_{0j} + \epsilon_{ij}, \\
+    u_{0j} &\sim \operatorname{N}(0, \sigma^2_u), \\
+    \epsilon_{ij} &\sim \operatorname{N}(0, \sigma^2),
+  \end{align*}
+onde $y_{ij}$ é a nota do aluno $i$ na escola $j$, $x_{ij}$ é o pré-teste do aluno $i$ na escola $j$, $\beta_0$ e $\beta_1$ são os coeficientes de regressão, $u_{0j}$ é o efeito aleatório da escola $j$ e $\epsilon_{ij}$ é o erro aleatório do aluno $i$ na escola $j$.
+
+- Modelo de intercepto **e** inclinação aleatórios: 
+  \begin{align*}
+    y_{ij} &= \beta_0 + u_{0j} + (\beta_1 + u_{1j}) x_{ij} + \epsilon_{ij}, \\
+    \begin{pmatrix} u_{0j} \\ u_{1j} \end{pmatrix}  &\sim 
+    \operatorname{N}\left(\begin{pmatrix} 0 \\ 0 \end{pmatrix},
+    \begin{pmatrix} \sigma^2_u & \sigma_{u0u1} \\ 
+    \sigma_{u0u1} & \sigma^2_{u1} \end{pmatrix}\right), \\
+    \epsilon_{ij} &\sim \operatorname{N}(0, \sigma^2),
+  \end{align*}
+onde $u_{1j}$ é o efeito aleatório da inclinação da escola $j$ e $\sigma_{u0u1}$ é a covariância entre os efeitos aleatórios de intercepto e inclinação.
+
+Aqui, o modelo para o indivíduo $i$ é o primeiro nível, enquanto o modelo para a escola $j$ é o segundo nível. 
+
+# "Multinível" ou "Hierárquico"
+
+Modelos multiníveis são frequentemente chamados de modelos hierárquicos, pois eles lidam com dados que têm uma estrutura hierárquica.
+Por exemplo, em um estudo educacional, os alunos estão aninhados dentro de escolas, e as escolas podem estar aninhadas dentro de distritos escolares.
+Essa estrutura hierárquica é o que distingue os modelos multiníveis dos modelos de regressão tradicionais.
+Para mais, ver a discussão na página 245 de Gelman & Hill (2007).
+
+# Modelo linear generalizado misto
+
+De modo geral, a modelagem multinível pode ser vista como uma extensão dos modelos lineares generalizados (GLMs) que incorpora efeitos aleatórios. Esses modelos são chamados de modelos lineares generalizados mistos (GLMMs).
+Eles permitem que os pesquisadores considerem tanto os efeitos fixos (como os coeficientes de regressão) quanto os efeitos aleatórios (como os interceptos e inclinações aleatórias) em um único modelo.
+
+Considere observações $\by$ de uma variável resposta $Y$ que segue uma distribuição da família exponencial, com uma função de ligação $g(\cdot)$; uma matriz de design $\bX$ com $n$ linhas e $p$ colunas, onde cada linha corresponde a uma observação e cada coluna a uma variável preditora; uma matriz de design $\bZ$ com $n$ linhas e $q$ colunas, onde cada linha corresponde a uma observação e cada coluna a um efeito aleatório; e um vetor de efeitos aleatórios $\bu$ com $q$ componentes. O modelo pode ser escrito como:
+
+\begin{align*}
+  g(\bE[\bY \mid \bU = \bu]) &= \bX \bbeta + \bZ \bu, \\
+  \bU &\sim \operatorname{N}(0, \bSigma_{\bU}).
+\end{align*}
+
+# Ajuste do modelo
+
+Para ajustar um modelo multinível, podemos estimar os parâmetros usando máxima verossimilhança (ML) ou máxima verossimilhança restrita (REML). Em R, o pacote `lme4` é amplamente utilizado para ajustar modelos lineares generalizados mistos. A função `lmer()` é usada para ajustar modelos lineares mistos, enquanto a função `glmer()` é usada para ajustar modelos lineares generalizados mistos. Este [link](https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#introduction) é um bom tutorial sobre o uso do `lme4`.
+
+## Exemplo
+
+Vamos considerar um exemplo de dados de um estudo de privação de sono, onde o objetivo é modelar o tempo de reação dos sujeitos com base no número de dias de sono. Os dados estão disponíveis no pacote `lme4` e podem ser carregados com o seguinte código:
+
+```{r}
+library(lme4)
+library(lattice) # Para visualização dos efeitos aleatórios
+data("sleepstudy", package = "lme4")
+head(sleepstudy)
+```
+
+Neste exemplo, `Reaction` é a variável resposta (tempo de reação), `Days` é o pré-teste (número de dias de sono) e `Subject` é o identificador do sujeito. Podemos ajustar um modelo linear misto usando a função `lmer()`:
+
+```{r}
+model <- lmer(Reaction ~ Days + (1 | Subject), data = sleepstudy)
+```
+
+Neste modelo, estamos modelando o tempo de reação dos sujeitos com base no número de dias de sono, permitindo que haja um intercepto aleatório para cada sujeito. O resultado do `summary(model)` nos dará os coeficientes estimados, incluindo o intercepto fixo e o efeito aleatório.
+
+```{r}
+summary(model)
+```
+
+Podemos também visualizar os efeitos aleatórios usando a função `ranef()`:
+```{r}
+dotplot(ranef(model))
+```
+
+## Referências
+
+- [Gelman, A., & Hill, J. (2007)](https://www.cambridge.org/highereducation/books/data-analysis-using-regression-and-multilevel-hierarchical-models/32A29531C7FD730C3A68951A17C9D983#overview). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
+
+
+
