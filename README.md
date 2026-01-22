@@ -22,8 +22,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 ### News
 
-- [Exercícios de revisão para a A1 2025](https://github.com/maxbiostat/stats_modelling/blob/master/notas/revisao_A1_2025.pdf)
-- `2025-05-14`: Trabalho valendo 30% da nota da A2 [aqui](https://github.com/maxbiostat/stats_modelling/blob/master/notas/StatMod2025_sobredispersao.pdf). Entrega **28/05/2025**.  
+- `2026-02-23`: Não haverá aula. Nosso primeiro encontro será na quarta-feira, 25/02 às 11:10h.
 
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
