@@ -30,6 +30,8 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 - [A1 2024](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2024_solucoes.pdf).
 - [AS 2024](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/PS_ModEst_BSc_2024_solucoes.pdf).
 - [A1 2025](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2025_solucoes.pdf).
+- [A2 2025](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P2_ModEst_BSc_2025_solucoes.pdf).
+- [AS 2025](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/PS_ModEst_BSc_2025_solucoes.pdf).
 
 ### Portifólio de trabalhos finais (A2):
 - [2023](https://github.com/maxbiostat/A2_StatMod_2023).
