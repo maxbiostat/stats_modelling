@@ -132,6 +132,3 @@ exibindo $\gamma_0$ e $\gamma_1$ em termos de $\beta_0$, $\beta_1$ e $\sigma_u^2
 ## Referências
 
 - [Gelman, A., & Hill, J. (2007)](https://www.cambridge.org/highereducation/books/data-analysis-using-regression-and-multilevel-hierarchical-models/32A29531C7FD730C3A68951A17C9D983#overview). Data analysis using regression and multilevel/hierarchical models. Cambridge university press.
-
-
-
