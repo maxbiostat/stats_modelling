@@ -26,7 +26,7 @@ A construção de modelos matemáticos e estatísticos é fundamental para a Ci�
     Y_i & \sim \operatorname{Binomial-Negativa}(\mu, \phi),  \\
     X_i \mid Y_i & \sim \operatorname{Binomial}(Y_i, \theta),  
     \end{align} para $i = 1, 2, \ldots, n$ e onde a binomial negativa é parametrizada em termos de [média e dispersão](https://mc-stan.org/docs/functions-reference/nbalt.html)[^1].
-    a.  Compute $E[X_1]$ e $\vr(X_1)$ usando a [propriedade da torre](https://en.wikipedia.org/wiki/Law_of_total_expectation).
+    a.  Compute $\mathbb{E}[X_1]$ e $\vr(X_1)$ usando a [propriedade da torre](https://en.wikipedia.org/wiki/Law_of_total_expectation).
     b.  Calcule a probabilidade marginal conjunta $\pr(X_1 = x_1, \ldots, X_n = x_n)$.
     c.  O modelo em questão é identificável?
     d.  Como você modificaria $\pr(X_1 = x_1, \ldots, X_n = x_n)$ se o evento $X_i = 0$ não fosse observável?
