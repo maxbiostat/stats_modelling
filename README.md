@@ -64,7 +64,8 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com abordagens levemente diferentes.
 
-- [Notas](https://ams206-winter19-01.courses.soe.ucsc.edu/system/files/attachments/banerjee-bayesian-linear-model-details.pdf) do grande [Sudipto Banerjee](http://sudipto.bol.ucla.edu/);
+- [Notas](https://github.com/maxbiostat/stats_modelling/blob/master/materiais/banerjee-bayesian-linear-model-details.pdf) do grande [Sudipto Banerjee](http://sudipto.bol.ucla.edu/);
+- [Notas](https://irvinggomez.com/courses/bayesian/GoryDetailsStudentsVersion.pdf) de Irvin Gomez, atualizando as notas do Banerjee. 
 - [Notas](https://tminka.github.io/papers/minka-linear.pdf) de Thomas Minka.
 - [Monografia](https://arxiv.org/pdf/2406.01819v1) de J. Andrés Christen.
 
