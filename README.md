@@ -22,7 +22,7 @@ Para auxiliar a busca pelo conhecimento, há uma bibliografia comentada [aqui](h
 
 ### News
 
-- `2026-02-23`: Não haverá aula. Nosso primeiro encontro será na quarta-feira, 25/02 às 11:10h.
+- `2026-06-03`: O Trabalho II já se encontra [disponível](https://github.com/maxbiostat/stats_modelling/blob/master/notas/StatMod2026_dadosFaltantes.pdf). Entrega até 2026-06-24 às 16h GMT-3, impreterivelmente.
 
 ### Provas anteriores
 - [A1 2023](https://github.com/maxbiostat/stats_modelling/blob/master/provas/PDF/P1_ModEst_BSc_2023_solucoes.pdf).
