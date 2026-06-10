@@ -77,6 +77,7 @@ Os conjuntos de notas a seguir cobrem mais ou menos o mesmo material, com aborda
 
 ### Critérios de bondade do ajuste (_goodness-of-fit_)
 - [Notas](https://faculty.washington.edu/yenchic/19A_stat535/Lec7_model.pdf) sobre a derivação do AIC e BIC. Notem como para o modelo linear, os critérios de informação podem ser escritos em função da soma de quadrados. Acidente?
+- Um outro conjunto de [notas](https://github.com/maxbiostat/stats_modelling/blob/master/materiais/aic_bic_note.pdf), inspiradas pelas notas do Chen, com mais informações e outros detalhes.
 
 ### Transformações
 
